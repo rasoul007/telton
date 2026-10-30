@@ -96,8 +96,9 @@ build if any of it drifts.
 | `audio/vo/S01.wav … S25.wav` | Persian voice-over, fitted to 12 s slots |
 | `audio/music/score.wav` | 300 s original score + sound design |
 
-The MP4 and WAVs are build outputs and are git-ignored: run the commands above to
-regenerate them byte-for-byte (rendering is deterministic given the same seeds).
+The intermediate WAVs and clips are build outputs and are git-ignored; the master MP4
+is committed (it is the deliverable). Everything is reproducible: run the commands above
+and the render is deterministic given the same seeds.
 
 ## QC (all green)
 
