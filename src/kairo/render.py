@@ -62,7 +62,8 @@ FRAMING = (("extreme", 2.9), ("macro", 2.9), ("close-up", 2.1),
 
 SCALE_OVERRIDE = {   # scenes where the keyword framing reads wrong
     "S01": 1.90, "S02": 2.20, "S03": 2.10, "S04": 2.20, "S25": 2.30,
-    "S06": 1.10, "S10": 1.30, "S19": 0.95, "S24": 1.30,
+    "S06": 1.10, "S10": 1.30, "S19": 1.00, "S20": 1.30, "S21": 1.35,
+    "S22": 1.35, "S23": 1.30, "S24": 1.25,
 }
 
 FOCUS = {            # camera centre for the push-in, per backdrop
@@ -176,9 +177,10 @@ def scene_assets(scene: dict):
     prop_state = "glow" if scene["id"] in ("S22", "S23", "S24") else "rest"
 
     def layer(mouth: float, blink: bool) -> Image.Image:
+        override = None if backdrop.startswith("map_") else figure._UNSET
         return figure.kairo_layer((BIG_W, BIG_H), origin, scale, pose, wardrobe,
                                   expr, facing=facing, mouth=mouth, blink=blink,
-                                  prop_state=prop_state)
+                                  prop_state=prop_state, prop_override=override)
 
     # 0 closed, 1 half, 2 wide, 3 blink (eyes closed)
     variants = [layer(0.0, False), layer(0.45, False), layer(0.95, False),
@@ -253,11 +255,19 @@ def render_clip(scene: dict, force: bool = False) -> Path:
     origin, scale = stage_for(scene)
     fx, fy = focus_for(scene, origin, scale)
 
+    # Composite the character onto the backdrop once per mouth/blink state.
+    # Per frame we then need a single crop+resize instead of two.
+    if kind == "figure":
+        composites = [Image.alpha_composite(a, layer).convert("RGB") for layer in b]
+    else:
+        composites = []
+
     cmd = [str(FFMPEG), "-hide_banner", "-loglevel", "error", "-y",
            "-f", "rawvideo", "-pix_fmt", "rgb24", "-s", f"{WIDTH}x{HEIGHT}",
            "-r", str(FPS), "-i", "-", "-an",
            "-c:v", "libx264", "-preset", "veryfast", "-crf", "20",
-           "-pix_fmt", "yuv420p", "-movflags", "+faststart", str(out)]
+           "-threads", "2", "-pix_fmt", "yuv420p",
+           "-movflags", "+faststart", str(out)]
     proc = subprocess.Popen(cmd, stdin=subprocess.PIPE)
 
     fade_frames = int(scene["render"].get("fade_out_s", 0) * FPS)
@@ -268,20 +278,21 @@ def render_clip(scene: dict, force: bool = False) -> Path:
 
         if kind == "s05":
             iris = min(1.0, max(0.0, (t - 0.25) / 0.6))
-            frame = Image.blend(a, b, iris ** 1.6).convert("RGB")
+            # RGB is mandatory here: RGBA would feed 4 bytes per pixel into a
+            # rawvideo rgb24 pipe and silently produce 4/3 the expected frames.
+            src = Image.blend(a.convert("RGB"), b.convert("RGB"), iris ** 1.6)
+            frame = src.resize((WIDTH, HEIGHT), Image.BILINEAR, box=box).convert("RGB")
         else:
-            bg = a.crop(box).resize((WIDTH, HEIGHT), Image.BILINEAR)
-            if f in blinks:
-                idx = 3
-            else:
-                m = env[f]
-                idx = 0 if m < 0.12 else (1 if m < 0.55 else 2)
-            char = b[idx].crop(box).resize((WIDTH, HEIGHT), Image.BILINEAR)
-            frame = Image.alpha_composite(bg, char).convert("RGB")
+            idx = 3 if f in blinks else (
+                0 if env[f] < 0.12 else (1 if env[f] < 0.55 else 2))
+            frame = composites[idx].resize((WIDTH, HEIGHT), Image.BILINEAR, box=box)
 
         if fade_frames and f >= frames - fade_frames:
             k = (frames - f) / fade_frames
             frame = Image.eval(frame, lambda v, k=k: int(v * k))
+
+        if frame.mode != "RGB":       # the pipe is rgb24, no exceptions
+            frame = frame.convert("RGB")
 
         proc.stdin.write(frame.tobytes())
 
@@ -289,7 +300,20 @@ def render_clip(scene: dict, force: bool = False) -> Path:
     proc.wait()
     if proc.returncode != 0:
         raise RuntimeError(f"ffmpeg failed for {scene['id']}")
+
+    # A shot that is not exactly 12.000 s is a defect, not a rounding error.
+    info = probe(out)
+    if info["duration_s"] is None or abs(info["duration_s"] - 12) > 0.05:
+        out.unlink(missing_ok=True)
+        raise RuntimeError(
+            f"{scene['id']} rendered {info['duration_s']}s, expected 12s")
     return out
+
+
+def _render_one(job):
+    scene_id, scene = job
+    path = render_clip(scene)
+    return scene_id, str(path), probe(path)
 
 
 
@@ -318,16 +342,36 @@ def render_stills(force: bool = False) -> list[Path]:
     return paths
 
 
-def render_clips(force: bool = False) -> list[Path]:
+def render_clips(force: bool = False, jobs: int = 3) -> list[Path]:
+    """Render every clip. Scenes are independent, so they run in parallel."""
     episode = screenplay.load()
-    paths = []
+    todo = []
     for scene in episode["scenes"]:
-        path = render_clip(scene, force=force)
-        info = probe(path)
-        print(f"  {scene['id']}  {info['duration_s']:.3f}s  "
-              f"{info['width']}x{info['height']} @ {info['fps']}fps")
-        paths.append(path)
-    return paths
+        out = CLIPS / f"{scene['id']}.mp4"
+        if force and out.exists():
+            out.unlink()
+        todo.append((scene["id"], scene))
+
+    paths = []
+    if jobs <= 1:
+        for sid, scene in todo:
+            path = render_clip(scene, force=force)
+            info = probe(path)
+            print(f"  {sid}  {info['duration_s']:.3f}s  "
+                  f"{info['width']}x{info['height']} @ {info['fps']}fps",
+                  flush=True)
+            paths.append(path)
+    else:
+        from concurrent.futures import ProcessPoolExecutor, as_completed
+        with ProcessPoolExecutor(max_workers=jobs) as pool:
+            futures = {pool.submit(_render_one, job): job[0] for job in todo}
+            for fut in as_completed(futures):
+                sid, path, info = fut.result()
+                print(f"  {sid}  {info['duration_s']:.3f}s  "
+                      f"{info['width']}x{info['height']} @ {info['fps']}fps",
+                      flush=True)
+                paths.append(Path(path))
+    return sorted(paths)
 
 
 # ------------------------------------------------------------------- audio
@@ -384,6 +428,10 @@ def _concat_clips() -> Path:
     subprocess.run([str(FFMPEG), "-hide_banner", "-loglevel", "error", "-y",
                     "-f", "concat", "-safe", "0", "-i", str(list_path),
                     "-c", "copy", str(joined)], check=True)
+    info = probe(joined)
+    if info["duration_s"] is None or abs(info["duration_s"] - 300) > 0.1:
+        raise RuntimeError(
+            f"concatenated video is {info['duration_s']}s, expected 300s")
     return joined
 
 

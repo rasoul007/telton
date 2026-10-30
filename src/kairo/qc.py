@@ -123,4 +123,8 @@ def _check_continuity() -> dict:
 def run_all() -> dict:
     checks = [_check_screenplay(), _check_voice(), _check_continuity(),
               _check_clips(), _check_audio(), _check_master()]
-    return {"passed": all(c["passed"] for c in checks), "checks": checks}
+    report = {"passed": all(c["passed"] for c in checks), "checks": checks}
+    OUT.mkdir(parents=True, exist_ok=True)
+    (OUT / "qc_report.json").write_text(
+        json.dumps(report, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    return report

@@ -1,0 +1,35 @@
+{
+  "passed": true,
+  "checks": [
+    {
+      "name": "screenplay",
+      "passed": true,
+      "detail": "25 scenes x 12 s = 300 s, dialogue verbatim"
+    },
+    {
+      "name": "voice-over",
+      "passed": true,
+      "detail": "25 lines, voice fa-IR-FaridNeural, 206.03s speech, max prosody +30%"
+    },
+    {
+      "name": "continuity",
+      "passed": true,
+      "detail": "one design, 19 re-used backdrops, wardrobe locked per timeline"
+    },
+    {
+      "name": "clips",
+      "passed": true,
+      "detail": "25 clips, 12.000 s each, 1920x1080 @ 24fps"
+    },
+    {
+      "name": "audio",
+      "passed": true,
+      "detail": "300.000s, 48000 Hz, 2ch"
+    },
+    {
+      "name": "master",
+      "passed": true,
+      "detail": "300.0s, 1920x1080, 24.0fps"
+    }
+  ]
+}

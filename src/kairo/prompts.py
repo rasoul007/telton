@@ -27,7 +27,7 @@ STYLE_BLOCK = (
 
 CHARACTER_BLOCK = (
     "CHARACTER — KAIRO: cartoon stickman, slightly oversized round head, small black "
-    "elliptical eyes, simple expressive eyebrows, movable mouth line, four short hair "
+    "elliptical eyes, simple expressive eyebrows, movable mouth line, three short hair "
     "strands, thin simple arms and legs, slightly oversized feet. Head-to-body "
     "proportions must not change. {wardrobe_line} The same reference character image "
     "is used in every scene."
@@ -66,7 +66,7 @@ def continuity_block(scene: dict, episode: dict) -> str:
         lines.append(f"- cave: {anchors['cave']}")
     if scene["setting"].startswith("modern"):
         lines.append(f"- room: {anchors['room']}")
-    return "CONTINUITY (must match previous and next scene)\n" + "\n".join(lines)
+    return "\n".join(lines)
 
 
 def build_scene_prompt(scene: dict, episode: dict) -> str:
@@ -103,7 +103,8 @@ AUDIO INTENT — {scene['audio']}
 {NEGATIVE_BASE}
 ```
 
-## 4.{continuity_block(scene, episode)}
+## 4. Continuity
+{continuity_block(scene, episode)}
 
 ## 5. Cast / performance
 - Action: {scene['action']}

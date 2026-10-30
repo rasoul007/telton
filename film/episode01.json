@@ -55,7 +55,7 @@
         "backdrop": "modern_room",
         "zoom": [
           1.0,
-          1.25
+          1.3
         ],
         "pose": "sit_talk",
         "facing": "front"
@@ -90,8 +90,8 @@
       "render": {
         "backdrop": "modern_room",
         "zoom": [
-          1.28,
-          1.34
+          1.0,
+          1.16
         ],
         "pose": "sit_gesture",
         "facing": "front"
@@ -126,7 +126,7 @@
       "render": {
         "backdrop": "modern_room",
         "zoom": [
-          1.3,
+          1.1,
           1.3
         ],
         "pose": "sit_glance_clock",
@@ -161,8 +161,8 @@
       "render": {
         "backdrop": "modern_room_closeup",
         "zoom": [
-          1.0,
-          1.12
+          1.9,
+          2.4
         ],
         "pose": "closeup_calm",
         "facing": "front"
@@ -908,8 +908,8 @@
       "render": {
         "backdrop": "modern_room_closeup",
         "zoom": [
-          1.1,
-          1.4
+          1.15,
+          1.55
         ],
         "pose": "sit_final",
         "facing": "front",

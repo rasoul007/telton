@@ -83,3 +83,59 @@ Continuity is enforced, not hoped for: wardrobe is bound to the timeline
 (`present/transition → suit`, `prehistoric/cave/map → hide`), every scene
 references a named backdrop with fixed geometry, and `kairo check` fails the
 build if any of it drifts.
+
+## Delivered files
+
+| File | What it is |
+|---|---|
+| `out/kairo_ep01_animatic.mp4` | 5:00.000 master, 1920x1080, 24 fps, Persian narration + score |
+| `out/kairo_ep01_review.srt` | Persian subtitles with per-scene timing (review only) |
+| `out/qc_report.json` | machine-checked spec compliance |
+| `film/episode01.json` | the whole film as one validated document |
+| `prompts/S01.md … S25.md` | paste-ready generation prompts per shot |
+| `audio/vo/S01.wav … S25.wav` | Persian voice-over, fitted to 12 s slots |
+| `audio/music/score.wav` | 300 s original score + sound design |
+
+The MP4 and WAVs are build outputs and are git-ignored: run the commands above to
+regenerate them byte-for-byte (rendering is deterministic given the same seeds).
+
+## QC (all green)
+
+```
+screenplay  25 scenes x 12 s = 300 s, dialogue verbatim
+voice-over  25 lines, fa-IR-FaridNeural, 206.03 s speech, max prosody +30%
+continuity  one design, 19 re-used backdrops, wardrobe locked per timeline
+clips       25 clips, 12.000 s each, 1920x1080 @ 24fps
+audio       300.000 s, 48 kHz, stereo
+master      300.0 s, 1920x1080, 24.0 fps
+```
+
+Bugs the checks caught during the build, and what they taught:
+
+- A background renderer wrote an interrupted WAV that a later run happily reused
+  (S15 measured 11.14 s but was 10.60 s on disk). Voice-over files now only
+  count as cached when a success marker exists.
+- The S05 match cut blended RGBA frames into a rawvideo `rgb24` pipe, so ffmpeg
+  decoded 4/3 of the frames and the shot came out 16 s long. Every frame is now
+  forced to RGB, and a shot that is not exactly 12.000 s deletes itself and
+  raises instead of shipping.
+- Concatenation and muxing each assert 300 s before the master is accepted, so a
+  short shot can never quietly truncate the ending again.
+
+## Known limits of this cut
+
+- Backgrounds are procedural vector/painterly composites, not hand-painted
+  production art. They are built to be replaced shot for shot by the outputs of
+  `prompts/`, which is why every scene carries a locked backdrop name.
+- Character acting is pose-based (24 authored poses + mouth/blink driven by the
+  narration). It reads as a strong animatic, not as character animation with
+  secondary motion.
+- The predator and the map are stylised silhouettes by design; the brief keeps
+  both mysterious, and neither is explained on screen.
+
+## Episode 2 hooks already in place
+
+The map's illuminated point is stored but deliberately undefined; the cave
+threshold has a physical rule (the predator will not cross it) that is never
+explained; and KAIRO's age is stated as approximate, which leaves room for the
+revelation to be revised. None of that is resolved here.

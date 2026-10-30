@@ -296,20 +296,58 @@ def savanna(kind: str, seed: int = 7) -> Image.Image:
 
 
 # --------------------------------------------------------------------- cave
+def _fractal(w: int, h: int, seed: int, octaves: int = 5, base: int = 6) -> np.ndarray:
+    """Value-noise fBm in 0..1, built by upscaling small random grids."""
+    acc = np.zeros((h, w), dtype=np.float32)
+    amp, total = 1.0, 0.0
+    for o in range(octaves):
+        s = max(2, base * (2 ** o))
+        rnd = np.random.default_rng(seed + o).integers(0, 255, (s, s)).astype(np.uint8)
+        layer = Image.fromarray(rnd, "L").resize((w, h), Image.BICUBIC)
+        acc += np.asarray(layer, dtype=np.float32) / 255.0 * amp
+        total += amp
+        amp *= 0.52
+    return acc / total
+
+
+def _rock_surface(w: int, h: int, seed: int, dark, light, contrast: float = 1.45):
+    """Stone: fBm texture through a colour ramp, plus a soft top-down light."""
+    f = _fractal(w, h, seed, octaves=5, base=5)
+    f = np.clip((f - 0.5) * contrast + 0.5, 0, 1) ** 1.15
+    ramp = (np.array(dark, np.float32)[None, None, :] * (1 - f)[:, :, None]
+            + np.array(light, np.float32)[None, None, :] * f[:, :, None])
+    light_grad = np.linspace(1.10, 0.62, h, dtype=np.float32)[:, None, None]
+    arr = np.clip(ramp * light_grad, 0, 255).astype(np.uint8)
+    return Image.fromarray(arr, "RGB")
+
+
 def _rock_wall(d, rng, colour, count=90, spread=(0.0, 1.0)):
-    for _ in range(count):
+    """Boulders and rubble sitting at the base of the rock surface."""
+    for _ in range(max(3, count // 22)):
         x = rng.uniform(spread[0] * W, spread[1] * W)
-        y = rng.uniform(0, H)
-        rw = rng.uniform(W * 0.02, W * 0.09)
-        rh = rng.uniform(H * 0.02, H * 0.07)
-        shade = rng.randint(-14, 16)
+        y = rng.uniform(H * 0.66, H * 0.98)
+        rw = rng.uniform(W * 0.05, W * 0.14)
+        rh = rw * rng.uniform(0.28, 0.5)
+        shade = rng.randint(-12, 8)
         col = tuple(max(0, min(255, c + shade)) for c in colour)
-        d.ellipse([x - rw, y - rh, x + rw, y + rh], fill=col + (150,))
+        d.ellipse([x - rw, y - rh, x + rw, y + rh], fill=col + (120,))
 
 
 def _light_shaft(d, x0, x1, top, bottom, colour=(180, 210, 230), alpha=40):
     d.polygon([(x0, top), (x1, top), (x1 + (x1 - x0) * 0.55, bottom),
                (x0 - (x1 - x0) * 0.35, bottom)], fill=colour + (alpha,))
+
+
+def _shafts_layer(beams, colour=(186, 214, 232), alpha=30, blur=34):
+    """Soft volumetric beams: drawn once, blurred, then composited."""
+    layer = Image.new("RGBA", (W, H), (0, 0, 0, 0))
+    d = ImageDraw.Draw(layer, "RGBA")
+    for x0, x1 in beams:
+        d.polygon([(W * x0, 0), (W * x1, 0),
+                   (W * x1 + (W * (x1 - x0)) * 0.55, H),
+                   (W * x0 - (W * (x1 - x0)) * 0.35, H)],
+                  fill=colour + (alpha,))
+    return layer.filter(ImageFilter.GaussianBlur(blur * SS))
 
 
 def cave(kind: str, seed: int = 11) -> Image.Image:
@@ -325,8 +363,9 @@ def cave(kind: str, seed: int = 11) -> Image.Image:
     d = ImageDraw.Draw(img, "RGBA")
 
     if kind in ("entrance_int", "mouth_inside", "passage_mouth"):
-        d.rectangle([0, 0, W, H], fill=(12, 11, 12, 255))
-        _rock_wall(d, rng, (74, 66, 60), 120)
+        img.paste(_rock_surface(W, H, 23, (12, 11, 11), (78, 70, 62)), (0, 0))
+        d = ImageDraw.Draw(img, "RGBA")
+        _rock_wall(d, rng, (58, 52, 46), 50)
         mx0, mx1 = (W * 0.02, W * 0.36) if kind != "mouth_inside" else (W * 0.34, W * 0.62)
         d.polygon([(mx0, H * 0.04), (mx1, 0), (mx1, H * 0.92), (mx0, H * 0.98)],
                   fill=(255, 236, 196, 255))
@@ -356,22 +395,30 @@ def cave(kind: str, seed: int = 11) -> Image.Image:
         _rock_wall(d, rng, (62, 56, 50), 60, (0.0, 0.45))
 
     else:   # chamber / chamber_exit
-        d.rectangle([0, 0, W, H], fill=(12, 13, 16, 255))
-        _rock_wall(d, rng, (80, 74, 68), 140)
+        img.paste(_rock_surface(W, int(H * 0.78), 11, (18, 16, 15), (104, 94, 82)), (0, 0))
+        d = ImageDraw.Draw(img, "RGBA")
+        _rock_wall(d, rng, (86, 78, 68), 60)
         d.arc([-W * 0.20, -H * 0.30, W * 1.20, H * 1.30], 180, 360,
               fill=(46, 43, 40, 255), width=int(60 * SS))
-        for x0, x1 in ((0.22, 0.30), (0.52, 0.58), (0.74, 0.79)):
-            _light_shaft(d, W * x0, W * x1, H * 0.02, H * 0.92)
+        img = Image.alpha_composite(
+            img, _shafts_layer(((0.22, 0.30), (0.52, 0.58), (0.74, 0.79))))
+        d = ImageDraw.Draw(img, "RGBA")
         d.polygon([(0, H * 0.72), (W, H * 0.68), (W, H), (0, H)],
                   fill=(38, 34, 31, 255))
+        img.paste(_rock_surface(W, int(H * 0.32), 31, (16, 15, 14), (58, 52, 46)),
+                  (0, int(H * 0.68)))
+        d = ImageDraw.Draw(img, "RGBA")
         cx, cy = W * 0.50, H * 0.74
         pw, ph = W * 0.15, H * 0.085
+        # contact shadow, then the block: shadowed base, lit top face
+        d.ellipse([cx - pw * 1.15, cy - ph * 0.10, cx + pw * 1.15, cy + ph * 0.55],
+                  fill=(8, 7, 7, 150))
         d.polygon([(cx - pw, cy), (cx - pw * 0.8, cy - ph),
                    (cx + pw * 0.8, cy - ph * 0.92), (cx + pw, cy + ph * 0.1)],
-                  fill=(96, 88, 80, 255))
+                  fill=(64, 58, 52, 255))
         d.polygon([(cx - pw * 0.8, cy - ph), (cx + pw * 0.8, cy - ph * 0.92),
                    (cx + pw * 0.68, cy - ph * 1.12), (cx - pw * 0.68, cy - ph * 1.2)],
-                  fill=(126, 116, 104, 255))
+                  fill=(112, 103, 92, 255))
         add_glow(img, (cx, cy - ph * 1.1), 260 * SS, (120, 200, 210))
         if kind == "chamber_exit":
             d.polygon([(W * 0.86, H * 0.26), (W, H * 0.18), (W, H * 0.92),

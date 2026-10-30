@@ -50,9 +50,9 @@ def cmd_stills(force: bool) -> None:
     print(f"{len(paths)} stills rendered into build/stills/")
 
 
-def cmd_clips(force: bool) -> None:
+def cmd_clips(force: bool, jobs: int = 3) -> None:
     from . import render
-    paths = render.render_clips(force=force)
+    paths = render.render_clips(force=force, jobs=jobs)
     print(f"{len(paths)} clips rendered into build/clips/")
 
 
@@ -103,6 +103,9 @@ def main(argv: list[str] | None = None) -> None:
         if needs_force:
             p.add_argument("--force", action="store_true")
 
+    clips_p = sub.choices["clips"]
+    clips_p.add_argument("--jobs", type=int, default=3)
+
     p = sub.add_parser("film")
     p.add_argument("--force", action="store_true")
     sub.add_parser("srt")
@@ -116,7 +119,8 @@ def main(argv: list[str] | None = None) -> None:
         "voice": lambda: cmd_voice(getattr(args, "force", False)),
         "score": lambda: cmd_score(getattr(args, "force", False)),
         "stills": lambda: cmd_stills(getattr(args, "force", False)),
-        "clips": lambda: cmd_clips(getattr(args, "force", False)),
+        "clips": lambda: cmd_clips(getattr(args, "force", False),
+                                    getattr(args, "jobs", 3)),
         "film": lambda: cmd_film(getattr(args, "force", False)),
         "srt": lambda: cmd_srt(),
         "check": lambda: cmd_check(),

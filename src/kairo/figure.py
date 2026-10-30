@@ -10,6 +10,7 @@ screen, x pointing in the direction the character faces.
 
 from __future__ import annotations
 
+import dataclasses
 import math
 from dataclasses import dataclass
 
@@ -34,6 +35,7 @@ HIDE_DARK = (86, 58, 34)
 SUIT = (24, 24, 27)
 SHIRT = (238, 233, 222)
 RIM_WARM = (255, 208, 138)
+_UNSET = object()
 RIM_COOL = (140, 186, 214)
 
 
@@ -191,7 +193,7 @@ def _both(a, b, t):
 
 def kairo_layer(size, origin, scale, pose_name, wardrobe, expression,
                 facing=1, mouth=0.0, blink=False, rim=RIM_WARM,
-                prop_state="rest"):
+                prop_state="rest", prop_override=_UNSET):
     """Render KAIRO onto a transparent RGBA layer.
 
     ``mouth`` (0..1) opens the mouth and is driven by the voice-over envelope;
@@ -200,6 +202,8 @@ def kairo_layer(size, origin, scale, pose_name, wardrobe, expression,
     layer = Image.new("RGBA", size, (0, 0, 0, 0))
     d = ImageDraw.Draw(layer)
     pose = POSES[pose_name]
+    if prop_override is not _UNSET:
+        pose = dataclasses.replace(pose, prop=prop_override)
     sk = skeleton(pose, facing)
     lw = max(2, int(15 * scale))
     torso_w = max(3, int(26 * scale))
