@@ -1,0 +1,36 @@
+{
+  "id": "S04",
+  "index": 4,
+  "title": "Something Changed",
+  "start_s": 36.0,
+  "duration_s": 12,
+  "timecode": "00:36–00:48",
+  "act": "present",
+  "setting": "modern_room_closeup",
+  "wardrobe": "suit",
+  "shot": "close-up on face",
+  "camera": "locked close-up, then micro push-in",
+  "action": "KAIRO's slight smile fades. He leans back into the chair and looks into the distance, remembering.",
+  "expression": "smile fading into haunted stillness",
+  "lighting": "one side of the face lit, the other eye in shadow",
+  "audio": "clock tick stops, low sub-bass swell begins",
+  "dialogue_fa": "منم یه زمانی مثل همه فکر می‌کردم... تا اینکه یه اتفاقی افتاد. اتفاقی که همه‌چیز رو عوض کرد.",
+  "gloss_en": "I used to think like everyone else... until something happened. Something that changed everything.",
+  "render": {
+    "backdrop": "modern_room_closeup",
+    "zoom": [
+      1.9,
+      2.4
+    ],
+    "pose": "closeup_calm",
+    "facing": "front"
+  },
+  "continuity": [
+    "same hair strands",
+    "same eye shape",
+    "same suit"
+  ],
+  "transition": "push continues into the eyes, setting up the match cut in S05",
+  "image_prompt": "Tight cinematic close-up of KAIRO's oversized round stickman head. Small black elliptical eyes, thin expressive eyebrows, a simple mouth line losing its smile, four short hair strands. Lamp light on the left half of the face only, right half sinking into black. Black suit collar and white shirt edge at the bottom of frame. Painterly 2D animation, fine film grain, shallow depth.",
+  "video_prompt": "Locked close-up. The faint smile disappears, eyebrows flatten, he exhales and leans back out of the light, eyes drifting off lens into the distance. Extremely slow micro push-in. A low sub-bass swell rises under the silence."
+}

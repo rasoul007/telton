@@ -1,0 +1,35 @@
+{
+  "id": "S05",
+  "index": 5,
+  "title": "Entering a Memory",
+  "start_s": 48.0,
+  "duration_s": 12,
+  "timecode": "00:48–01:00",
+  "act": "transition",
+  "setting": "eye_matchcut",
+  "wardrobe": "suit",
+  "shot": "extreme close-up of the eyes, then match cut to a savanna sunrise",
+  "camera": "macro push into the pupil; the pupil iris-wipes into a sunrise horizon line",
+  "action": "Macro shot of KAIRO's eyes. A tiny reflection of warm sunrise light appears in each pupil. The reflection expands until the frame is the African savanna at sunrise.",
+  "expression": "eyes only: calm, then a flicker of memory",
+  "lighting": "eye highlights turn from lamp-yellow to sunrise-gold",
+  "audio": "pad dissolves into wind; a warm low string note opens the memory",
+  "dialogue_fa": "بذار برگردیم به همون روز... روزی که فکر می‌کردم فقط یه شکار معمولیه.",
+  "gloss_en": "Let's go back to that day... the day I thought was just an ordinary hunt.",
+  "render": {
+    "backdrop": "eyes_to_savanna",
+    "zoom": [
+      1.0,
+      1.5
+    ],
+    "pose": "eyes_extreme",
+    "facing": "front"
+  },
+  "continuity": [
+    "iris shape identical to S04 eyes",
+    "transition must land on the exact savanna of S06"
+  ],
+  "transition": "invisible match cut: pupil rim becomes the sun disk",
+  "image_prompt": "Extreme macro of two small black stickman eyes filling the frame, each pupil holding a tiny warm sunrise reflection of golden grass and a low sun. Ink linework, painterly iris detail, deep shadow around the sockets. 2D cinematic animation detail shot.",
+  "video_prompt": "Macro push into the pupils. The reflected sunrise inside each eye brightens and expands until it iris-wipes the whole frame into a wide golden savanna at sunrise. Seamless match cut, no flash, no dissolve, continuous single motion."
+}

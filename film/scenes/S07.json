@@ -1,0 +1,38 @@
+{
+  "id": "S07",
+  "index": 7,
+  "title": "The Hunt",
+  "start_s": 72.0,
+  "duration_s": 12,
+  "timecode": "01:12–01:24",
+  "act": "prehistoric",
+  "setting": "savanna_grass",
+  "wardrobe": "hide",
+  "shot": "medium tracking shot, profile",
+  "camera": "lateral tracking with KAIRO, then settle as he kneels",
+  "action": "KAIRO moves cautiously through waist-high dry grass, spear low and ready. He stops, notices tracks, and kneels down to inspect them.",
+  "expression": "focused, cautious",
+  "lighting": "sunrise side light raking the grass, warm bounce from below",
+  "audio": "grass brushing against legs, soft footsteps, insects, low wind",
+  "dialogue_fa": "اون روز رفته بودم دنبال شکار. راستش گرسنه بودیم و چاره‌ای هم نداشتیم. باید چیزی برای خوردن پیدا می‌کردم.",
+  "gloss_en": "That day I had gone out to hunt. Honestly, we were hungry and had no choice. I had to find something to eat.",
+  "render": {
+    "backdrop": "savanna_grass",
+    "zoom": [
+      1.12,
+      1.24
+    ],
+    "pose": "walk_spear",
+    "facing": "right",
+    "extra": "tracks"
+  },
+  "continuity": [
+    "hide tunic",
+    "wooden spear in right hand",
+    "bare feet",
+    "same grass field as S06"
+  ],
+  "transition": "he kneels, motivating the cut to the footprint close-up",
+  "image_prompt": "Medium profile tracking shot of KAIRO the stickman walking through waist-high golden dry grass in prehistoric Africa, wearing a simple brown animal-hide tunic, bare feet, a wooden spear held low in his right hand. Sunrise side light rakes the grass, long shadows, acacia trees soft in the background. Painterly 2D animation, warm dust in the air.",
+  "video_prompt": "Lateral tracking shot following KAIRO through the tall grass. He pushes stalks aside with the spear shaft, stops, glances down at fresh tracks, and kneels slowly out of frame bottom. Grass sways in the wind, dust motes drift. Camera settles as he kneels."
+}

@@ -1,0 +1,8 @@
+# Python deps for the KAIRO pipeline.
+# ffmpeg is provided by the npm package `ffmpeg-static` (see package.json),
+# so it is pinned and reproducible instead of relying on a system install.
+pillow>=10
+numpy>=1.24
+edge-tts>=6.1
+arabic-reshaper>=3.0
+python-bidi>=0.4

@@ -1,0 +1,35 @@
+{
+  "id": "S08",
+  "index": 8,
+  "title": "Footprints",
+  "start_s": 84.0,
+  "duration_s": 12,
+  "timecode": "01:24–01:36",
+  "act": "prehistoric",
+  "setting": "savanna_grass",
+  "wardrobe": "hide",
+  "shot": "close-up on footprints, tilt up to medium",
+  "camera": "slow tilt from the ground up to KAIRO's face",
+  "action": "Large fresh animal footprints pressed into dry soil. The camera tilts up to find KAIRO staring toward a dense wall of bushes.",
+  "expression": "uncertain, a first hint of unease",
+  "lighting": "hard low sun, strong texture on the soil",
+  "audio": "wind drops away; a single low drone enters",
+  "dialogue_fa": "ردپاها تازه بودن... خیلی تازه. فکر کردم بالاخره شانس آوردم. ولی یه چیزی درست به نظر نمی‌رسید.",
+  "gloss_en": "The tracks were fresh... very fresh. I thought my luck had finally turned. But something didn't feel right.",
+  "render": {
+    "backdrop": "savanna_tracks",
+    "zoom": [
+      1.0,
+      1.35
+    ],
+    "pose": "kneel_look",
+    "facing": "three_quarter"
+  },
+  "continuity": [
+    "same predator tracks as S09 threat",
+    "bushes camera-right"
+  ],
+  "transition": "tilt lands on his face at the exact scale of S09's first frame",
+  "image_prompt": "Ground-level close-up of three huge fresh predator paw prints pressed deep into cracked dry soil, claw tips visible, dust at the edges. Beyond them, blurred golden grass. Painterly 2D animation, raking low sunlight, rich soil texture.",
+  "video_prompt": "Slow tilt up from the oversized paw prints in the soil, past the grass stems, to KAIRO's face as he kneels and stares toward the dense bushes. Wind dies down. His eyebrows lower. Dust settles."
+}

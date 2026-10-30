@@ -1,0 +1,36 @@
+{
+  "id": "S06",
+  "index": 6,
+  "title": "The Ancient World",
+  "start_s": 60.0,
+  "duration_s": 12,
+  "timecode": "01:00–01:12",
+  "act": "prehistoric",
+  "setting": "savanna_aerial",
+  "wardrobe": "hide",
+  "shot": "high aerial wide, then descend to ground level",
+  "camera": "crane down from aerial to a ground-level wide over the grass",
+  "action": "Prehistoric Africa at sunrise, 200,000 years ago. Golden grass, scattered acacia trees, distant hills. KAIRO rises out of the tall grass, wearing a brown animal-hide tunic, holding a wooden spear.",
+  "expression": "alert, scanning the horizon",
+  "lighting": "low golden sun, long shadows, warm haze on the hills",
+  "audio": "wide wind, distant birds and insects, no music for the first two seconds",
+  "dialogue_fa": "حدود دویست هزار سال پیش... آفریقا. نه خبری از شهر بود، نه ماشین، نه حتی یه سقف درست‌وحسابی بالای سرمون.",
+  "gloss_en": "About two hundred thousand years ago... Africa. No cities, no cars, not even a proper roof over our heads.",
+  "render": {
+    "backdrop": "savanna_aerial",
+    "zoom": [
+      1.0,
+      1.18
+    ],
+    "pose": "stand_grass_spear",
+    "facing": "right"
+  },
+  "continuity": [
+    "sun position low camera-left",
+    "hills silhouette on the right",
+    "same lighting for S07-S13"
+  ],
+  "transition": "crane continues down, motivating the cut to the grass-level hunt",
+  "image_prompt": "Sweeping aerial view of prehistoric African savanna at sunrise: oceans of golden dry grass, scattered flat-topped acacia trees, rocky outcrops, distant blue hills, warm haze. A small stickman figure in a brown animal-hide tunic stands in the tall grass holding a wooden spear, tiny against the landscape. Painterly 2D animation background, layered atmospheric depth, long shadows.",
+  "video_prompt": "Slow cinematic crane descent from high aerial to ground level over the golden grass. Wind moves the grass in waves, dust drifts. KAIRO rises out of the grass and scans the horizon, spear in hand. Sun flare low on the left. No cuts."
+}

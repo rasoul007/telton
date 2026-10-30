@@ -1,0 +1,35 @@
+{
+  "id": "S03",
+  "index": 3,
+  "title": "Forgetting Today",
+  "start_s": 24.0,
+  "duration_s": 12,
+  "timecode": "00:24–00:36",
+  "act": "present",
+  "setting": "modern_room",
+  "wardrobe": "suit",
+  "shot": "medium close-up, three-quarter angle",
+  "camera": "slow tilt from the wall clock down to KAIRO",
+  "action": "KAIRO turns his head toward the wall clock behind him and pauses. Then he turns back to camera and opens one hand gently.",
+  "expression": "distant, then quietly sad",
+  "lighting": "warm lamp key, thin highlight on the clock rim",
+  "audio": "clock tick moves to the foreground, pad thins out",
+  "dialogue_fa": "همه می‌گن وقتی به فلان چیز برسم، اون‌وقت زندگی می‌کنم. ولی کسی نمی‌دونه شاید همون لحظه‌ای که منتظرشی، دیگه هیچ‌وقت برنگرده.",
+  "gloss_en": "Everyone says when I reach such-and-such, then I'll live. But nobody knows that the moment you are waiting for may never come back.",
+  "render": {
+    "backdrop": "modern_room",
+    "zoom": [
+      1.1,
+      1.3
+    ],
+    "pose": "sit_glance_clock",
+    "facing": "three_quarter"
+  },
+  "continuity": [
+    "clock directly above the armchair",
+    "same lamp"
+  ],
+  "transition": "match on his turn back to camera; the push-in begins",
+  "image_prompt": "Three-quarter medium close-up in the dark room. KAIRO the stickman has turned his head to look up at a round wall clock above the armchair, a thin highlight tracing the clock rim. Suit collar and tie clearly readable, lamp light grazing his round head. Painterly 2D cinematic still, atmospheric shadow.",
+  "video_prompt": "Camera tilts slowly down from the ticking wall clock to KAIRO. He holds the look for two beats, blinks once, then turns back to the lens and opens one hand gently. The clock hand advances. Lighting unchanged."
+}

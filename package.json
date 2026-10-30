@@ -1,0 +1,20 @@
+{
+  "name": "kairo-episode-01",
+  "version": "1.0.0",
+  "description": "KAIRO Ep.01 production kit: 25-scene screenplay, prompt pack, Persian voice-over, procedural animatic renderer",
+  "private": true,
+  "scripts": {
+    "screenplay": "PYTHONPATH=src python3 -m kairo screenplay",
+    "prompts": "PYTHONPATH=src python3 -m kairo prompts",
+    "voice": "PYTHONPATH=src python3 -m kairo voice",
+    "score": "PYTHONPATH=src python3 -m kairo score",
+    "stills": "PYTHONPATH=src python3 -m kairo stills",
+    "clips": "PYTHONPATH=src python3 -m kairo clips",
+    "film": "PYTHONPATH=src python3 -m kairo film",
+    "srt": "PYTHONPATH=src python3 -m kairo srt",
+    "check": "PYTHONPATH=src python3 -m kairo check"
+  },
+  "dependencies": {
+    "ffmpeg-static": "^5.3.0"
+  }
+}

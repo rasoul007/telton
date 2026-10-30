@@ -1,0 +1,37 @@
+{
+  "id": "S11",
+  "index": 11,
+  "title": "Escape",
+  "start_s": 120.0,
+  "duration_s": 12,
+  "timecode": "02:00–02:12",
+  "act": "prehistoric",
+  "setting": "savanna_chase",
+  "wardrobe": "hide",
+  "shot": "dynamic tracking with handheld energy",
+  "camera": "fast lateral tracking, then behind-the-shoulder chase, slight shake",
+  "action": "The predator charges. KAIRO turns and sprints through tall grass, the predator closing behind him. Dust, flattened grass and blurred foreground.",
+  "expression": "panic, mouth open, running for his life",
+  "lighting": "dappled raking light, kicked-up dust glowing gold",
+  "audio": "pounding footsteps, ragged breathing, heavy paws, driving percussion",
+  "dialogue_fa": "فقط یه کار می‌تونستم بکنم... فرار! اونم با تمام سرعتی که داشتم.",
+  "gloss_en": "There was only one thing I could do... run! With every bit of speed I had.",
+  "render": {
+    "backdrop": "savanna_chase",
+    "zoom": [
+      1.25,
+      1.15
+    ],
+    "pose": "run",
+    "facing": "left",
+    "extra": "predator_chase"
+  },
+  "continuity": [
+    "spear still in hand",
+    "same predator",
+    "chase direction is screen-left to right"
+  ],
+  "transition": "he spots the rocks ahead, motivating S12",
+  "image_prompt": "Kinetic chase frame: KAIRO the stickman sprints through tall golden grass, hide tunic flapping, spear clutched to his chest, dust exploding from his heels. Behind him a massive prehistoric predator gallops through the flattened grass, mouth open. Motion blur on the foreground grass, low sun flare, flying dust. Dynamic 2D cinematic animation.",
+  "video_prompt": "Fast lateral tracking shot of the chase, then drop behind KAIRO's shoulder. He runs left to right, arms pumping, hide tunic flapping, grass whipping past. The predator follows in long heavy bounds, dust clouds rising. Slight handheld shake, speed lines, single continuous shot."
+}

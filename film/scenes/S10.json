@@ -1,0 +1,36 @@
+{
+  "id": "S10",
+  "index": 10,
+  "title": "The Predator",
+  "start_s": 108.0,
+  "duration_s": 12,
+  "timecode": "01:48–02:00",
+  "act": "prehistoric",
+  "setting": "savanna_predator",
+  "wardrobe": "hide",
+  "shot": "wide low-angle, predator foreground",
+  "camera": "low angle with a slow pull-back as the predator advances",
+  "action": "A huge prehistoric big-cat predator steps out of the bushes into the light. KAIRO steps backward in fear and lifts his spear with both hands.",
+  "expression": "fear, jaw tight",
+  "lighting": "predator rim-lit by the sun, KAIRO in warm bounce light",
+  "audio": "deep growl, grass crunch, low brass hit, drone rises",
+  "dialogue_fa": "وقتی دیدمش، فهمیدم شکارچی واقعی منم! باور کن حتی فرصت نکردم فکر کنم.",
+  "gloss_en": "When I saw it, I realised I was the real prey! Believe me, I didn't even get a chance to think.",
+  "render": {
+    "backdrop": "savanna_predator",
+    "zoom": [
+      1.2,
+      1.1
+    ],
+    "pose": "stand_back_spear",
+    "facing": "three_quarter",
+    "extra": "predator_full"
+  },
+  "continuity": [
+    "predator design locked from here to S14",
+    "same sun direction"
+  ],
+  "transition": "the predator gathers its weight, motivating the cut to the run",
+  "image_prompt": "Low wide shot in golden savanna grass. A massive prehistoric big-cat predator with low heavy shoulders, a huge head, short rounded ears and a thick tail stands at the edge of the bushes, rim-lit by sunrise, fur tawny-grey with a dark dorsal stripe. In the foreground KAIRO the stickman in a brown hide tunic backs away, wooden spear raised in both hands. 2D cinematic animation, dust, dramatic scale contrast.",
+  "video_prompt": "Slow pull-back as the predator pushes out of the bushes one heavy step at a time, head low, shoulders rolling. KAIRO stumbles backward, raises the spear with both thin arms and freezes. The predator's tail flicks. Grass and dust move with the weight."
+}

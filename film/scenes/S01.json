@@ -1,0 +1,36 @@
+{
+  "id": "S01",
+  "index": 1,
+  "title": "A Mysterious Beginning",
+  "start_s": 0.0,
+  "duration_s": 12,
+  "timecode": "00:00–00:12",
+  "act": "present",
+  "setting": "modern_room",
+  "wardrobe": "suit",
+  "shot": "wide establishing, slow push-in to medium close-up",
+  "camera": "slow dolly push from wide to face height, 1.00x to 1.25x",
+  "action": "KAIRO sits in the armchair, one side of his body lit by the floor lamp. He looks directly into the lens and introduces himself with a small, self-deprecating shrug.",
+  "expression": "warm, faintly amused, a little uncertain",
+  "lighting": "warm tungsten key from camera-left, deep blue-black shadow camera-right, dust motes in the beam",
+  "audio": "low warm string pad, sparse piano notes, faint room tone and a slow clock tick",
+  "dialogue_fa": "سلام... من کایرو هستم. راستش نمی‌دونم از کجا شروع کنم... چون داستان من یه‌کم با بقیه فرق داره.",
+  "gloss_en": "Hello... I'm Kairo. Honestly, I don't know where to start... because my story is a little different from everyone else's.",
+  "render": {
+    "backdrop": "modern_room",
+    "zoom": [
+      1.0,
+      1.3
+    ],
+    "pose": "sit_talk",
+    "facing": "front"
+  },
+  "continuity": [
+    "same armchair as S25",
+    "lamp camera-left",
+    "clock above the chair"
+  ],
+  "transition": "cut on the last word; camera still settling",
+  "image_prompt": "Wide cinematic interior of a dark modern room. A stickman named KAIRO sits in a worn leather armchair, wearing a black business suit with white shirt and black tie, dark shoes on the floor. A warm yellow floor lamp stands on the left and paints a golden rim on one half of his oversized round head; the other half falls into deep shadow. Heavy curtain right, round wall clock above the chair, dust motes drifting in the lamp beam. Painterly 2D animation background, layered depth, soft vignette.",
+  "video_prompt": "Static wide frame of the dark room, then a very slow cinematic push-in toward KAIRO's face over twelve seconds. KAIRO blinks twice naturally, small mouth movement as he speaks, eyebrows lift on the first line then settle. Slight breathing in the shoulders, tiny flicker in the floor lamp. Camera never shakes; the push is perfectly smooth."
+}

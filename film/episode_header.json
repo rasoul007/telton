@@ -1,0 +1,35 @@
+{
+  "series": "KAIRO",
+  "episode": 1,
+  "title_fa": "کایرو – مردی که زمان را شکست داد",
+  "title_en": "KAIRO – The Man Who Defeated Time",
+  "language": "fa-IR",
+  "total_duration_s": 300,
+  "scene_count": 25,
+  "scene_duration_s": 12,
+  "format": {
+    "aspect_ratio": "16:9",
+    "resolution": "1920x1080",
+    "fps": 24,
+    "style": "Cinematic 2D hand-drawn stickman animation",
+    "subtitles_in_final": false,
+    "watermark": false,
+    "logo": false
+  },
+  "voice": {
+    "engine": "edge-tts",
+    "voice_id": "fa-IR-FaridNeural",
+    "gender": "male",
+    "tone": "medium-low, warm, slightly mysterious, natural Iranian conversational accent",
+    "consistency": "same voice_id for all 25 scenes"
+  },
+  "continuity_anchors": {
+    "kairo": "stickman, slightly oversized round head, small black dot eyes, simple expressive eyebrows, movable mouth line, four short hair strands, thin simple arms and legs, slightly oversized feet. Proportions never change.",
+    "kairo_present": "black business suit, white shirt, black tie, dark shoes",
+    "kairo_prehistoric": "simple primitive brown animal-hide tunic, bare feet, wooden spear while hunting. No modern accessories.",
+    "predator": "large prehistoric big-cat-like predator: low heavy shoulders, massive head, short rounded ears, long thick tail, tawny-grey matted fur with a dark dorsal stripe",
+    "map": "circular amber stone tablet, concentric rings, twelve radial grooves, star-point markers, unknown angular glyphs, one blank destination node",
+    "cave": "narrow south-facing entrance in a rock outcrop above dry grass, 40 m descending passage with a right-hand bend, then a large domed chamber with a waist-high stone platform at its centre",
+    "room": "dark modern room, single worn leather armchair, warm yellow floor lamp on camera-left, heavy curtain camera-right, round wall clock above the chair"
+  }
+}

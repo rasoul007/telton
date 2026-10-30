@@ -1,0 +1,264 @@
+{
+  "voice_id": "fa-IR-FaridNeural",
+  "lead_in_s": 0.55,
+  "tail_s": 0.55,
+  "scenes": [
+    {
+      "id": "S01",
+      "rate_pct": 0,
+      "atempo": null,
+      "raw_s": 9.528,
+      "final_s": 9.528,
+      "budget_s": 10.9,
+      "fits": true,
+      "cached": false
+    },
+    {
+      "id": "S02",
+      "rate_pct": 0,
+      "atempo": null,
+      "raw_s": 9.048,
+      "final_s": 9.048,
+      "budget_s": 10.9,
+      "fits": true,
+      "cached": false
+    },
+    {
+      "id": "S03",
+      "rate_pct": 0,
+      "atempo": null,
+      "raw_s": 9.504,
+      "final_s": 9.504,
+      "budget_s": 10.9,
+      "fits": true,
+      "cached": false
+    },
+    {
+      "id": "S04",
+      "rate_pct": 0,
+      "atempo": null,
+      "raw_s": 8.232,
+      "final_s": 8.232,
+      "budget_s": 10.9,
+      "fits": true,
+      "cached": false
+    },
+    {
+      "id": "S05",
+      "rate_pct": 0,
+      "atempo": null,
+      "raw_s": 6.192,
+      "final_s": 6.192,
+      "budget_s": 10.9,
+      "fits": true,
+      "cached": false
+    },
+    {
+      "id": "S06",
+      "rate_pct": 0,
+      "atempo": null,
+      "raw_s": 9.744,
+      "final_s": 9.744,
+      "budget_s": 10.9,
+      "fits": true,
+      "cached": false
+    },
+    {
+      "id": "S07",
+      "rate_pct": 0,
+      "atempo": null,
+      "raw_s": 9.24,
+      "final_s": 9.24,
+      "budget_s": 10.9,
+      "fits": true,
+      "cached": false
+    },
+    {
+      "id": "S08",
+      "rate_pct": 0,
+      "atempo": null,
+      "raw_s": 9.816,
+      "final_s": 9.816,
+      "budget_s": 10.9,
+      "fits": true,
+      "cached": false
+    },
+    {
+      "id": "S09",
+      "rate_pct": 0,
+      "atempo": null,
+      "raw_s": 8.592,
+      "final_s": 8.592,
+      "budget_s": 10.9,
+      "fits": true,
+      "cached": false
+    },
+    {
+      "id": "S10",
+      "rate_pct": 0,
+      "atempo": null,
+      "raw_s": 7.008,
+      "final_s": 7.008,
+      "budget_s": 10.9,
+      "fits": true,
+      "cached": false
+    },
+    {
+      "id": "S11",
+      "rate_pct": 0,
+      "atempo": null,
+      "raw_s": 6.72,
+      "final_s": 6.72,
+      "budget_s": 10.9,
+      "fits": true,
+      "cached": false
+    },
+    {
+      "id": "S12",
+      "rate_pct": 0,
+      "atempo": null,
+      "raw_s": 8.232,
+      "final_s": 8.232,
+      "budget_s": 10.9,
+      "fits": true,
+      "cached": false
+    },
+    {
+      "id": "S13",
+      "rate_pct": 0,
+      "atempo": null,
+      "raw_s": 6.336,
+      "final_s": 6.336,
+      "budget_s": 10.9,
+      "fits": true,
+      "cached": false
+    },
+    {
+      "id": "S14",
+      "rate_pct": 0,
+      "atempo": null,
+      "raw_s": 9.384,
+      "final_s": 9.384,
+      "budget_s": 10.9,
+      "fits": true,
+      "cached": false
+    },
+    {
+      "id": "S15",
+      "rate_pct": 0,
+      "atempo": 1.0217,
+      "raw_s": 11.136,
+      "final_s": 10.879,
+      "budget_s": 10.9,
+      "fits": true,
+      "cached": false
+    },
+    {
+      "id": "S16",
+      "rate_pct": 0,
+      "atempo": null,
+      "raw_s": 8.616,
+      "final_s": 8.616,
+      "budget_s": 10.9,
+      "fits": true,
+      "cached": false
+    },
+    {
+      "id": "S17",
+      "rate_pct": 0,
+      "atempo": null,
+      "raw_s": 6.6,
+      "final_s": 6.6,
+      "budget_s": 10.9,
+      "fits": true,
+      "cached": false
+    },
+    {
+      "id": "S18",
+      "rate_pct": 0,
+      "atempo": null,
+      "raw_s": 6.6,
+      "final_s": 6.6,
+      "budget_s": 10.9,
+      "fits": true,
+      "cached": false
+    },
+    {
+      "id": "S19",
+      "rate_pct": 0,
+      "atempo": null,
+      "raw_s": 7.464,
+      "final_s": 7.464,
+      "budget_s": 10.9,
+      "fits": true,
+      "cached": false
+    },
+    {
+      "id": "S20",
+      "rate_pct": 0,
+      "atempo": null,
+      "raw_s": 7.584,
+      "final_s": 7.584,
+      "budget_s": 10.9,
+      "fits": true,
+      "cached": false
+    },
+    {
+      "id": "S21",
+      "rate_pct": 0,
+      "atempo": null,
+      "raw_s": 7.032,
+      "final_s": 7.032,
+      "budget_s": 10.9,
+      "fits": true,
+      "cached": false
+    },
+    {
+      "id": "S22",
+      "rate_pct": 0,
+      "atempo": null,
+      "raw_s": 6.168,
+      "final_s": 6.168,
+      "budget_s": 10.9,
+      "fits": true,
+      "cached": false
+    },
+    {
+      "id": "S23",
+      "rate_pct": 0,
+      "atempo": null,
+      "raw_s": 7.8,
+      "final_s": 7.8,
+      "budget_s": 10.9,
+      "fits": true,
+      "cached": false
+    },
+    {
+      "id": "S24",
+      "rate_pct": 0,
+      "atempo": null,
+      "raw_s": 8.832,
+      "final_s": 8.832,
+      "budget_s": 10.9,
+      "fits": true,
+      "cached": false
+    },
+    {
+      "id": "S25",
+      "rate_pct": 30,
+      "atempo": 1.2572,
+      "raw_s": 13.704,
+      "final_s": 10.884,
+      "budget_s": 10.9,
+      "fits": true,
+      "cached": false
+    }
+  ],
+  "total_speech_s": 206.03,
+  "all_fit": true,
+  "max_rate_used": 30,
+  "tempo_used": [
+    "S15",
+    "S25"
+  ]
+}

@@ -1,0 +1,36 @@
+{
+  "id": "S25",
+  "index": 25,
+  "title": "The Revelation",
+  "start_s": 288.0,
+  "duration_s": 12,
+  "timecode": "04:48–05:00",
+  "act": "present",
+  "setting": "modern_room_closeup",
+  "wardrobe": "suit",
+  "shot": "match cut to the S01 room, then a push-in on the face",
+  "camera": "match cut, then a slow push-in; fade to black on the final second",
+  "action": "Cinematic match cut back to the exact modern room of Scene 1. KAIRO sits in his black suit. The camera pushes slowly toward his face. He looks straight into the lens and reveals his immortality, then holds a mysterious expression through a beat of silence before a smooth fade to black.",
+  "expression": "calm, ancient, faintly amused; a mystery held behind the eyes",
+  "lighting": "identical lamp key to S01, slightly warmer as the music resolves",
+  "audio": "music resolves on a single dramatic accent, the clock tick returns for one second, then silence and a long fade",
+  "dialogue_fa": "شاید فکر کنی این فقط یه خاطره قدیمیه... ولی نه. حدود دویست هزار سال از اون روز گذشته... و من هنوز اینجام. من حدود دویست هزار سال زندگی کردم! و باور کن... این تازه شروع ماجراست.",
+  "gloss_en": "You might think this is just an old memory... but no. About two hundred thousand years have passed since that day... and I'm still here. I have lived for about two hundred thousand years! And believe me... this is only the beginning.",
+  "render": {
+    "backdrop": "modern_room_closeup",
+    "zoom": [
+      1.15,
+      1.55
+    ],
+    "pose": "sit_final",
+    "facing": "front",
+    "fade_out_s": 1.2
+  },
+  "continuity": [
+    "must match S01 framing, lamp, chair, clock exactly",
+    "same suit and hair as S01-S04"
+  ],
+  "transition": "fade to black; end card is empty, no logo, no text",
+  "image_prompt": "Tight cinematic close-up of KAIRO the stickman in his black suit and black tie, seated in the armchair of the dark modern room, warm lamp light on the left of his round head, deep shadow on the right, wall clock soft behind him. His eyes look directly into the lens with a calm, ancient, faintly amused expression. 2D animation, painterly detail, film grain.",
+  "video_prompt": "Match cut from the cave to the exact same room as the opening shot. KAIRO sits in the armchair in his black suit, looks into the lens and speaks. The camera pushes in very slowly on his face as he reveals his age. On the last word he stops, blinks once, holds a mysterious half-smile, and the image fades smoothly to black with no text."
+}

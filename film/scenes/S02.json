@@ -1,0 +1,36 @@
+{
+  "id": "S02",
+  "index": 2,
+  "title": "People and Their Hurry",
+  "start_s": 12.0,
+  "duration_s": 12,
+  "timecode": "00:12–00:24",
+  "act": "present",
+  "setting": "modern_room",
+  "wardrobe": "suit",
+  "shot": "medium shot, chest up",
+  "camera": "almost locked off, imperceptible drift, framing continuous with S01",
+  "action": "Same room and seat. KAIRO speaks to camera with small natural hand gestures; on the last line he gradually leans forward with a thoughtful expression.",
+  "expression": "conversational, then thoughtful",
+  "lighting": "identical to S01, lamp beam unchanged",
+  "audio": "pad continues, clock tick slightly louder, single low piano note under the lean",
+  "dialogue_fa": "تا حالا دقت کردی همه عجله دارن؟ یکی دنبال پوله، یکی دنبال موفقیته، یکی هم فقط می‌خواد زودتر به فردا برسه.",
+  "gloss_en": "Have you ever noticed that everyone is in a hurry? One chases money, one chases success, and one just wants to reach tomorrow faster.",
+  "render": {
+    "backdrop": "modern_room",
+    "zoom": [
+      1.0,
+      1.16
+    ],
+    "pose": "sit_gesture",
+    "facing": "front"
+  },
+  "continuity": [
+    "same seat",
+    "same lamp position",
+    "suit unchanged"
+  ],
+  "transition": "his eye-line shift motivates the cut to the clock",
+  "image_prompt": "Medium shot of KAIRO the stickman seated in the armchair, black suit and tie, warm lamp light on the left of his face. His right hand is raised in a small open gesture as if explaining something. The dark modern room and the wall clock sit slightly out of focus behind him. Cinematic 2D animation still, soft depth of field, warm-cool contrast.",
+  "video_prompt": "Continuous medium shot. KAIRO talks with small natural hand gestures and blinks, and on the final phrase leans forward toward the lens with a thoughtful head tilt. Camera drifts imperceptibly. Background identical to the previous shot."
+}

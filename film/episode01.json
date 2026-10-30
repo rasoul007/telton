@@ -1,0 +1,927 @@
+{
+  "series": "KAIRO",
+  "episode": 1,
+  "title_fa": "کایرو – مردی که زمان را شکست داد",
+  "title_en": "KAIRO – The Man Who Defeated Time",
+  "language": "fa-IR",
+  "total_duration_s": 300,
+  "scene_count": 25,
+  "scene_duration_s": 12,
+  "format": {
+    "aspect_ratio": "16:9",
+    "resolution": "1920x1080",
+    "fps": 24,
+    "style": "Cinematic 2D hand-drawn stickman animation",
+    "subtitles_in_final": false,
+    "watermark": false,
+    "logo": false
+  },
+  "voice": {
+    "engine": "edge-tts",
+    "voice_id": "fa-IR-FaridNeural",
+    "gender": "male",
+    "tone": "medium-low, warm, slightly mysterious, natural Iranian conversational accent",
+    "consistency": "same voice_id for all 25 scenes"
+  },
+  "continuity_anchors": {
+    "kairo": "stickman, slightly oversized round head, small black dot eyes, simple expressive eyebrows, movable mouth line, four short hair strands, thin simple arms and legs, slightly oversized feet. Proportions never change.",
+    "kairo_present": "black business suit, white shirt, black tie, dark shoes",
+    "kairo_prehistoric": "simple primitive brown animal-hide tunic, bare feet, wooden spear while hunting. No modern accessories.",
+    "predator": "large prehistoric big-cat-like predator: low heavy shoulders, massive head, short rounded ears, long thick tail, tawny-grey matted fur with a dark dorsal stripe",
+    "map": "circular amber stone tablet, concentric rings, twelve radial grooves, star-point markers, unknown angular glyphs, one blank destination node",
+    "cave": "narrow south-facing entrance in a rock outcrop above dry grass, 40 m descending passage with a right-hand bend, then a large domed chamber with a waist-high stone platform at its centre",
+    "room": "dark modern room, single worn leather armchair, warm yellow floor lamp on camera-left, heavy curtain camera-right, round wall clock above the chair"
+  },
+  "scenes": [
+    {
+      "id": "S01",
+      "index": 1,
+      "title": "A Mysterious Beginning",
+      "start_s": 0.0,
+      "duration_s": 12,
+      "timecode": "00:00–00:12",
+      "act": "present",
+      "setting": "modern_room",
+      "wardrobe": "suit",
+      "shot": "wide establishing, slow push-in to medium close-up",
+      "camera": "slow dolly push from wide to face height, 1.00x to 1.25x",
+      "action": "KAIRO sits in the armchair, one side of his body lit by the floor lamp. He looks directly into the lens and introduces himself with a small, self-deprecating shrug.",
+      "expression": "warm, faintly amused, a little uncertain",
+      "lighting": "warm tungsten key from camera-left, deep blue-black shadow camera-right, dust motes in the beam",
+      "audio": "low warm string pad, sparse piano notes, faint room tone and a slow clock tick",
+      "dialogue_fa": "سلام... من کایرو هستم. راستش نمی‌دونم از کجا شروع کنم... چون داستان من یه‌کم با بقیه فرق داره.",
+      "gloss_en": "Hello... I'm Kairo. Honestly, I don't know where to start... because my story is a little different from everyone else's.",
+      "render": {
+        "backdrop": "modern_room",
+        "zoom": [
+          1.0,
+          1.25
+        ],
+        "pose": "sit_talk",
+        "facing": "front"
+      },
+      "continuity": [
+        "same armchair as S25",
+        "lamp camera-left",
+        "clock above the chair"
+      ],
+      "transition": "cut on the last word; camera still settling",
+      "image_prompt": "Wide cinematic interior of a dark modern room. A stickman named KAIRO sits in a worn leather armchair, wearing a black business suit with white shirt and black tie, dark shoes on the floor. A warm yellow floor lamp stands on the left and paints a golden rim on one half of his oversized round head; the other half falls into deep shadow. Heavy curtain right, round wall clock above the chair, dust motes drifting in the lamp beam. Painterly 2D animation background, layered depth, soft vignette.",
+      "video_prompt": "Static wide frame of the dark room, then a very slow cinematic push-in toward KAIRO's face over twelve seconds. KAIRO blinks twice naturally, small mouth movement as he speaks, eyebrows lift on the first line then settle. Slight breathing in the shoulders, tiny flicker in the floor lamp. Camera never shakes; the push is perfectly smooth."
+    },
+    {
+      "id": "S02",
+      "index": 2,
+      "title": "People and Their Hurry",
+      "start_s": 12.0,
+      "duration_s": 12,
+      "timecode": "00:12–00:24",
+      "act": "present",
+      "setting": "modern_room",
+      "wardrobe": "suit",
+      "shot": "medium shot, chest up",
+      "camera": "almost locked off, imperceptible drift, framing continuous with S01",
+      "action": "Same room and seat. KAIRO speaks to camera with small natural hand gestures; on the last line he gradually leans forward with a thoughtful expression.",
+      "expression": "conversational, then thoughtful",
+      "lighting": "identical to S01, lamp beam unchanged",
+      "audio": "pad continues, clock tick slightly louder, single low piano note under the lean",
+      "dialogue_fa": "تا حالا دقت کردی همه عجله دارن؟ یکی دنبال پوله، یکی دنبال موفقیته، یکی هم فقط می‌خواد زودتر به فردا برسه.",
+      "gloss_en": "Have you ever noticed that everyone is in a hurry? One chases money, one chases success, and one just wants to reach tomorrow faster.",
+      "render": {
+        "backdrop": "modern_room",
+        "zoom": [
+          1.28,
+          1.34
+        ],
+        "pose": "sit_gesture",
+        "facing": "front"
+      },
+      "continuity": [
+        "same seat",
+        "same lamp position",
+        "suit unchanged"
+      ],
+      "transition": "his eye-line shift motivates the cut to the clock",
+      "image_prompt": "Medium shot of KAIRO the stickman seated in the armchair, black suit and tie, warm lamp light on the left of his face. His right hand is raised in a small open gesture as if explaining something. The dark modern room and the wall clock sit slightly out of focus behind him. Cinematic 2D animation still, soft depth of field, warm-cool contrast.",
+      "video_prompt": "Continuous medium shot. KAIRO talks with small natural hand gestures and blinks, and on the final phrase leans forward toward the lens with a thoughtful head tilt. Camera drifts imperceptibly. Background identical to the previous shot."
+    },
+    {
+      "id": "S03",
+      "index": 3,
+      "title": "Forgetting Today",
+      "start_s": 24.0,
+      "duration_s": 12,
+      "timecode": "00:24–00:36",
+      "act": "present",
+      "setting": "modern_room",
+      "wardrobe": "suit",
+      "shot": "medium close-up, three-quarter angle",
+      "camera": "slow tilt from the wall clock down to KAIRO",
+      "action": "KAIRO turns his head toward the wall clock behind him and pauses. Then he turns back to camera and opens one hand gently.",
+      "expression": "distant, then quietly sad",
+      "lighting": "warm lamp key, thin highlight on the clock rim",
+      "audio": "clock tick moves to the foreground, pad thins out",
+      "dialogue_fa": "همه می‌گن وقتی به فلان چیز برسم، اون‌وقت زندگی می‌کنم. ولی کسی نمی‌دونه شاید همون لحظه‌ای که منتظرشی، دیگه هیچ‌وقت برنگرده.",
+      "gloss_en": "Everyone says when I reach such-and-such, then I'll live. But nobody knows that the moment you are waiting for may never come back.",
+      "render": {
+        "backdrop": "modern_room",
+        "zoom": [
+          1.3,
+          1.3
+        ],
+        "pose": "sit_glance_clock",
+        "facing": "three_quarter"
+      },
+      "continuity": [
+        "clock directly above the armchair",
+        "same lamp"
+      ],
+      "transition": "match on his turn back to camera; the push-in begins",
+      "image_prompt": "Three-quarter medium close-up in the dark room. KAIRO the stickman has turned his head to look up at a round wall clock above the armchair, a thin highlight tracing the clock rim. Suit collar and tie clearly readable, lamp light grazing his round head. Painterly 2D cinematic still, atmospheric shadow.",
+      "video_prompt": "Camera tilts slowly down from the ticking wall clock to KAIRO. He holds the look for two beats, blinks once, then turns back to the lens and opens one hand gently. The clock hand advances. Lighting unchanged."
+    },
+    {
+      "id": "S04",
+      "index": 4,
+      "title": "Something Changed",
+      "start_s": 36.0,
+      "duration_s": 12,
+      "timecode": "00:36–00:48",
+      "act": "present",
+      "setting": "modern_room_closeup",
+      "wardrobe": "suit",
+      "shot": "close-up on face",
+      "camera": "locked close-up, then micro push-in",
+      "action": "KAIRO's slight smile fades. He leans back into the chair and looks into the distance, remembering.",
+      "expression": "smile fading into haunted stillness",
+      "lighting": "one side of the face lit, the other eye in shadow",
+      "audio": "clock tick stops, low sub-bass swell begins",
+      "dialogue_fa": "منم یه زمانی مثل همه فکر می‌کردم... تا اینکه یه اتفاقی افتاد. اتفاقی که همه‌چیز رو عوض کرد.",
+      "gloss_en": "I used to think like everyone else... until something happened. Something that changed everything.",
+      "render": {
+        "backdrop": "modern_room_closeup",
+        "zoom": [
+          1.0,
+          1.12
+        ],
+        "pose": "closeup_calm",
+        "facing": "front"
+      },
+      "continuity": [
+        "same hair strands",
+        "same eye shape",
+        "same suit"
+      ],
+      "transition": "push continues into the eyes, setting up the match cut in S05",
+      "image_prompt": "Tight cinematic close-up of KAIRO's oversized round stickman head. Small black elliptical eyes, thin expressive eyebrows, a simple mouth line losing its smile, four short hair strands. Lamp light on the left half of the face only, right half sinking into black. Black suit collar and white shirt edge at the bottom of frame. Painterly 2D animation, fine film grain, shallow depth.",
+      "video_prompt": "Locked close-up. The faint smile disappears, eyebrows flatten, he exhales and leans back out of the light, eyes drifting off lens into the distance. Extremely slow micro push-in. A low sub-bass swell rises under the silence."
+    },
+    {
+      "id": "S05",
+      "index": 5,
+      "title": "Entering a Memory",
+      "start_s": 48.0,
+      "duration_s": 12,
+      "timecode": "00:48–01:00",
+      "act": "transition",
+      "setting": "eye_matchcut",
+      "wardrobe": "suit",
+      "shot": "extreme close-up of the eyes, then match cut to a savanna sunrise",
+      "camera": "macro push into the pupil; the pupil iris-wipes into a sunrise horizon line",
+      "action": "Macro shot of KAIRO's eyes. A tiny reflection of warm sunrise light appears in each pupil. The reflection expands until the frame is the African savanna at sunrise.",
+      "expression": "eyes only: calm, then a flicker of memory",
+      "lighting": "eye highlights turn from lamp-yellow to sunrise-gold",
+      "audio": "pad dissolves into wind; a warm low string note opens the memory",
+      "dialogue_fa": "بذار برگردیم به همون روز... روزی که فکر می‌کردم فقط یه شکار معمولیه.",
+      "gloss_en": "Let's go back to that day... the day I thought was just an ordinary hunt.",
+      "render": {
+        "backdrop": "eyes_to_savanna",
+        "zoom": [
+          1.0,
+          1.5
+        ],
+        "pose": "eyes_extreme",
+        "facing": "front"
+      },
+      "continuity": [
+        "iris shape identical to S04 eyes",
+        "transition must land on the exact savanna of S06"
+      ],
+      "transition": "invisible match cut: pupil rim becomes the sun disk",
+      "image_prompt": "Extreme macro of two small black stickman eyes filling the frame, each pupil holding a tiny warm sunrise reflection of golden grass and a low sun. Ink linework, painterly iris detail, deep shadow around the sockets. 2D cinematic animation detail shot.",
+      "video_prompt": "Macro push into the pupils. The reflected sunrise inside each eye brightens and expands until it iris-wipes the whole frame into a wide golden savanna at sunrise. Seamless match cut, no flash, no dissolve, continuous single motion."
+    },
+    {
+      "id": "S06",
+      "index": 6,
+      "title": "The Ancient World",
+      "start_s": 60.0,
+      "duration_s": 12,
+      "timecode": "01:00–01:12",
+      "act": "prehistoric",
+      "setting": "savanna_aerial",
+      "wardrobe": "hide",
+      "shot": "high aerial wide, then descend to ground level",
+      "camera": "crane down from aerial to a ground-level wide over the grass",
+      "action": "Prehistoric Africa at sunrise, 200,000 years ago. Golden grass, scattered acacia trees, distant hills. KAIRO rises out of the tall grass, wearing a brown animal-hide tunic, holding a wooden spear.",
+      "expression": "alert, scanning the horizon",
+      "lighting": "low golden sun, long shadows, warm haze on the hills",
+      "audio": "wide wind, distant birds and insects, no music for the first two seconds",
+      "dialogue_fa": "حدود دویست هزار سال پیش... آفریقا. نه خبری از شهر بود، نه ماشین، نه حتی یه سقف درست‌وحسابی بالای سرمون.",
+      "gloss_en": "About two hundred thousand years ago... Africa. No cities, no cars, not even a proper roof over our heads.",
+      "render": {
+        "backdrop": "savanna_aerial",
+        "zoom": [
+          1.0,
+          1.18
+        ],
+        "pose": "stand_grass_spear",
+        "facing": "right"
+      },
+      "continuity": [
+        "sun position low camera-left",
+        "hills silhouette on the right",
+        "same lighting for S07-S13"
+      ],
+      "transition": "crane continues down, motivating the cut to the grass-level hunt",
+      "image_prompt": "Sweeping aerial view of prehistoric African savanna at sunrise: oceans of golden dry grass, scattered flat-topped acacia trees, rocky outcrops, distant blue hills, warm haze. A small stickman figure in a brown animal-hide tunic stands in the tall grass holding a wooden spear, tiny against the landscape. Painterly 2D animation background, layered atmospheric depth, long shadows.",
+      "video_prompt": "Slow cinematic crane descent from high aerial to ground level over the golden grass. Wind moves the grass in waves, dust drifts. KAIRO rises out of the grass and scans the horizon, spear in hand. Sun flare low on the left. No cuts."
+    },
+    {
+      "id": "S07",
+      "index": 7,
+      "title": "The Hunt",
+      "start_s": 72.0,
+      "duration_s": 12,
+      "timecode": "01:12–01:24",
+      "act": "prehistoric",
+      "setting": "savanna_grass",
+      "wardrobe": "hide",
+      "shot": "medium tracking shot, profile",
+      "camera": "lateral tracking with KAIRO, then settle as he kneels",
+      "action": "KAIRO moves cautiously through waist-high dry grass, spear low and ready. He stops, notices tracks, and kneels down to inspect them.",
+      "expression": "focused, cautious",
+      "lighting": "sunrise side light raking the grass, warm bounce from below",
+      "audio": "grass brushing against legs, soft footsteps, insects, low wind",
+      "dialogue_fa": "اون روز رفته بودم دنبال شکار. راستش گرسنه بودیم و چاره‌ای هم نداشتیم. باید چیزی برای خوردن پیدا می‌کردم.",
+      "gloss_en": "That day I had gone out to hunt. Honestly, we were hungry and had no choice. I had to find something to eat.",
+      "render": {
+        "backdrop": "savanna_grass",
+        "zoom": [
+          1.12,
+          1.24
+        ],
+        "pose": "walk_spear",
+        "facing": "right",
+        "extra": "tracks"
+      },
+      "continuity": [
+        "hide tunic",
+        "wooden spear in right hand",
+        "bare feet",
+        "same grass field as S06"
+      ],
+      "transition": "he kneels, motivating the cut to the footprint close-up",
+      "image_prompt": "Medium profile tracking shot of KAIRO the stickman walking through waist-high golden dry grass in prehistoric Africa, wearing a simple brown animal-hide tunic, bare feet, a wooden spear held low in his right hand. Sunrise side light rakes the grass, long shadows, acacia trees soft in the background. Painterly 2D animation, warm dust in the air.",
+      "video_prompt": "Lateral tracking shot following KAIRO through the tall grass. He pushes stalks aside with the spear shaft, stops, glances down at fresh tracks, and kneels slowly out of frame bottom. Grass sways in the wind, dust motes drift. Camera settles as he kneels."
+    },
+    {
+      "id": "S08",
+      "index": 8,
+      "title": "Footprints",
+      "start_s": 84.0,
+      "duration_s": 12,
+      "timecode": "01:24–01:36",
+      "act": "prehistoric",
+      "setting": "savanna_grass",
+      "wardrobe": "hide",
+      "shot": "close-up on footprints, tilt up to medium",
+      "camera": "slow tilt from the ground up to KAIRO's face",
+      "action": "Large fresh animal footprints pressed into dry soil. The camera tilts up to find KAIRO staring toward a dense wall of bushes.",
+      "expression": "uncertain, a first hint of unease",
+      "lighting": "hard low sun, strong texture on the soil",
+      "audio": "wind drops away; a single low drone enters",
+      "dialogue_fa": "ردپاها تازه بودن... خیلی تازه. فکر کردم بالاخره شانس آوردم. ولی یه چیزی درست به نظر نمی‌رسید.",
+      "gloss_en": "The tracks were fresh... very fresh. I thought my luck had finally turned. But something didn't feel right.",
+      "render": {
+        "backdrop": "savanna_tracks",
+        "zoom": [
+          1.0,
+          1.35
+        ],
+        "pose": "kneel_look",
+        "facing": "three_quarter"
+      },
+      "continuity": [
+        "same predator tracks as S09 threat",
+        "bushes camera-right"
+      ],
+      "transition": "tilt lands on his face at the exact scale of S09's first frame",
+      "image_prompt": "Ground-level close-up of three huge fresh predator paw prints pressed deep into cracked dry soil, claw tips visible, dust at the edges. Beyond them, blurred golden grass. Painterly 2D animation, raking low sunlight, rich soil texture.",
+      "video_prompt": "Slow tilt up from the oversized paw prints in the soil, past the grass stems, to KAIRO's face as he kneels and stares toward the dense bushes. Wind dies down. His eyebrows lower. Dust settles."
+    },
+    {
+      "id": "S09",
+      "index": 9,
+      "title": "Danger",
+      "start_s": 96.0,
+      "duration_s": 12,
+      "timecode": "01:36–01:48",
+      "act": "prehistoric",
+      "setting": "savanna_grass",
+      "wardrobe": "hide",
+      "shot": "medium close-up, then wide with deep focus",
+      "camera": "locked on KAIRO, rack focus to the bushes behind him",
+      "action": "KAIRO freezes in the grass and turns his head. A large mysterious predator silhouette slides behind the bushes. Only a shape and the sound of it are visible.",
+      "expression": "frozen, listening",
+      "lighting": "sun a little higher, bushes in deep shade",
+      "audio": "breath held, low drone, a heavy body brushing through leaves",
+      "dialogue_fa": "یه صدایی از پشت سرم اومد... اول فکر کردم باد بوده. ولی نه... یه چیزی اونجا بود.",
+      "gloss_en": "I heard a sound behind me... at first I thought it was the wind. But no... something was there.",
+      "render": {
+        "backdrop": "savanna_grass",
+        "zoom": [
+          1.3,
+          1.34
+        ],
+        "pose": "stand_freeze",
+        "facing": "front",
+        "extra": "predator_silhouette"
+      },
+      "continuity": [
+        "predator silhouette only, no detail reveal before S10",
+        "same bushes as S08"
+      ],
+      "transition": "the silhouette pushes through the leaves, motivating S10",
+      "image_prompt": "Medium close-up of KAIRO the stickman frozen in tall golden grass, head half turned, eyes wide, animal-hide tunic, spear gripped tight. Behind him, out of focus, a huge dark predator silhouette slides behind a dense wall of bushes. Sunrise backlight, dust and haze. 2D cinematic animation, suspense composition.",
+      "video_prompt": "Camera locked on KAIRO. He freezes mid-step, head turning first, body following. Focus racks from his face to the bushes behind him where a large dark shape moves slowly, pushing leaves aside. Only silhouette and shadow, no detail. Grass trembles."
+    },
+    {
+      "id": "S10",
+      "index": 10,
+      "title": "The Predator",
+      "start_s": 108.0,
+      "duration_s": 12,
+      "timecode": "01:48–02:00",
+      "act": "prehistoric",
+      "setting": "savanna_predator",
+      "wardrobe": "hide",
+      "shot": "wide low-angle, predator foreground",
+      "camera": "low angle with a slow pull-back as the predator advances",
+      "action": "A huge prehistoric big-cat predator steps out of the bushes into the light. KAIRO steps backward in fear and lifts his spear with both hands.",
+      "expression": "fear, jaw tight",
+      "lighting": "predator rim-lit by the sun, KAIRO in warm bounce light",
+      "audio": "deep growl, grass crunch, low brass hit, drone rises",
+      "dialogue_fa": "وقتی دیدمش، فهمیدم شکارچی واقعی منم! باور کن حتی فرصت نکردم فکر کنم.",
+      "gloss_en": "When I saw it, I realised I was the real prey! Believe me, I didn't even get a chance to think.",
+      "render": {
+        "backdrop": "savanna_predator",
+        "zoom": [
+          1.2,
+          1.1
+        ],
+        "pose": "stand_back_spear",
+        "facing": "three_quarter",
+        "extra": "predator_full"
+      },
+      "continuity": [
+        "predator design locked from here to S14",
+        "same sun direction"
+      ],
+      "transition": "the predator gathers its weight, motivating the cut to the run",
+      "image_prompt": "Low wide shot in golden savanna grass. A massive prehistoric big-cat predator with low heavy shoulders, a huge head, short rounded ears and a thick tail stands at the edge of the bushes, rim-lit by sunrise, fur tawny-grey with a dark dorsal stripe. In the foreground KAIRO the stickman in a brown hide tunic backs away, wooden spear raised in both hands. 2D cinematic animation, dust, dramatic scale contrast.",
+      "video_prompt": "Slow pull-back as the predator pushes out of the bushes one heavy step at a time, head low, shoulders rolling. KAIRO stumbles backward, raises the spear with both thin arms and freezes. The predator's tail flicks. Grass and dust move with the weight."
+    },
+    {
+      "id": "S11",
+      "index": 11,
+      "title": "Escape",
+      "start_s": 120.0,
+      "duration_s": 12,
+      "timecode": "02:00–02:12",
+      "act": "prehistoric",
+      "setting": "savanna_chase",
+      "wardrobe": "hide",
+      "shot": "dynamic tracking with handheld energy",
+      "camera": "fast lateral tracking, then behind-the-shoulder chase, slight shake",
+      "action": "The predator charges. KAIRO turns and sprints through tall grass, the predator closing behind him. Dust, flattened grass and blurred foreground.",
+      "expression": "panic, mouth open, running for his life",
+      "lighting": "dappled raking light, kicked-up dust glowing gold",
+      "audio": "pounding footsteps, ragged breathing, heavy paws, driving percussion",
+      "dialogue_fa": "فقط یه کار می‌تونستم بکنم... فرار! اونم با تمام سرعتی که داشتم.",
+      "gloss_en": "There was only one thing I could do... run! With every bit of speed I had.",
+      "render": {
+        "backdrop": "savanna_chase",
+        "zoom": [
+          1.25,
+          1.15
+        ],
+        "pose": "run",
+        "facing": "left",
+        "extra": "predator_chase"
+      },
+      "continuity": [
+        "spear still in hand",
+        "same predator",
+        "chase direction is screen-left to right"
+      ],
+      "transition": "he spots the rocks ahead, motivating S12",
+      "image_prompt": "Kinetic chase frame: KAIRO the stickman sprints through tall golden grass, hide tunic flapping, spear clutched to his chest, dust exploding from his heels. Behind him a massive prehistoric predator gallops through the flattened grass, mouth open. Motion blur on the foreground grass, low sun flare, flying dust. Dynamic 2D cinematic animation.",
+      "video_prompt": "Fast lateral tracking shot of the chase, then drop behind KAIRO's shoulder. He runs left to right, arms pumping, hide tunic flapping, grass whipping past. The predator follows in long heavy bounds, dust clouds rising. Slight handheld shake, speed lines, single continuous shot."
+    },
+    {
+      "id": "S12",
+      "index": 12,
+      "title": "The Cave Entrance",
+      "start_s": 132.0,
+      "duration_s": 12,
+      "timecode": "02:12–02:24",
+      "act": "prehistoric",
+      "setting": "savanna_rocks",
+      "wardrobe": "hide",
+      "shot": "wide, then medium as he changes direction",
+      "camera": "panning follow, then a whip pan onto the cave mouth",
+      "action": "KAIRO bursts between rocks and grass, spots a dark cave entrance in a rock outcrop, and swerves toward it.",
+      "expression": "desperate hope",
+      "lighting": "bright exterior light against the absolute black of the cave mouth",
+      "audio": "percussion continues, wind, a hollow low tone from inside the cave",
+      "dialogue_fa": "یه‌دفعه چشمم به یه غار افتاد. نمی‌دونستم داخلش چیه... ولی بیرون موندن قطعاً بدتر بود!",
+      "gloss_en": "Suddenly I caught sight of a cave. I had no idea what was inside... but staying outside was definitely worse!",
+      "render": {
+        "backdrop": "cave_entrance_ext",
+        "zoom": [
+          1.1,
+          1.2
+        ],
+        "pose": "run_turn",
+        "facing": "right",
+        "extra": "predator_chase"
+      },
+      "continuity": [
+        "cave mouth sits above dry grass on the right side of a rock outcrop; reused in S13-S16",
+        "same predator",
+        "same sun direction"
+      ],
+      "transition": "whip pan follows him into the dark, motivating S13",
+      "image_prompt": "Wide shot of a rocky outcrop above golden dry grass in prehistoric Africa, with a narrow dark cave mouth set in the rock face. KAIRO the stickman sprints toward it between boulders, hide tunic flapping, spear in hand. The cave interior is pure black, framed by sunlit stone. 2D cinematic animation, strong light-dark contrast, dust.",
+      "video_prompt": "Panning follow shot of KAIRO running between boulders, then a fast whip pan that catches the black cave mouth in the rock face. He changes direction and drives toward it. Dust and grass seeds fly through frame. The darkness of the entrance holds against the bright exterior."
+    },
+    {
+      "id": "S13",
+      "index": 13,
+      "title": "Entering the Cave",
+      "start_s": 144.0,
+      "duration_s": 12,
+      "timecode": "02:24–02:36",
+      "act": "prehistoric",
+      "setting": "cave_entrance_int",
+      "wardrobe": "hide",
+      "shot": "medium from behind, entering the dark",
+      "camera": "push forward following behind KAIRO into darkness",
+      "action": "KAIRO rushes into the cave, stumbles on loose stone and catches his balance. Bright sunlight stays behind him as the camera follows him into the dark.",
+      "expression": "relief mixed with panic, one quick backward glance",
+      "lighting": "hard sunlight wedge on the floor, deep black beyond",
+      "audio": "running footsteps become echoing steps, tight breathing, cave reverb",
+      "dialogue_fa": "خودمو پرت کردم توی غار... و فقط امیدوار بودم اون موجود دنبالم نیاد.",
+      "gloss_en": "I threw myself into the cave... just hoping that creature wouldn't follow me.",
+      "render": {
+        "backdrop": "cave_entrance_int",
+        "zoom": [
+          1.2,
+          1.32
+        ],
+        "pose": "stumble",
+        "facing": "back"
+      },
+      "continuity": [
+        "same cave mouth geometry as S12",
+        "sunlight wedge falls from screen-left"
+      ],
+      "transition": "his backward glance sets up the reverse angle of S14",
+      "image_prompt": "Interior of a cave mouth seen from just inside. KAIRO the stickman in a hide tunic stumbles forward into the dark, arms out for balance, spear still in one hand. A hard wedge of golden sunlight falls across the rocky floor behind him; the passage ahead is black. 2D cinematic animation, dust particles in the light beam, deep shadow.",
+      "video_prompt": "Push forward from behind KAIRO as he runs in, trips on loose stone, catches himself against the wall and half-turns to look back at the daylight. Dust drifts through the sun wedge. The darkness beyond is native black with no fill light."
+    },
+    {
+      "id": "S14",
+      "index": 14,
+      "title": "The Predator Stops",
+      "start_s": 156.0,
+      "duration_s": 12,
+      "timecode": "02:36–02:48",
+      "act": "prehistoric",
+      "setting": "cave_entrance_int",
+      "wardrobe": "hide",
+      "shot": "deep-focus shot from inside the cave looking out",
+      "camera": "locked, anchored inside the cave; the predator plays outside the mouth",
+      "action": "From inside the cave: the predator arrives at the entrance, stops at the threshold, sniffs, hesitates, and slowly retreats. KAIRO is a small silhouette at frame-left edge, pressed against the rock.",
+      "expression": "KAIRO: unreadable silhouette, shoulders tense",
+      "lighting": "bright exterior blown out, interior silhouette crushing to black",
+      "audio": "sniffing, a low confused growl, then paw steps fading; cave reverb tail",
+      "dialogue_fa": "ولی یه چیز عجیب اتفاق افتاد... اون حیوان رسید به دهانه غار، اما داخل نیومد. انگار از چیزی می‌ترسید!",
+      "gloss_en": "But something strange happened... that animal reached the mouth of the cave, but it didn't come in. As if it was afraid of something!",
+      "render": {
+        "backdrop": "cave_mouth_from_inside",
+        "zoom": [
+          1.0,
+          1.12
+        ],
+        "pose": "press_rock",
+        "facing": "front",
+        "extra": "predator_threshold"
+      },
+      "continuity": [
+        "predator must never cross the threshold",
+        "same cave mouth shape as S12/S13",
+        "interior stays black"
+      ],
+      "transition": "the predator's retreat empties the frame, motivating S15",
+      "image_prompt": "View from deep inside a cave looking out at the bright entrance. The cave mouth is a jagged bright opening; a huge prehistoric predator stands just outside it, hesitant, head lowered, one paw raised, refusing to step over the threshold. Inside, rock walls fall into black, and a small stickman silhouette presses against the left wall. 2D cinematic animation, silhouettes against blown-out light.",
+      "video_prompt": "Locked shot from inside the cave. The predator arrives at the mouth, stops dead, sniffs the air, shifts its weight forward then back, and slowly retreats out of frame. Dust and heat shimmer in the doorway. The interior remains black throughout."
+    },
+    {
+      "id": "S15",
+      "index": 15,
+      "title": "Strange Silence",
+      "start_s": 168.0,
+      "duration_s": 12,
+      "timecode": "02:48–03:00",
+      "act": "prehistoric",
+      "setting": "cave_entrance_int",
+      "wardrobe": "hide",
+      "shot": "medium from inside, then a slow push as he steps out from cover",
+      "camera": "locked on the empty mouth, then a slow drift right to find KAIRO behind a rock",
+      "action": "The entrance is empty, sunlight lying across the floor. KAIRO slowly comes out from behind a rock and looks outside, listening.",
+      "expression": "wary, breathing again",
+      "lighting": "sun wedge on the floor, cool ambient bounce on the walls",
+      "audio": "silence with a faint high ring; his breath is the loudest thing",
+      "dialogue_fa": "چند لحظه همون‌جا موندم. نه صدایی... نه حرکتی... فقط یه سکوت عجیب. انگار غار نفسشو حبس کرده بود.",
+      "gloss_en": "I stayed right there for a few moments. No sound... no movement... just a strange silence. As if the cave was holding its breath.",
+      "render": {
+        "backdrop": "cave_entrance_int",
+        "zoom": [
+          1.15,
+          1.25
+        ],
+        "pose": "peek_rock",
+        "facing": "left"
+      },
+      "continuity": [
+        "same sunlight angle as S13",
+        "same rock cover"
+      ],
+      "transition": "silence is broken by a sound from behind him, motivating S16",
+      "image_prompt": "Inside the cave mouth, the entrance empty and glowing with golden daylight, a hard wedge of sun on the rocky floor. KAIRO the stickman in a hide tunic peers out from behind a large rock at frame-left, only half of him visible, spear lowered. Dust suspended in the light. 2D cinematic animation, quiet composition, negative space.",
+      "video_prompt": "Locked on the empty bright entrance, dust floating. The camera drifts slowly right and finds KAIRO easing out from behind a rock, one cautious step, head tilting to listen. He exhales. Nothing outside moves."
+    },
+    {
+      "id": "S16",
+      "index": 16,
+      "title": "A Strange Sound",
+      "start_s": 180.0,
+      "duration_s": 12,
+      "timecode": "03:00–03:12",
+      "act": "cave",
+      "setting": "cave_entrance_int",
+      "wardrobe": "hide",
+      "shot": "medium close-up, backlit by the entrance",
+      "camera": "slow orbit from front to profile as he turns",
+      "action": "KAIRO stands near the entrance. A mysterious sound drifts up from deep inside the cave. He turns sharply toward the dark passage.",
+      "expression": "startled, listening hard",
+      "lighting": "warm daylight rim from behind him, black passage in front",
+      "audio": "a low resonant tone with a faint pulse, like a struck stone; cave reverb",
+      "dialogue_fa": "همون موقع یه صدا شنیدم... یه صدای عجیب. نه شبیه صدای حیوان بود، نه شبیه صدای آدم.",
+      "gloss_en": "Right then I heard a sound... a strange sound. It was not like an animal, and not like a human voice.",
+      "render": {
+        "backdrop": "cave_passage_mouth",
+        "zoom": [
+          1.2,
+          1.32
+        ],
+        "pose": "turn_passage",
+        "facing": "three_quarter"
+      },
+      "continuity": [
+        "passage opening is camera-right of the entrance wall, recreated in S17-S18"
+      ],
+      "transition": "his turn completes the move into the passage, motivating S17",
+      "image_prompt": "Medium close-up of KAIRO the stickman standing at the cave entrance, backlit by warm daylight so his hide tunic and spear edge glow, face in soft shadow. Behind him the black passage opening. Small dust motes curl in the light. 2D cinematic animation, strong rim lighting, moody.",
+      "video_prompt": "Slow orbit around KAIRO from the front to his profile. A resonant tone sounds; his head snaps toward the dark passage, eyebrows lifting, one hand tightening on the spear. The light behind him stays constant."
+    },
+    {
+      "id": "S17",
+      "index": 17,
+      "title": "Curiosity",
+      "start_s": 192.0,
+      "duration_s": 12,
+      "timecode": "03:12–03:24",
+      "act": "cave",
+      "setting": "cave_passage_mouth",
+      "wardrobe": "hide",
+      "shot": "close-up on the face, then medium as he steps in",
+      "camera": "slow push-in on the face, then follow his step",
+      "action": "KAIRO stares into the dark passage. Confusion turns to curiosity. He takes one slow step forward.",
+      "expression": "confusion melting into fascination",
+      "lighting": "the last daylight behind him, the passage ahead by a single cool bounce",
+      "audio": "the tone repeats, closer; the wind outside fades out completely",
+      "dialogue_fa": "عجیب‌تر این بود که از صدا نمی‌ترسیدم... یه جورایی حس می‌کردم باید برم ببینم چیه.",
+      "gloss_en": "The strangest part was that the sound didn't frighten me... somehow I felt I had to go and see what it was.",
+      "render": {
+        "backdrop": "cave_passage_mouth",
+        "zoom": [
+          1.3,
+          1.45
+        ],
+        "pose": "step_forward",
+        "facing": "three_quarter"
+      },
+      "continuity": [
+        "same passage mouth as S16",
+        "daylight still behind him"
+      ],
+      "transition": "his step becomes the rear tracking shot of S18",
+      "image_prompt": "Close-up of KAIRO's face half lit by daylight from behind, eyes fixed on something off-frame in the dark. His expression shifts from confusion to fascination, eyebrows rising, mouth slightly open. Beyond him, the black throat of a rocky passage. 2D cinematic animation, high contrast, texture in the stone.",
+      "video_prompt": "Slow push-in on KAIRO's face as he stares into the dark. His brow smooths, curiosity replacing fear. He takes one deliberate step forward, spear now hanging loose at his side, and the shadows take half of his face."
+    },
+    {
+      "id": "S18",
+      "index": 18,
+      "title": "The Dark Passage",
+      "start_s": 204.0,
+      "duration_s": 12,
+      "timecode": "03:24–03:36",
+      "act": "cave",
+      "setting": "cave_passage",
+      "wardrobe": "hide",
+      "shot": "rear tracking shot",
+      "camera": "steadicam follow behind KAIRO, deepening darkness, faint glow ahead",
+      "action": "KAIRO walks deeper into a narrow rocky passage. A faint mysterious light becomes visible in the distance.",
+      "expression": "not visible; posture is careful, hand trailing the wall",
+      "lighting": "almost no light; a cold blue-green glow far ahead, warm memory of daylight behind",
+      "audio": "echoing footsteps, dripping water, the resonant tone growing clearer",
+      "dialogue_fa": "هرچی جلوتر می‌رفتم، صدا واضح‌تر می‌شد. نمی‌دونستم دارم به چی نزدیک می‌شم...",
+      "gloss_en": "The further I went, the clearer the sound became. I had no idea what I was getting close to...",
+      "render": {
+        "backdrop": "cave_passage",
+        "zoom": [
+          1.05,
+          1.3
+        ],
+        "pose": "walk_passage",
+        "facing": "back"
+      },
+      "continuity": [
+        "passage bends right before the chamber, recreated in S19"
+      ],
+      "transition": "the glow grows until it fills frame, motivating the chamber reveal",
+      "image_prompt": "Rear tracking shot of KAIRO the stickman walking down a narrow rocky cave passage, one thin hand trailing the wall, spear over his shoulder. The passage narrows and bends to the right; a faint cold blue-green glow leaks from around the bend. Rough stone texture, wet highlights, deep blacks. 2D cinematic animation, claustrophobic composition.",
+      "video_prompt": "Steadicam follow behind KAIRO walking deeper. He slows, touches the wall, then keeps going. The passage narrows, shadows crowd the edges of frame, and the glow around the bend gradually brightens until it starts to fill the screen."
+    },
+    {
+      "id": "S19",
+      "index": 19,
+      "title": "The Unknown Chamber",
+      "start_s": 216.0,
+      "duration_s": 12,
+      "timecode": "03:36–03:48",
+      "act": "cave",
+      "setting": "cave_chamber",
+      "wardrobe": "hide",
+      "shot": "wide reveal from the passage mouth, then medium",
+      "camera": "emerge from the passage and crane up into the dome",
+      "action": "The narrow passage opens into a huge underground chamber. In its centre stands an ancient stone platform. KAIRO stops and stares.",
+      "expression": "amazement, mouth open",
+      "lighting": "cool light from above the dome plus a faint warm glow from the platform edge",
+      "audio": "huge reverb bloom, the tone now clearly coming from the platform, air movement",
+      "dialogue_fa": "بعد از چند دقیقه رسیدم به یه جای بزرگ... یه چیزی وسط اون اتاق بود که اصلاً انتظارشو نداشتم.",
+      "gloss_en": "After a few minutes I reached a big place... there was something in the middle of that room that I did not expect at all.",
+      "render": {
+        "backdrop": "cave_chamber",
+        "zoom": [
+          1.0,
+          1.2
+        ],
+        "pose": "stand_amazed",
+        "facing": "three_quarter"
+      },
+      "continuity": [
+        "platform at chamber centre, recreated in S20-S24",
+        "passage mouth at frame-left",
+        "dome ceiling with faint light shafts"
+      ],
+      "transition": "his eye-line drops to the top of the platform, motivating the map reveal",
+      "image_prompt": "Wide interior of a vast domed underground chamber. Rough stone walls rise into darkness, faint cold light shafts fall from an unseen fissure above, dust in the beams. At the centre stands a waist-high ancient stone platform, its edges carved with worn patterns. KAIRO the stickman is a small figure at the left, spear hanging from one hand, staring up. 2D cinematic animation, epic scale, painterly rock texture.",
+      "video_prompt": "Camera emerges from the narrow passage into the chamber and cranes slowly upward, revealing how enormous the dome is. Light shafts shift in the dust. KAIRO walks three steps in and stops, head tilting back, spear forgotten at his side."
+    },
+    {
+      "id": "S20",
+      "index": 20,
+      "title": "Discovering the Map",
+      "start_s": 228.0,
+      "duration_s": 12,
+      "timecode": "03:48–04:00",
+      "act": "map",
+      "setting": "cave_chamber",
+      "wardrobe": "hide",
+      "shot": "top-down on the platform, then medium profile",
+      "camera": "crane down onto the stone platform, then rise to a profile two-shot with KAIRO",
+      "action": "An ancient circular map lies on the stone platform: unusual symbols, geometric rings, mysterious markings. KAIRO approaches it carefully.",
+      "expression": "wonder and caution at once",
+      "lighting": "the map catches a cold light and returns a faint amber warmth",
+      "audio": "the tone becomes harmonic; a soft stone-on-stone scrape as he steps closer",
+      "dialogue_fa": "روی اون سنگ، یه چیزی بود... شبیه نقشه. ولی نه نقشه‌ای که تا اون روز دیده بودم.",
+      "gloss_en": "On that stone there was something... like a map. But not a map like any I had seen before.",
+      "render": {
+        "backdrop": "map_platform",
+        "zoom": [
+          1.15,
+          1.35
+        ],
+        "pose": "approach_map",
+        "facing": "right"
+      },
+      "continuity": [
+        "map design locked here through S24",
+        "platform edges identical to S19"
+      ],
+      "transition": "his hand rises, motivating the macro insert",
+      "image_prompt": "High angle looking down at a waist-high ancient stone platform inside a dark cave chamber. On it rests a circular amber stone tablet engraved with concentric rings, twelve radial grooves, small star-point markers and unknown angular glyphs. A faint cold light from above and a warm amber glow from the tablet itself. KAIRO the stickman's thin shadow reaches the edge of frame. 2D cinematic animation, intricate etched detail.",
+      "video_prompt": "Crane down onto the stone platform until the circular map fills the frame, then rise smoothly to a profile shot where KAIRO steps up beside it, leaning in, spear now resting against the stone. The etched lines catch the light as the angle changes."
+    },
+    {
+      "id": "S21",
+      "index": 21,
+      "title": "Approaching the Map",
+      "start_s": 240.0,
+      "duration_s": 12,
+      "timecode": "04:00–04:12",
+      "act": "map",
+      "setting": "cave_chamber",
+      "wardrobe": "hide",
+      "shot": "macro glide across the map, then a hand enters frame",
+      "camera": "macro slider move across the symbols, then tilt to the extending hand",
+      "action": "Macro close-up of the map. The camera glides across its symbols. KAIRO slowly extends his hand toward it.",
+      "expression": "hesitant fascination",
+      "lighting": "raking light revealing the depth of every engraved groove",
+      "audio": "fine detail sounds: his breath, the faint harmonic hum, cloth movement",
+      "dialogue_fa": "اولش می‌خواستم بی‌خیالش بشم... ولی یه چیزی توی اون نقشه بود که نمی‌ذاشت چشم ازش بردارم.",
+      "gloss_en": "At first I wanted to forget about it... but there was something in that map that wouldn't let me look away.",
+      "render": {
+        "backdrop": "map_macro",
+        "zoom": [
+          1.0,
+          1.25
+        ],
+        "pose": "reach_hand",
+        "facing": "right"
+      },
+      "continuity": [
+        "exact glyph order preserved from S20",
+        "hand is KAIRO's thin stick arm with hide cuff"
+      ],
+      "transition": "his fingertip reaches the surface, motivating the touch in S22",
+      "image_prompt": "Macro shot gliding across a circular amber stone tablet: engraved concentric rings, twelve radial grooves, tiny star-point markers and angular glyphs cut deep into the stone, dust in the grooves. A thin stickman hand with a hide cuff enters from the right, fingers extended. 2D cinematic animation, extreme detail, shallow depth of field.",
+      "video_prompt": "Slow macro slide across the engraved symbols, light raking across the grooves, then the camera tilts slightly and KAIRO's thin hand enters frame, hovering, hesitating, fingers trembling a little before extending toward the stone."
+    },
+    {
+      "id": "S22",
+      "index": 22,
+      "title": "Touching the Map",
+      "start_s": 252.0,
+      "duration_s": 12,
+      "timecode": "04:12–04:24",
+      "act": "map",
+      "setting": "cave_chamber",
+      "wardrobe": "hide",
+      "shot": "extreme close-up of the fingertip contact",
+      "camera": "locked macro, then a slow pull to medium",
+      "action": "KAIRO touches the map. A faint golden-blue glow appears under his fingertip and begins spreading along the nearest symbols.",
+      "expression": "KAIRO: startled, then transfixed",
+      "lighting": "the glow becomes the key light, lighting his face from below",
+      "audio": "a soft magical chime, the harmonic hum rising, stone resonating",
+      "dialogue_fa": "همین که دست زدم بهش... یه اتفاقی افتاد که هنوزم نمی‌تونم توضیحش بدم.",
+      "gloss_en": "The moment I touched it... something happened that I still can't explain.",
+      "render": {
+        "backdrop": "map_touch",
+        "zoom": [
+          1.3,
+          1.15
+        ],
+        "pose": "touch_map",
+        "facing": "three_quarter"
+      },
+      "continuity": [
+        "glow colour is gold with a blue core, locked for S22-S24",
+        "same fingertip position as S21"
+      ],
+      "transition": "the spreading light pulls the camera wider into S23",
+      "image_prompt": "Extreme close-up: a thin stickman fingertip touching an engraved amber stone tablet at the exact moment a small golden-blue light ignites under the finger. Threads of light run into the nearest glyphs like liquid metal. The glow lights the fingertip and the stone's pores from below. 2D cinematic animation, magical restrained effect, no lens flares.",
+      "video_prompt": "Locked macro on the fingertip touching the stone. A small golden-blue spark ignites, spreads along the engraved channels, and the nearby symbols begin to shimmer. Slow pull back to a medium shot as the light climbs onto KAIRO's face and his eyes widen."
+    },
+    {
+      "id": "S23",
+      "index": 23,
+      "title": "The Illuminated Point",
+      "start_s": 264.0,
+      "duration_s": 12,
+      "timecode": "04:24–04:36",
+      "act": "map",
+      "setting": "cave_chamber",
+      "wardrobe": "hide",
+      "shot": "top-down on the map, then tilt up to KAIRO's face",
+      "camera": "overhead on the map, then tilt up along the light to his face",
+      "action": "The glow travels across the map and converges at one distinct point. The camera moves upward to reveal KAIRO's amazed face.",
+      "expression": "amazed, unblinking",
+      "lighting": "a single hot golden-blue point as the brightest thing in frame",
+      "audio": "the harmonic resolves into one clear sustained note; the cave falls silent around it",
+      "dialogue_fa": "یه نقطه روی نقشه روشن شد... انگار داشت یه جایی رو نشونم می‌داد. یه مقصد ناشناخته.",
+      "gloss_en": "One point on the map lit up... as if it was showing me a place. An unknown destination.",
+      "render": {
+        "backdrop": "map_point",
+        "zoom": [
+          1.05,
+          1.3
+        ],
+        "pose": "stand_amazed",
+        "facing": "front"
+      },
+      "continuity": [
+        "the illuminated point stays in the same map position in S24",
+        "destination is never identified"
+      ],
+      "transition": "his wonder motivates the decision beat of S24",
+      "image_prompt": "Overhead shot of the circular amber stone map in darkness, threads of golden-blue light running along its grooves and converging into a single brilliant point on one side of the tablet. All other engravings fall dark. 2D cinematic animation, high contrast, restrained magical glow.",
+      "video_prompt": "Overhead on the map as the light races along the engraved channels and pools into one bright point. The camera tilts up along the glow to KAIRO's face, lit from below, eyes wide and unblinking, mouth slightly open. The point continues to pulse softly."
+    },
+    {
+      "id": "S24",
+      "index": 24,
+      "title": "The Decision",
+      "start_s": 276.0,
+      "duration_s": 12,
+      "timecode": "04:36–04:48",
+      "act": "map",
+      "setting": "cave_chamber",
+      "wardrobe": "hide",
+      "shot": "medium, then wide toward the exit",
+      "camera": "medium three-quarter, then a slow pull back as he turns to the passage",
+      "action": "KAIRO carefully lifts the circular map, studies the glowing point, and turns toward the cave exit with a determined expression.",
+      "expression": "resolve settling over fear",
+      "lighting": "map glow under his chin, cold cave light behind",
+      "audio": "cloth and stone, a single low string note of resolve, footsteps starting",
+      "dialogue_fa": "نمی‌دونستم اون نقطه کجاست... یا قراره چه بلایی سرم بیاد. ولی یه چیزی رو می‌دونستم؛ باید دنبالش می‌رفتم.",
+      "gloss_en": "I didn't know where that point was... or what was going to happen to me. But one thing I did know: I had to go after it.",
+      "render": {
+        "backdrop": "cave_chamber_exit",
+        "zoom": [
+          1.2,
+          1.05
+        ],
+        "pose": "lift_map",
+        "facing": "right"
+      },
+      "continuity": [
+        "map carried in both hands, glowing point facing up",
+        "passage mouth at frame-right for the exit"
+      ],
+      "transition": "he walks into the passage light; hard cut on a beat of silence to the present",
+      "image_prompt": "Medium three-quarter shot of KAIRO the stickman in a hide tunic holding a circular amber stone tablet in both hands. The single golden-blue point on the tablet glows up onto his face and chest. He is already turning toward a dark passage mouth at the right of frame, spear tucked under one arm, jaw set. 2D cinematic animation, warm glow against cold cave.",
+      "video_prompt": "KAIRO lifts the tablet carefully from the platform, studies the glowing point, then turns his body toward the exit passage. Camera pulls back slowly as he starts walking, the map light swinging across the cave walls. His expression settles into determination."
+    },
+    {
+      "id": "S25",
+      "index": 25,
+      "title": "The Revelation",
+      "start_s": 288.0,
+      "duration_s": 12,
+      "timecode": "04:48–05:00",
+      "act": "present",
+      "setting": "modern_room_closeup",
+      "wardrobe": "suit",
+      "shot": "match cut to the S01 room, then a push-in on the face",
+      "camera": "match cut, then a slow push-in; fade to black on the final second",
+      "action": "Cinematic match cut back to the exact modern room of Scene 1. KAIRO sits in his black suit. The camera pushes slowly toward his face. He looks straight into the lens and reveals his immortality, then holds a mysterious expression through a beat of silence before a smooth fade to black.",
+      "expression": "calm, ancient, faintly amused; a mystery held behind the eyes",
+      "lighting": "identical lamp key to S01, slightly warmer as the music resolves",
+      "audio": "music resolves on a single dramatic accent, the clock tick returns for one second, then silence and a long fade",
+      "dialogue_fa": "شاید فکر کنی این فقط یه خاطره قدیمیه... ولی نه. حدود دویست هزار سال از اون روز گذشته... و من هنوز اینجام. من حدود دویست هزار سال زندگی کردم! و باور کن... این تازه شروع ماجراست.",
+      "gloss_en": "You might think this is just an old memory... but no. About two hundred thousand years have passed since that day... and I'm still here. I have lived for about two hundred thousand years! And believe me... this is only the beginning.",
+      "render": {
+        "backdrop": "modern_room_closeup",
+        "zoom": [
+          1.1,
+          1.4
+        ],
+        "pose": "sit_final",
+        "facing": "front",
+        "fade_out_s": 1.2
+      },
+      "continuity": [
+        "must match S01 framing, lamp, chair, clock exactly",
+        "same suit and hair as S01-S04"
+      ],
+      "transition": "fade to black; end card is empty, no logo, no text",
+      "image_prompt": "Tight cinematic close-up of KAIRO the stickman in his black suit and black tie, seated in the armchair of the dark modern room, warm lamp light on the left of his round head, deep shadow on the right, wall clock soft behind him. His eyes look directly into the lens with a calm, ancient, faintly amused expression. 2D animation, painterly detail, film grain.",
+      "video_prompt": "Match cut from the cave to the exact same room as the opening shot. KAIRO sits in the armchair in his black suit, looks into the lens and speaks. The camera pushes in very slowly on his face as he reveals his age. On the last word he stops, blinks once, holds a mysterious half-smile, and the image fades smoothly to black with no text."
+    }
+  ]
+}
