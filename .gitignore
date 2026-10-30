@@ -14,3 +14,4 @@ build/small_*
 build/dbg_*
 package-lock.json
 out/*.mp4
+build/
