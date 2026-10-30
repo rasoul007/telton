@@ -466,13 +466,32 @@ def assemble_review() -> Path:
     srt = subtitles.write_srt()
     final = OUT / "kairo_ep01_animatic_review.mp4"
     master = OUT / "kairo_ep01_animatic.mp4"
-    style = ("FontName=Noto Naskh Arabic,FontSize=20,PrimaryColour=&H00F0F0F0,"
-             "OutlineColour=&H80000000,BorderStyle=1,Outline=2,Shadow=0,"
-             "Alignment=2,MarginV=48")
+    if not master.exists():
+        raise FileNotFoundError("render the master first: kairo film")
+    style = ("FontName=Noto Naskh Arabic,FontSize=22,PrimaryColour=&H00F0F0F0,"
+             "OutlineColour=&H90000000,BorderStyle=1,Outline=2,Shadow=0,"
+             "Alignment=2,MarginV=52")
+    srt_escaped = str(srt).replace(":", r"\:")
     subprocess.run([str(FFMPEG), "-hide_banner", "-loglevel", "error", "-y",
                     "-i", str(master), "-vf",
-                    f"subtitles={srt}:force_style='{style}'",
-                    "-c:v", "libx264", "-preset", "veryfast", "-crf", "23",
-                    "-c:a", "copy", str(final)], check=True)
+                    f"subtitles='{srt_escaped}':force_style='{style}'",
+                    "-c:v", "libx264", "-preset", "veryfast", "-crf", "22",
+                    "-c:a", "copy", "-movflags", "+faststart", str(final)],
+                   check=True)
     return final
+
+
+def encode_preview(height: int = 720, crf: int = 26) -> Path:
+    """Lightweight copy for phones and quick review."""
+    master = OUT / "kairo_ep01_animatic.mp4"
+    if not master.exists():
+        raise FileNotFoundError("render the master first: kairo film")
+    out = OUT / f"kairo_ep01_preview_{height}p.mp4"
+    subprocess.run([str(FFMPEG), "-hide_banner", "-loglevel", "error", "-y",
+                    "-i", str(master), "-vf",
+                    f"scale=-2:{height}:flags=lanczos",
+                    "-c:v", "libx264", "-preset", "veryfast", "-crf", str(crf),
+                    "-c:a", "aac", "-b:a", "128k", "-movflags", "+faststart",
+                    str(out)], check=True)
+    return out
 

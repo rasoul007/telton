@@ -67,6 +67,16 @@ def cmd_srt() -> None:
     print(f"review subtitles: {path}")
 
 
+def cmd_review() -> None:
+    from . import render
+    print(render.assemble_review())
+
+
+def cmd_preview() -> None:
+    from . import render
+    print(render.encode_preview())
+
+
 def cmd_check() -> None:
     from . import qc
     report = qc.run_all()
@@ -109,6 +119,8 @@ def main(argv: list[str] | None = None) -> None:
     p = sub.add_parser("film")
     p.add_argument("--force", action="store_true")
     sub.add_parser("srt")
+    sub.add_parser("review")
+    sub.add_parser("preview")
     sub.add_parser("check")
     sub.add_parser("all")
 
@@ -123,6 +135,8 @@ def main(argv: list[str] | None = None) -> None:
                                     getattr(args, "jobs", 3)),
         "film": lambda: cmd_film(getattr(args, "force", False)),
         "srt": lambda: cmd_srt(),
+        "review": lambda: cmd_review(),
+        "preview": lambda: cmd_preview(),
         "check": lambda: cmd_check(),
         "all": lambda: cmd_all(),
     }
