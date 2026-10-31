@@ -120,11 +120,79 @@ def _check_continuity() -> dict:
                                   f"backdrops, wardrobe locked per timeline"}
 
 
+def _missing_glyphs(chars: str, font_path: Path) -> list[str]:
+    """Characters the Arabic face cannot draw (they would render as tofu boxes).
+
+    Noto Naskh carries no em dash, en dash, hyphen or middot at all, so a single
+    "—" in a Persian caption turns into a box. Checking the real dialogue against
+    the real font catches that before it ships.
+    """
+    import numpy as np
+    from PIL import Image, ImageDraw, ImageFont
+
+    font = ImageFont.truetype(str(font_path), 48)
+
+    def mask(ch: str) -> "np.ndarray":
+        im = Image.new("L", (90, 90), 0)
+        ImageDraw.Draw(im).text((10, 10), ch, font=font, fill=255)
+        return np.asarray(im)
+
+    tofu = mask("\ue000")
+    missing = []
+    for ch in sorted(set(chars)):
+        if ch.isspace() or ch in "\u200c\u200f\u200e":
+            continue
+        if np.array_equal(mask(ch), tofu):
+            missing.append(ch)
+    return missing
+
+
+def _check_persian_glyphs() -> dict:
+    from PIL import features
+
+    from .portrait import _AR_REG
+
+    episode = screenplay.load()
+    text = episode["title_fa"]
+    text += "".join(sc["dialogue_fa"] for sc in episode["scenes"])
+    missing = _missing_glyphs(text, Path(_AR_REG))
+    engine = "libraqm" if features.check("raqm") else "arabic_reshaper fallback"
+    detail = (f"{len(set(text))} distinct characters covered by Noto Naskh, "
+              f"shaping via {engine}")
+    if missing:
+        detail = f"no glyph for: {' '.join(repr(c) for c in missing)}"
+    return {"name": "persian-glyphs", "passed": not missing, "detail": detail}
+
+
+def _check_character_art() -> dict:
+    from PIL import Image
+
+    wanted = (
+        ("character_kairo_v3_sheet.png", (2560, 1440)),
+        ("character_kairo_reference.png", (1920, 1080)),
+    )
+    problems, found = [], []
+    for name, size in wanted:
+        path = OUT / name
+        if not path.exists():
+            problems.append(f"{name} missing")
+            continue
+        got = Image.open(path).size
+        if got != size:
+            problems.append(f"{name} is {got[0]}x{got[1]}, expected "
+                            f"{size[0]}x{size[1]}")
+        found.append(f"{name} {got[0]}x{got[1]}")
+    return {"name": "character-art", "passed": not problems,
+            "detail": problems or ", ".join(found)}
+
+
 def run_all() -> dict:
     checks = [_check_screenplay(), _check_voice(), _check_continuity(),
+              _check_persian_glyphs(), _check_character_art(),
               _check_clips(), _check_audio(), _check_master()]
     report = {"passed": all(c["passed"] for c in checks), "checks": checks}
     OUT.mkdir(parents=True, exist_ok=True)
     (OUT / "qc_report.json").write_text(
         json.dumps(report, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     return report
+

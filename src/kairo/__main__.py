@@ -69,7 +69,8 @@ def cmd_srt() -> None:
 
 def cmd_sheet() -> None:
     from . import portrait
-    print(portrait.character_sheet())
+    print("character sheet:", portrait.character_sheet())
+    print("seed reference :", portrait.hero_reference())
 
 
 def cmd_review() -> None:

@@ -44,6 +44,7 @@ PYTHONPATH=src python3 -m kairo screenplay  # validate + merge the 25 scene file
 PYTHONPATH=src python3 -m kairo prompts     # write prompts/S01..S25 + INDEX
 PYTHONPATH=src python3 -m kairo voice       # Persian VO, fitted to 12 s slots
 PYTHONPATH=src python3 -m kairo score       # 300 s score + sound design
+PYTHONPATH=src python3 -m kairo sheet       # character reference sheet + seed image
 PYTHONPATH=src python3 -m kairo stills      # one 1080p frame per scene
 PYTHONPATH=src python3 -m kairo clips       # 25 x 12 s clips (slow, ~10 min)
 PYTHONPATH=src python3 -m kairo film        # concat + mix -> out/*.mp4
@@ -88,6 +89,8 @@ build if any of it drifts.
 
 | File | What it is |
 |---|---|
+| `out/character_kairo_v3_sheet.png` | Character reference sheet: both wardrobes, face detail, six expressions, palette, proportion ruler |
+| `out/character_kairo_reference.png` | The single seed image — one clean KAIRO, no text or props, to feed every scene prompt |
 | `out/kairo_ep01_animatic.mp4` | 5:00.000 master, 1920x1080, 24 fps, Persian narration + score |
 | `out/kairo_ep01_review.srt` | Persian subtitles with per-scene timing (review only) |
 | `out/qc_report.json` | machine-checked spec compliance |
@@ -106,10 +109,30 @@ and the render is deterministic given the same seeds.
 screenplay  25 scenes x 12 s = 300 s, dialogue verbatim
 voice-over  25 lines, fa-IR-FaridNeural, 206.03 s speech, max prosody +30%
 continuity  one design, 19 re-used backdrops, wardrobe locked per timeline
+persian     40 distinct characters covered by Noto Naskh, shaping via libraqm
+character   sheet 2560x1440 + seed image 1920x1080
 clips       25 clips, 12.000 s each, 1920x1080 @ 24fps
 audio       300.000 s, 48 kHz, stereo
 master      300.0 s, 1920x1080, 24.0 fps
 ```
+
+## Persian text is shaped exactly once
+
+Pillow has two different behaviours and confusing them silently ruins every
+Persian caption:
+
+* Built with **libraqm** (this machine), Pillow shapes and bidi-reorders by
+  itself when text is drawn with `direction="rtl"`. Passing it text that was
+  already shaped with `arabic_reshaper` makes HarfBuzz process the presentation
+  forms again, which reverses the line and de-joins every letter — rev 02 of the
+  sheet shipped exactly that bug (`راولشوتک` instead of `کت‌وشلوار`).
+* Without libraqm there is no complex-text engine at all, so `arabic_reshaper`
+  + `python-bidi` are required.
+
+`kairo.portrait.fa()` picks the right path at runtime, and `kairo check`
+measures the film's real Persian text against the real font, so a character the
+font cannot draw (Noto Naskh has no em dash, en dash, hyphen or middot — only
+Arabic punctuation) fails the build instead of rendering as a box.
 
 Bugs the checks caught during the build, and what they taught:
 

@@ -21,6 +21,18 @@ Reference for every department. These rules are enforced in code
 Total standing height is 876 body units; the head is ~27% of it, which is what
 reads as "slightly oversized" without becoming chibi.
 
+The renderer in `src/kairo/portrait.py` uses the same proportions with an
+explicit visible neck, and derives everything from `TOTAL_H` so the reference
+sheet and the seed image can never be drawn at two different scales:
+
+| Constant | Value | Meaning |
+|---|---|---|
+| `HEAD_R` | 112 | head radius |
+| `NECK_VIS` | 22 | chin-to-shoulder gap (the visible neck) |
+| `TORSO` | 196 | neck to hip |
+| `THIGH` / `SHIN` | 152 / 152 | leg segments |
+| `TOTAL_H` | derived | head top to sole, = 756.3 units |
+
 ## Wardrobe
 
 **Present day (S01–S05, S25)** — black business suit, white shirt, black tie,
@@ -57,3 +69,16 @@ Circular amber stone tablet: three concentric rings, twelve radial grooves,
 star-point markers, angular glyphs, one blank destination node at the
 lower-right of the face. The glowing point appears at that node and is never
 explained or located.
+
+## Reference art
+
+`out/character_kairo_v3_sheet.png` (2560x1440) is the approval plate: both
+wardrobes at one identical scale on one floor line, a large face detail, the six
+approved expressions, the palette in hex, and a proportion ruler in body units.
+Captions are Persian and must stay readable — Noto Naskh has no dash glyphs, so
+separators are commas (`،`), never `—`.
+
+`out/character_kairo_reference.png` (1920x1080) is the seed image: one clean
+KAIRO, no text and no props, to feed every scene prompt so the design cannot
+drift between shots.
+
