@@ -1,0 +1,44 @@
+{
+  "project": {
+    "title": "5 خبر ورزشی — 11 Aban 1405 / 2 Nov 2026",
+    "format": { "width": 1080, "height": 1920, "fps": 30, "duration_sec": 62, "aspect": "9:16" },
+    "audio": {
+      "music_bpm": 132,
+      "voiceover": "fa-IR, energetic, 2.7-3.0 words/sec",
+      "ducking_db": -9
+    },
+    "style": {
+      "font": "Vazirmatn Black",
+      "caption_style": "white fill, 4px black stroke, lower third, max 2 lines",
+      "accent_colors": { "yellow": "#FFD400", "red": "#E10600", "black": "#0B0B0B" }
+    }
+  },
+  "clips": [
+    { "id": "seg0-hook", "start": 0.0, "end": 5.0, "type": "montage", "cues": ["نماهای پرش از هر ۵ خبر"], "caption": "۵ خبر | این هفته", "transition_out": "flash" },
+    { "id": "seg1-f1-a", "start": 5.0, "end": 8.6, "type": "broll", "source": "F1 official — Mexico City GP", "cue": "Antonelli parc ferme", "caption": "۲۰ سال و ۶۸ روز" },
+    { "id": "seg1-f1-b", "start": 8.6, "end": 11.5, "type": "broll", "source": "F1 official", "cue": "team radio / 'We did it'", "caption": "جوان‌ترین قهرمان تاریخ F1" },
+    { "id": "seg1-f1-c", "start": 11.5, "end": 15.0, "type": "broll", "source": "F1 official", "cue": "podium + record graphic", "caption": "رکورد فتل شکست" },
+    { "id": "seg1-f1-d", "start": 15.0, "end": 18.0, "type": "broll", "source": "F1 official", "cue": "Verstappen / Hamilton battle", "caption": "برنده: فرشتپن | دوم: همیلتون" },
+    { "id": "seg1-f1-e", "start": 18.0, "end": 20.0, "type": "graphic", "cue": "standings screenshot", "caption": "اولین ایتالیایی از ۱۹۵۳", "transition_out": "cut" },
+    { "id": "seg2-epl-a", "start": 20.0, "end": 23.0, "type": "broll", "source": "Premier League / Arsenal official", "cue": "Havertz goal", "caption": "آرسنال ۱ – ۰ لیورپول" },
+    { "id": "seg2-epl-b", "start": 23.0, "end": 25.0, "type": "broll", "source": "Premier League official", "cue": "Havertz tap-in replay", "caption": "هاورتز | دقیقه ۱۶" },
+    { "id": "seg2-epl-c", "start": 25.0, "end": 28.5, "type": "broll", "source": "broadcast VAR angle (3s, credited)", "cue": "Timber shirt pull on Isak, 0.5x + red circle", "caption": "VAR بررسی کرد…" },
+    { "id": "seg2-epl-d", "start": 28.5, "end": 31.5, "type": "broll", "source": "broadcast ANGLE", "cue": "slow-mo pull, freeze frame", "caption": "پنالتی نگرفت ❌" },
+    { "id": "seg2-epl-e", "start": 31.5, "end": 34.0, "type": "broll", "source": "Liverpool official press conf.", "cue": "Van Dijk reaction", "caption": "«قطعاً پنالتی بود» — فان دایک" },
+    { "id": "seg3-seriea-a", "start": 34.0, "end": 38.0, "type": "broll", "source": "Serie A official", "cue": "Lazio goal + fans", "caption": "لاجیو: ۹ برد از ۱۰" },
+    { "id": "seg3-seriea-b", "start": 38.0, "end": 41.0, "type": "graphic", "cue": "Serie A table top-5 screenshot", "caption": "لاجیو ۲۸ | اینتر ۲۵ | رم ۲۴" },
+    { "id": "seg3-seriea-c", "start": 41.0, "end": 44.0, "type": "graphic", "cue": "lower-table highlight", "caption": "یووه ۷ | ناپولی ۸", "transition_out": "swipe-left" },
+    { "id": "seg4-irn-a", "start": 44.0, "end": 47.0, "type": "broll", "source": "Persepolis official / IPL official highlights", "cue": "goal in Qaemshahr", "caption": "نساجی ۰ – ۱ پرسپولیس" },
+    { "id": "seg4-irn-b", "start": 47.0, "end": 51.0, "type": "broll", "source": "same", "cue": "bench celebration", "caption": "صدر جدول: ۲۳ امتیاز" },
+    { "id": "seg4-irn-c", "start": 51.0, "end": 54.0, "type": "graphic", "cue": "table + next fixture card", "caption": "پرسپولیس ۲۳ | سپاهان ۲۳ | فولاد ۲۲" },
+    { "id": "seg5-end-a", "start": 54.0, "end": 57.5, "type": "broll", "source": "France Football official", "cue": "Kane with Ballon d'Or", "caption": "توپ طلا ۲۰۲۶: هری کین" },
+    { "id": "seg5-end-b", "start": 57.5, "end": 59.5, "type": "graphic", "cue": "points margin animation", "caption": "+۲۸ امتیاز از امباپه" },
+    { "id": "seg5-end-c", "start": 59.5, "end": 62.0, "type": "card", "cue": "UCL fixtures card + CTA", "caption": "سه‌شنبه: اسلاویا–آرسنال | اتلتیکو–بایرن — کدام را می‌بینی؟", "transition_out": "freeze-frame" }
+  ],
+  "subtitles": { "file": "subtitles-fa.srt", "burn_in": true },
+  "qa": {
+    "mute_test": "all key numbers readable without audio",
+    "sources_credited": true,
+    "music_license": "royalty-free (Epidemic / Uppbeat / YT Audio Library)"
+  }
+}
