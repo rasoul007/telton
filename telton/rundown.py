@@ -276,6 +276,27 @@ def write_caption(project: Project, rundown: Rundown, path) -> None:
     path.write_text("\n".join(lines), encoding="utf-8")
 
 
+def sync_stories(project: Project) -> Rundown:
+    """Refresh story metadata (headline/facts/broll) inside an existing timed rundown.
+
+    Useful when you just added b-roll clips or fixed a typo: audio timing stays intact,
+    only the on-screen text changes.
+    """
+    data = read_json(project.build / "rundown.json", default=None)
+    if not data:
+        raise FileNotFoundError("rundown.json missing — run `telton build` first")
+    rundown = Rundown.from_dict(data)
+    stories = {story.id: story for story in load_stories(project)}
+    for segment in rundown.segments:
+        if segment.story and segment.story.id in stories:
+            segment.story = stories[segment.story.id]
+    write_json(project.build / "rundown.json", rundown.to_dict())
+    write_srt(rundown, project.build / "subtitles.srt")
+    write_script(rundown, project.build / "script.md")
+    write_caption(project, rundown, project.build / "caption.txt")
+    return rundown
+
+
 def build(project: Project, target: float = 300.0, title: str | None = None) -> Rundown:
     project.ensure()
     stories = [s for s in load_stories(project) if s.summary.strip()]

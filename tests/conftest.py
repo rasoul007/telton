@@ -24,6 +24,7 @@ STORIES = [
         "facts": ["نساجی ۰ – ۱ پرسپولیس", "۲۳ امتیاز"],
         "sources": [{"name": "PersianLeague", "url": "https://example.com/a"}],
         "verified": True,
+        "tags": ["پرسپولیس", "لیگ برتر"],
     },
     {
         "id": "beta",
@@ -34,6 +35,7 @@ STORIES = [
         "facts": ["لیورپول ۰ – ۱ آرسنال"],
         "sources": [{"name": "BBC Sport", "url": "https://example.com/b"}],
         "verified": True,
+        "tags": ["آرسنال", "لیورپول"],
     },
     {
         "id": "gamma",
@@ -44,6 +46,7 @@ STORIES = [
         "facts": ["۲۰ سال و ۶۸ روز"],
         "sources": [{"name": "BBC Sport", "url": "https://example.com/c"}],
         "verified": True,
+        "tags": ["فرمول یک", "آنتونلی"],
     },
 ]
 

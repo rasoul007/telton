@@ -62,7 +62,18 @@ class Project:
     def __init__(self, slug: str, root: Path | None = None):
         self.slug = slug
         self.root = (root or REPO_ROOT / "projects" / slug)
-        self.style = load_style()
+        self._style = load_style()
+        # project.yaml may override any style block, e.g. video: {width: 1080, height: 1920}
+        for block in ("video", "branding", "narration", "ticker", "colors"):
+            override = self.meta.get(block)
+            if isinstance(override, dict):
+                merged = dict(self._style.raw.get(block) or {})
+                merged.update(override)
+                self._style.raw[block] = merged
+
+    @property
+    def style(self) -> Style:
+        return self._style
 
     # ---- paths -----------------------------------------------------------
     @property

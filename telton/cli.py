@@ -85,6 +85,18 @@ def cmd_render(args: argparse.Namespace) -> int:
     return 0
 
 
+def cmd_sync(args: argparse.Namespace) -> int:
+    from .rundown import sync_stories
+
+    project = _project(args)
+    rundown = sync_stories(project)
+    clips = [s.story.broll for s in rundown.segments if s.story and s.story.broll]
+    print(f"synced {len(rundown.segments)} segments · {len(clips)} با فوتیج")
+    for clip in clips:
+        print(f"  🎬 {clip}")
+    return 0
+
+
 def cmd_review(args: argparse.Namespace) -> int:
     from .models import Rundown
     from .review import approval_status, build_review, unverified_stories
@@ -117,9 +129,41 @@ def cmd_approve(args: argparse.Namespace) -> int:
     return 0
 
 
+def cmd_broll(args: argparse.Namespace) -> int:
+    from .telegram import auto_broll, fetch_posts
+
+    project = _project(args)
+    if args.list:
+        posts = fetch_posts(args.channel, limit=args.limit)
+        print(f"{len(posts)} پیام دارای مدیا از @{args.channel}:")
+        for post in posts:
+            kind = "🎬" if post.videos else "🖼"
+            print(f"  {kind} {post.url}  {post.clean_text[:70]}")
+        return 0
+    report = auto_broll(
+        project,
+        channel=args.channel,
+        limit=args.limit,
+        min_score=args.min_score,
+        dry_run=args.dry_run,
+        max_clips=args.max_clips,
+    )
+    for item in report:
+        line = f"  {item['status']:>18}  {item['story']:<24} {item.get('post', '')}"
+        print(line)
+        if item.get("caption"):
+            print(f"  {'':>18}  ↳ {item['caption']}")
+    done = sum(1 for item in report if item["status"].startswith("downloaded"))
+    if done:
+        print(f"\n{done} کلیپ به broll/ دانلود شد و در stories.json ثبت شد.")
+    print("بعدی: telton render -p %s" % project.slug)
+    return 0
+
+
 def cmd_publish(args: argparse.Namespace) -> int:
     from .models import Rundown
     from .publish import NotApproved, make_kit, upload
+    from .review import approve
 
     project = _project(args)
     data = read_json(project.build / "rundown.json")
@@ -127,6 +171,13 @@ def cmd_publish(args: argparse.Namespace) -> int:
         print("rundown.json missing — run `telton build`", file=sys.stderr)
         return 2
     rundown = Rundown.from_dict(data)
+    if args.by:
+        # explicit consent: recording the approval and publishing in one command
+        try:
+            approve(project, by=args.by, force=args.force)
+        except PermissionError as exc:
+            print(f"✋ {exc}", file=sys.stderr)
+            return 3
     try:
         if args.platform:
             print(json.dumps(upload(project, args.platform, dry_run=not args.live), ensure_ascii=False, indent=2))
@@ -138,6 +189,31 @@ def cmd_publish(args: argparse.Namespace) -> int:
     print(f"publish kit: {kit}")
     for item in sorted(kit.iterdir()):
         print(f"  - {item.name}")
+    return 0
+
+
+def cmd_daily(args: argparse.Namespace) -> int:
+    """collect → (if curated) build → voice → render → review, for today's episode."""
+    from datetime import date
+
+    if not args.project or args.project == "episode":
+        args.project = f"{date.today().isoformat()}-daily"
+    project = _project(args)
+    print(f"== project: {project.slug}")
+    cmd_collect(args)
+    if not project.stories_path.exists():
+        print(
+            "\n⚠️  stories.json ساخته نشد.\n"
+            f"   تیترها در {project.candidates_path} و {project.build / 'candidates.md'} هستند.\n"
+            "   خبرها را در فارسی بنویس (verified:true) و دوباره `telton daily` بزن."
+        )
+        return 0
+    for step in (cmd_build, cmd_voice, cmd_render, cmd_review):
+        code = step(args)
+        if code:
+            return code
+    print(f"\nآماده‌ی تأیید: {project.out / 'review.html'}")
+    print(f'سپس: telton publish -p {project.slug} --by "نام تو"')
     return 0
 
 
@@ -207,6 +283,8 @@ def main(argv: list[str] | None = None) -> int:
 
     add("review", "write out/review.html (watch + check facts)", cmd_review)
 
+    add("sync", "refresh headlines/b-roll in the existing rundown (no re-recording)", cmd_sync)
+
     approve_p = add("approve", "record your approval for the current video", cmd_approve)
     approve_p.add_argument("--by", required=True, help="your name (ثبت می‌شود)")
     approve_p.add_argument("--platforms", nargs="*", default=None)
@@ -215,6 +293,16 @@ def main(argv: list[str] | None = None) -> int:
     publish_p = add("publish", "build the publish kit (requires approval)", cmd_publish)
     publish_p.add_argument("--platform", help="check an upload target (youtube/instagram/telegram/tiktok/x)")
     publish_p.add_argument("--live", action="store_true", help="actually attempt an upload (needs your API creds)")
+    publish_p.add_argument("--by", help="تأیید + ساخت پکیج در یک دستور (نامت ثبت می‌شود)")
+    publish_p.add_argument("--force", action="store_true", help="تأیید حتی اگر خبری verified نشده باشد")
+
+    broll_p = add("broll", "download goal/highlight clips from a public Telegram channel", cmd_broll)
+    broll_p.add_argument("--channel", default="varzesh3", help="نام کانال تلگرام (پیش‌فرض varzesh3)")
+    broll_p.add_argument("--limit", type=int, default=20, help="چند پیام آخر بررسی شود")
+    broll_p.add_argument("--min-score", type=int, default=3, help="حداقل تطابق کلیدواژه با خبر")
+    broll_p.add_argument("--max-clips", type=int, default=8, help="حداکثر کلیپ دانلودی در هر اجرا")
+    broll_p.add_argument("--dry-run", action="store_true", help="فقط نشان بده چه چیزی پیدا شد")
+    broll_p.add_argument("--list", action="store_true", help="فهرست پیام‌های دارای ویدیو")
 
     add("status", "show pipeline progress for a project", cmd_status)
 
@@ -223,10 +311,25 @@ def main(argv: list[str] | None = None) -> int:
     run_p.add_argument("--title")
     run_p.add_argument("--voice")
     run_p.add_argument("--offline", action="store_true")
+    run_p.add_argument("--rate", default="+0%")
+    run_p.add_argument("--no-fit", action="store_true")
     run_p.add_argument("--width", type=int, default=None)
     run_p.add_argument("--height", type=int, default=None)
     run_p.add_argument("--fps", type=int, default=None)
     run_p.add_argument("--max-seconds", type=float, default=None)
+
+    daily_p = add("daily", "one-shot daily episode: collect → build → voice → render → review", cmd_daily)
+    daily_p.add_argument("--show", type=int, default=12)
+    daily_p.add_argument("--duration", "-d", type=float, default=300.0)
+    daily_p.add_argument("--title")
+    daily_p.add_argument("--voice")
+    daily_p.add_argument("--rate", default="+10%")
+    daily_p.add_argument("--no-fit", action="store_true")
+    daily_p.add_argument("--offline", action="store_true")
+    daily_p.add_argument("--width", type=int, default=None)
+    daily_p.add_argument("--height", type=int, default=None)
+    daily_p.add_argument("--fps", type=int, default=None)
+    daily_p.add_argument("--max-seconds", type=float, default=None)
 
     args = parser.parse_args(argv)
     if not hasattr(args, "show"):

@@ -14,11 +14,16 @@ from .rundown import SECTION_LABELS
 from .util import ensure_dir, read_json, seconds_to_clock, sha256_file, write_json
 
 PLATFORMS = {
-    "youtube": {"aspect": "9:16", "max_seconds": 60, "note": "Shorts؛ یا همین فایل را به‌عنوان ویدیوی بلند آپلود کن"},
-    "instagram": {"aspect": "9:16", "max_seconds": 90, "note": "Reels؛ کاور ۱۰۸۰×۱۹۲۰"},
-    "telegram": {"aspect": "9:16", "max_seconds": 600, "note": "فایل کامل بدون محدودیت شدید"},
-    "tiktok": {"aspect": "9:16", "max_seconds": 600, "note": "زیرنویس چسبیده لازم است"},
-    "x": {"aspect": "9:16", "max_seconds": 140, "note": "برای نسخه‌ی خبری سریع"},
+    "youtube": {
+        "aspect": "16:9",
+        "max_seconds": 43200,
+        "note": "ویدیوی بلند یوتیوب؛ تامبنیل و زیرنویس (SRT) را جدا آپلود کن",
+    },
+    "youtube-shorts": {"aspect": "9:16", "max_seconds": 60, "note": "نسخه‌ی شورت (رندر جدا با --width 1080 --height 1920)"},
+    "instagram": {"aspect": "9:16", "max_seconds": 90, "note": "Reels؛ برای فید مربع 1:1 رندر جدا لازم است"},
+    "telegram": {"aspect": "16:9", "max_seconds": 600, "note": "فایل کامل، بدون محدودیت شدید"},
+    "tiktok": {"aspect": "9:16", "max_seconds": 600, "note": "نیاز به نسخه‌ی عمودی دارد"},
+    "x": {"aspect": "16:9", "max_seconds": 140, "note": "برای نسخه‌ی خبری سریع"},
 }
 
 

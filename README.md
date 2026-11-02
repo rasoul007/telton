@@ -1,11 +1,12 @@
-# Telton — ایجنت خبر ورزشی (ساخت ویدیو از صفر تا انتشار)
+# tooop news — ایجنت خبر ورزشی (ساخت ویدیو از صفر تا انتشار)
 
-یک خط فرمان که خبرها را جمع می‌کند، اسکریپت فارسی می‌نویسد، نریشن می‌سازد، ویدیوی ۹:۱۶ رندر می‌کند،
+یک خط فرمان که خبرها را جمع می‌کند، کلیپ‌های گل را از کانال‌های عمومی تلگرام می‌آورد،
+اسکریپت فارسی می‌نویسد، نریشن می‌سازد، ویدیوی **۱۹۲۰×۱۰۸۰ (یوتیوب بلند)** رندر می‌کند،
 **صفحه‌ی بازبینی** می‌دهد و **بدون تأیید تو هیچ‌چیز را منتشر نمی‌کند**.
 
 ```
-collect → build  → voice  → render → review → approve → publish
- تیترها    اسکریپت   نریشن    ویدیو     بازبینی   تأیید تو    پکیج انتشار
+collect → broll → build → voice → render → review → publish --by "اسم تو"
+ تیترها    کلیپ گل   اسکریپت  نریشن   ویدیو    بازبینی    یک دستور
 ```
 
 ## نصب
@@ -18,34 +19,39 @@ python -m telton --help                # یا: pip install -e . && telton --help
 نیازی به نصب دستی ffmpeg نیست؛ باینری از `imageio-ffmpeg` استفاده می‌شود.
 فونت فارسی (`Vazirmatn`) در `assets/fonts/` هست.
 
-## اجرای کامل یک قسمت ۵ دقیقه‌ای
+## اجرای کامل یک قسمت ۵ دقیقه‌ای (یوتیوب بلند)
 
 ```bash
-# ۱) تیترها را از RSS بگیر (BBC/AFC/Google News و هر فید دیگری در config/sources.yaml)
-python -m telton collect -p 2026-11-02-sports-longform
+SLUG=2026-11-02-sports-longform
 
-# ۲) stories.json را در فارسی بنویس (توسط تو یا Cline) — با منبع و verified:true
+# ۱) تیترها از RSS
+python -m telton collect -p $SLUG
 
-# ۳) اسکریپت + زیرنویس + کپشن برای هدف ۳۰۰ ثانیه
-python -m telton build -p 2026-11-02-sports-longform -d 300
+# ۲) کلیپ‌های گل/صحنه از کانال عمومی تلگرام (مثلاً ورزش۳)
+python -m telton broll   -p $SLUG --channel varzesh3 --limit 150 --max-clips 6
+python -m telton broll   -p $SLUG --list        # فقط فهرست پیام‌های دارای ویدیو
 
-# ۴) نریشن فارسی + میکس صدا
-python -m telton voice -p 2026-11-02-sports-longform -d 300 --rate +10%
+# ۳) stories.json را در فارسی بنویس (با منبع و verified:true)
 
-# ۵) رندر ویدیو ۱۰۸۰×۱۹۲۰
-python -m telton render -p 2026-11-02-sports-longform
+# ۴) اسکریپت + زیرنویس + کپشن (هدف ۳۰۰ ثانیه)
+python -m telton build   -p $SLUG -d 300
 
-# ۶) صفحه‌ی بازبینی را در مرورگر باز کن
-#    projects/<slug>/out/review.html
+# ۵) نریشن فارسی + میکس صدا
+python -m telton voice   -p $SLUG -d 300 --rate +10%
 
-# ۷) تأیید (هش ویدیو ثبت می‌شود)
-python -m telton approve -p 2026-11-02-sports-longform --by "نام تو"
+# ۶) رندر ۱۹۲۰×۱۰۸۰ (برای شورت: --width 1080 --height 1920)
+python -m telton render  -p $SLUG
 
-# ۸) پکیج انتشار
-python -m telton publish -p 2026-11-02-sports-longform
+# ۷) بازبینی → projects/$SLUG/out/review.html
+
+# ۸) تأیید + پکیج انتشار در یک دستور
+python -m telton publish -p $SLUG --by "اسم تو"
 ```
 
-میان‌بر: `python -m telton run -p <slug> -d 300` مراحل ۳ تا ۶ را یک‌جا انجام می‌دهد.
+میان‌بر: `python -m telton run -p <slug> -d 300` مراحل ۴ تا ۷ را یک‌جا انجام می‌دهد.
+اجرای روزانه‌ی کامل: `./scripts/daily.sh` (جزئیات در همان فایل و `scripts/cron.example`).
+
+اگر فقط متن/فوتیج خبری را عوض کردی (بدون تغییر نریشن): `python -m telton sync -p $SLUG` تایم‌کدها را دست نمی‌زند.
 
 ## دروازه‌ی تأیید (مهم‌ترین بخش)
 

@@ -14,9 +14,26 @@ from .models import Cue, Rundown, Segment
 from .rundown import SECTION_LABELS
 from .util import ensure_dir, ffmpeg_exe
 
-MARGIN = 72
-SUBTITLE_Y = 1500
-TICKER_Y = 1734
+
+class Layout:
+    """All pixel positions are derived from the canvas so 9:16 and 16:9 both work."""
+
+    def __init__(self, width: int, height: int):
+        self.w = width
+        self.h = height
+        self.u = min(width, height)          # typographic unit
+        self.margin = round(self.u * 0.0667)
+        self.brand_y = round(height * 0.05)
+        self.pill_y = round(height * 0.078)
+        self.pill_h = round(self.u * 0.076)
+        self.headline_y = self.pill_y + self.pill_h + round(height * 0.12)
+        self.ticker_h = round(self.u * 0.0889)
+        self.ticker_y = height - self.ticker_h
+        self.sub_h = round(self.u * 0.145)
+        self.sub_y = self.ticker_y - self.sub_h - round(height * 0.014)
+
+    def size(self, factor: float, minimum: int = 18) -> int:
+        return max(minimum, round(self.u * factor))
 
 
 class Broll:
@@ -38,7 +55,7 @@ class Broll:
         )
         self._proc = subprocess.Popen(
             [
-                ffmpeg_exe(), "-v", "error", "-re", "-i", str(self.path), "-an",
+                ffmpeg_exe(), "-v", "error", "-i", str(self.path), "-an",
                 "-vf", vf, "-f", "rawvideo", "-pix_fmt", "rgb24", "-",
             ],
             stdout=subprocess.PIPE,
@@ -85,11 +102,13 @@ class FramePainter:
         self.r = Renderer(self.style, width, height)
         self.w = self.r.width
         self.h = self.r.height
+        self.L = Layout(self.w, self.h)
         self.broll_dir = broll_dir or (project.root.parent.parent / "broll")
         self._bases: dict[str, Image.Image] = {}
         self._overlays: dict[str, Image.Image] = {}
         self._subtitles: dict[str, Image.Image] = {}
         self._brolls: dict[str, Broll] = {}
+        self._stills: dict[str, Image.Image] = {}
         self._ticker: Image.Image = self._ticker_strip()
         self._scrim = self._scrim_layer()
 
@@ -104,15 +123,15 @@ class FramePainter:
         return layer
 
     def _ticker_strip(self) -> Image.Image:
-        height = 96
+        height = self.L.ticker_h
         labels = [s.story.headline for s in self.rundown.segments if s.story]
         text = "  •  ".join(labels) if labels else self.rundown.title
-        font = self.r.font("bold", 44)
+        font = self.r.font("bold", self.L.size(0.041))
         probe = ImageDraw.Draw(Image.new("RGB", (10, 10)))
         width = int(text_width(probe, text, font)) + 80
         strip = Image.new("RGB", (max(width, self.w), height), self.r.panel)
         draw = ImageDraw.Draw(strip)
-        draw_text(draw, (40, height // 2 - 30), text, font, self.r.text_color)
+        draw_text(draw, (40, height // 2 - font.size * 0.7), text, font, self.r.text_color)
         return strip
 
     def _plate_tall(self, seed: int) -> Image.Image:
@@ -127,12 +146,34 @@ class FramePainter:
         path = Path(story.broll)
         if not path.is_absolute():
             path = self.broll_dir / path
-        if not path.exists():
+        if not path.exists() or path.suffix.lower() in {".jpg", ".jpeg", ".png", ".webp"}:
             return None
         key = str(path)
         if key not in self._brolls:
             self._brolls[key] = Broll(path, self.w, self.h, self.style.fps)
         return self._brolls[key]
+
+    def _still(self, segment: Segment) -> Image.Image | None:
+        """A downloaded photo used as a slow ken-burns background."""
+        story = segment.story
+        if not story or not story.broll:
+            return None
+        path = Path(story.broll)
+        if not path.is_absolute():
+            path = self.broll_dir / path
+        if not path.exists() or path.suffix.lower() not in {".jpg", ".jpeg", ".png", ".webp"}:
+            return None
+        key = str(path)
+        if key not in self._stills:
+            try:
+                image = Image.open(path).convert("RGB")
+            except Exception:
+                return None
+            scale = max(self.w * 1.12 / image.width, self.h * 1.12 / image.height)
+            self._stills[key] = image.resize(
+                (max(self.w, int(image.width * scale)), max(self.h, int(image.height * scale)))
+            )
+        return self._stills[key]
 
     def close(self) -> None:
         for broll in self._brolls.values():
@@ -142,96 +183,103 @@ class FramePainter:
     def overlay(self, segment: Segment) -> Image.Image:
         if segment.id in self._overlays:
             return self._overlays[segment.id]
+        L = self.L
+        m = L.margin
         layer = Image.new("RGBA", (self.w, self.h), (0, 0, 0, 0))
         draw = ImageDraw.Draw(layer)
-        brand = str(self.style.get("branding.name", "تلتون اسپرت"))
+        brand = str(self.style.get("branding.name", "tooop news"))
         handle = str(self.style.get("branding.handle", ""))
-        accent_bar = [self.w - MARGIN - 8, 150, self.w - MARGIN, 300]
 
-        # brand watermark (top-left, mirrored for RTL audience)
-        draw_text(draw, (MARGIN, 96), brand, self.r.font("black", 40), (255, 255, 255, 150))
+        draw_text(draw, (m, L.brand_y), brand, self.r.font("black", L.size(0.037)), (255, 255, 255, 155))
         if handle:
-            draw_text(draw, (MARGIN, 146), handle, self.r.font("regular", 30), (255, 255, 255, 110))
-
-        if segment.kind == "intro":
-            badge = "خبرهای مهم ورزش"
-            badge_font = self.r.font("black", 50)
-            badge_w = text_width(draw, badge, badge_font)
-            pad = 46
-            top = 560
-            draw.rounded_rectangle(
-                [self.w - MARGIN - badge_w - 2 * pad, top, self.w - MARGIN, top + 96],
-                radius=48, fill=(255, 212, 0, 240),
-            )
             draw_text(
                 draw,
-                (self.w - MARGIN - pad - badge_w, top + 20),
-                badge,
-                badge_font,
-                (10, 12, 16, 255),
+                (m, L.brand_y + L.size(0.048)),
+                handle,
+                self.r.font("regular", L.size(0.028)),
+                (255, 255, 255, 115),
+            )
+
+        if segment.kind == "intro":
+            badge_text = "خبرهای مهم ورزش"
+            badge_font = self.r.font("black", L.size(0.046))
+            badge_w = text_width(draw, badge_text, badge_font)
+            pad = round(L.u * 0.043)
+            top = round(self.h * 0.29)
+            draw.rounded_rectangle(
+                [self.w - m - badge_w - 2 * pad, top, self.w - m, top + round(badge_font.size * 1.9)],
+                radius=round(badge_font.size * 0.95),
+                fill=(255, 212, 0, 240),
+            )
+            draw_text(
+                draw, (self.w - m - pad - badge_w, top + round(badge_font.size * 0.4)),
+                badge_text, badge_font, (10, 12, 16, 255),
             )
             y = self.r.text_block(
-                draw, segment.title, (self.w - MARGIN, top + 150),
-                weight="black", size=84, max_width=self.w - 2 * MARGIN, line_gap=14,
+                draw, segment.title, (self.w - m, top + round(self.h * 0.14)),
+                weight="black", size=L.size(0.078), max_width=self.w - 2 * m, line_gap=14,
                 fill=(255, 255, 255, 255),
             )
-            y += 26
             self.r.text_block(
-                draw, "ایران · اروپا · جهان ورزش · حواشی", (self.w - MARGIN, y),
-                weight="bold", size=44, max_width=self.w - 2 * MARGIN, fill=(255, 212, 0, 255),
+                draw, "ایران · اروپا · جهان ورزش · حواشی", (self.w - m, y + round(self.h * 0.026)),
+                weight="bold", size=L.size(0.041), max_width=self.w - 2 * m, fill=(255, 212, 0, 255),
             )
         elif segment.kind == "title":
-            label_size = 96
-            draw.rounded_rectangle([0, 760, self.w, 1000], fill=(255, 212, 0, 240))
+            band_top, band_bottom = round(self.h * 0.40), round(self.h * 0.52)
+            draw.rounded_rectangle([0, band_top, self.w, band_bottom], fill=(255, 212, 0, 242))
             self.r.text_block(
-                draw, segment.title, (self.w // 2, 880), weight="black", size=label_size,
-                max_width=self.w - 2 * MARGIN, align="center", anchor_y="middle", fill=(10, 12, 16, 255),
+                draw, segment.title, (self.w // 2, (band_top + band_bottom) // 2),
+                weight="black", size=L.size(0.089), max_width=self.w - 2 * m,
+                align="center", anchor_y="middle", fill=(10, 12, 16, 255),
             )
         elif segment.kind == "story" and segment.story:
             story = segment.story
             label = SECTION_LABELS.get(story.bucket, "")
             if label:
-                cw = text_width(draw, label, self.r.font("bold", 38))
+                pill_font = self.r.font("bold", L.size(0.035))
+                cw = text_width(draw, label, pill_font)
                 draw.rounded_rectangle(
-                    [self.w - MARGIN - cw - 56, 150, self.w - MARGIN, 232], radius=41,
-                    fill=(225, 6, 0, 235),
+                    [self.w - m - cw - 2 * L.size(0.026), L.pill_y,
+                     self.w - m, L.pill_y + L.pill_h],
+                    radius=L.pill_h // 2, fill=(225, 6, 0, 238),
                 )
                 draw_text(
-                    draw, (self.w - MARGIN - cw - 28, 172), label,
-                    self.r.font("bold", 38), (255, 255, 255, 255),
+                    draw, (self.w - m - L.size(0.026) - cw, L.pill_y + L.size(0.018)),
+                    label, pill_font, (255, 255, 255, 255),
                 )
-            else:
-                accent_bar = accent_bar
 
-            y = 470
-            for size in (92, 82, 74, 66, 58):
-                lines = self.r.wrap(story.headline, "black", size, self.w - 2 * MARGIN)
-                if len(lines) <= 3:
+            size = L.size(0.054)
+            for factor in (0.085, 0.076, 0.068, 0.061, 0.054):
+                size = L.size(factor)
+                if len(self.r.wrap(story.headline, "black", size, self.w - 2 * m)) <= 3:
                     break
             y = self.r.text_block(
-                draw, story.headline, (self.w - MARGIN, y), weight="black", size=size,
-                max_width=self.w - 2 * MARGIN, line_gap=12, fill=(255, 255, 255, 255),
+                draw, story.headline, (self.w - m, L.headline_y), weight="black", size=size,
+                max_width=self.w - 2 * m, line_gap=12, fill=(255, 255, 255, 255),
             )
-            draw.rounded_rectangle([self.w - 300, y + 18, self.w - MARGIN, y + 28], radius=5, fill=(255, 212, 0, 255))
-            y += 74
+            draw.rounded_rectangle(
+                [self.w - L.size(0.28), y + L.size(0.017), self.w - m, y + L.size(0.026)],
+                radius=5, fill=(255, 212, 0, 255),
+            )
+            y += L.size(0.069)
             for fact in story.facts[:3]:
-                chip(draw, self.r, fact, self.w - MARGIN, y, size=40)
-                y += 92
+                chip(draw, self.r, fact, self.w - m, y, size=L.size(0.037))
+                y += L.size(0.085)
             if story.source_line:
                 source = "منبع: " + story.source_line
-                source_w = text_width(draw, source, self.r.font("regular", 30))
+                source_w = text_width(draw, source, self.r.font("regular", L.size(0.028)))
                 draw_text(
-                    draw, (self.w - MARGIN - source_w, y + 8), source,
-                    self.r.font("regular", 30), (154, 164, 178, 235),
+                    draw, (self.w - m - source_w, y + L.size(0.007)), source,
+                    self.r.font("regular", L.size(0.028)), (154, 164, 178, 235),
                 )
         else:  # outro
             self.r.text_block(
-                draw, segment.title, (self.w // 2, 780), weight="black", size=110,
-                max_width=self.w - 2 * MARGIN, align="center", fill=(255, 255, 255, 255),
+                draw, segment.title, (self.w // 2, round(self.h * 0.40)), weight="black",
+                size=L.size(0.102), max_width=self.w - 2 * m, align="center", fill=(255, 255, 255, 255),
             )
             self.r.text_block(
-                draw, "نظرت را کامنت کن · فالو کن", (self.w // 2, 960), weight="bold", size=52,
-                max_width=self.w - 2 * MARGIN, align="center", fill=(255, 212, 0, 255),
+                draw, "نظرت را کامنت کن · فالو کن", (self.w // 2, round(self.h * 0.50)), weight="bold",
+                size=L.size(0.048), max_width=self.w - 2 * m, align="center", fill=(255, 212, 0, 255),
             )
         self._overlays[segment.id] = layer
         return layer
@@ -240,17 +288,19 @@ class FramePainter:
     def subtitle_strip(self, cue: Cue) -> Image.Image:
         if cue.index in self._subtitles:
             return self._subtitles[cue.index]
-        layer = Image.new("RGBA", (self.w, 300), (0, 0, 0, 0))
+        L = self.L
+        layer = Image.new("RGBA", (self.w, L.sub_h), (0, 0, 0, 0))
         draw = ImageDraw.Draw(layer)
-        size = 54
-        for candidate in (54, 48, 44, 40):
-            size = candidate
-            if len(self.r.wrap(cue.text, "bold", size, self.w - 2 * MARGIN - 40)) <= 2:
+        max_width = self.w - 2 * L.margin - 40
+        size = L.size(0.05)
+        for factor in (0.05, 0.045, 0.041, 0.037):
+            size = L.size(factor)
+            if len(self.r.wrap(cue.text, "bold", size, max_width)) <= 2:
                 break
         self.r.text_block(
-            draw, cue.text, (self.w // 2, 20), weight="bold", size=size,
-            max_width=self.w - 2 * MARGIN - 40, align="center", line_gap=8,
-            fill=(255, 255, 255, 255), stroke=6, stroke_fill=(4, 6, 10),
+            draw, cue.text, (self.w // 2, round(L.sub_h * 0.06)), weight="bold", size=size,
+            max_width=max_width, align="center", line_gap=8,
+            fill=(255, 255, 255, 255), stroke=max(3, L.size(0.006)), stroke_fill=(4, 6, 10),
         )
         self._subtitles[cue.index] = layer
         return layer
@@ -278,6 +328,16 @@ class FramePainter:
                 image = image.convert("RGB")
                 image.paste(self._scrim, (0, 0), self._scrim)
         if image is None:
+            still = self._still(segment)
+            if still is not None:
+                # slow ken-burns pan across the photo
+                max_x = max(1, still.width - self.w)
+                max_y = max(1, still.height - self.h)
+                x = int(max_x * min(1.0, max(0.0, progress)))
+                y = int(max_y * 0.5)
+                image = still.crop((x, y, x + self.w, y + self.h))
+                image.paste(self._scrim, (0, 0), self._scrim)
+        if image is None:
             plate = self._bases.get(segment.id)
             if plate is None:
                 plate = self._plate_tall(hash(segment.id) % 16)
@@ -290,7 +350,7 @@ class FramePainter:
         cue = self.cue_at(t)
         if cue is not None:
             strip = self.subtitle_strip(cue)
-            image.paste(strip, (0, SUBTITLE_Y), strip)
+            image.paste(strip, (0, self.L.sub_y), strip)
 
         if bool(self.style.get("ticker.enabled", True)):
             speed = float(self.style.get("ticker.speed_px_per_second", 170))
@@ -300,8 +360,8 @@ class FramePainter:
             if offset > 0:
                 band.paste(self._ticker.crop((0, 0, offset, self._ticker.height)), (self._ticker.width - offset, 0))
             draw = ImageDraw.Draw(band)
-            draw.rectangle([0, 0, self.w, 6], fill=self.r.accent)
-            image.paste(band, (0, TICKER_Y))
+            draw.rectangle([0, 0, self.w, max(4, self.L.size(0.006))], fill=self.r.accent)
+            image.paste(band, (0, self.L.ticker_y))
 
         draw = ImageDraw.Draw(image)
         bar_width = int(self.w * min(1.0, max(0.0, t / max(0.1, self.rundown.end))))

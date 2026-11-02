@@ -1,0 +1,11 @@
+# اجرای خودکار روزانه (cron) — نمونه
+# نصب:  crontab -e   و بعد این خط‌ها را اضافه کن (مسیرها را با مسیر خودت عوض کن)
+#
+# هر روز ساعت ۰۷:۰۰ به وقت سرور: جمع‌آوری + ساخت کامل، آماده‌ی تأیید
+0 7 * * * cd /path/to/telton && ./scripts/daily.sh >> logs/daily.log 2>&1
+#
+# هر روز ساعت ۱۲:۰۰: نسخه‌ی عمودی برای ریلز (بعد از اینکه نسخه‌ی افقی را تأیید کردی)
+0 12 * * * cd /path/to/telton && VERTICAL=1 ./scripts/daily.sh >> logs/vertical.log 2>&1
+#
+# اگر ویندوز داری، همین کار را با «Task Scheduler» و دستور زیر انجام بده:
+#   wsl bash -lc "cd /path/to/telton && ./scripts/daily.sh"

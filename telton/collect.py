@@ -90,7 +90,40 @@ def collect(project: Project, limit_per_feed: int = 25) -> dict[str, Any]:
         "candidates": items,
     }
     write_json(project.candidates_path, payload)
+    write_digest(project, payload)
     return payload
+
+
+def write_digest(project: Project, payload: dict) -> Path:
+    """Human-friendly checklist of today's candidates, ready to be turned into stories.json."""
+    lines = [
+        f"# تیترهای خام — {payload['generated_at']}",
+        "",
+        "هر مورد را که خواستی بردار، به فارسی بازنویسی کن و در `stories.json` بگذار:",
+        "",
+        "```json",
+        '{ "id": "unique-slug", "bucket": "iran_football", "priority": 1,',
+        '  "headline": "تیتر کوتاه", "summary": "دو جمله‌ی نریشن.",',
+        '  "facts": ["کارت ۱", "کارت ۲"],',
+        '  "sources": [{"name": "BBC Sport", "url": "https://…"}],',
+        '  "broll": null, "verified": true }',
+        "```",
+        "",
+        "## فیدها",
+        "",
+    ]
+    for feed in payload["feeds"]:
+        lines.append(f"- `{feed['id']}` → {feed['status']}" + (f" ({feed['entries']} مورد)" if feed.get("entries") else ""))
+    lines += ["", "## تیترها به‌ترتیب امتیاز", ""]
+    for candidate in payload["candidates"]:
+        lines.append(
+            f"- [ ] **{candidate['bucket']}** · {candidate['title']}  \n"
+            f"      {candidate['source']} — {candidate['url']}"
+        )
+    path = project.build / "candidates.md"
+    path.parent.mkdir(parents=True, exist_ok=True)
+    path.write_text("\n".join(lines) + "\n", encoding="utf-8")
+    return path
 
 
 def slugify(text: str) -> str:

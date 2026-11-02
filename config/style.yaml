@@ -1,7 +1,9 @@
-# Visual + narration defaults for every render (override per project if needed).
+# Visual + narration defaults for every render (override per project in project.yaml).
+# Default canvas is the YouTube long-form 16:9 frame; the vertical Shorts frame is
+# just a per-project override (video: {width: 1080, height: 1920}).
 video:
-  width: 1080
-  height: 1920
+  width: 1920
+  height: 1080
   fps: 30
   crf: 20
   preset: veryfast
@@ -29,8 +31,8 @@ narration:
   max_words_per_cue: 26
 
 branding:
-  name: "تلتون اسپرت"
-  handle: "@telton.sport"
+  name: "tooop news"
+  handle: "@tooop.news"
   watermark_alpha: 120
 
 ticker:
