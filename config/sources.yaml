@@ -1,0 +1,71 @@
+# Where the agent looks for news.  Enable/disable freely: unreachable feeds are
+# skipped with a warning, they never break the build.
+rss:
+  - id: bbc-sport
+    name: BBC Sport
+    url: https://feeds.bbci.co.uk/sport/rss.xml
+    lang: en
+    weight: 3
+  - id: bbc-football
+    name: BBC Football
+    url: https://feeds.bbci.co.uk/sport/football/rss.xml
+    lang: en
+    weight: 3
+  - id: afc
+    name: AFC
+    url: https://www.the-afc.com/rss
+    lang: en
+    weight: 2
+  - id: google-news-fa-sport
+    name: Google News (ورزش)
+    url: https://news.google.com/rss/search?q=%D9%88%D8%B1%D8%B2%D8%B4+%D8%A7%DB%8C%D8%B1%D8%A7%D9%86&hl=fa&gl=IR&ceid=IR:fa
+    lang: fa
+    weight: 2
+  # Persian outlets: reachable from a normal network, blocked from some sandboxes.
+  - id: varzesh3
+    name: ورزش سه
+    url: https://www.varzesh3.com/rss/all
+    lang: fa
+    weight: 2
+    enabled: false
+  - id: irna-sport
+    name: ایرنا
+    url: https://www.irna.ir/rss
+    lang: fa
+    weight: 2
+    enabled: false
+
+# Keyword rules decide which section a headline lands in.
+buckets:
+  iran_football:
+    label: "فوتبال ایران"
+    keywords: [پرسپولیس, استقلال, سپاهان, تراکتور, فولاد, لیگ برتر, نساجی, خیبر, گل‌گهر,
+               persepolis, esteghlal, sepahan, tractor, iran pro league, azadegan]
+    priority: 1
+  iran_other:
+    label: "ورزش ایران"
+    keywords: [کشتی, فرنگی, آزاد, والیبال, بسکتبال, هندبال, تکواندو, وزنه‌برداری,
+               wrestling, volleyball, basketball, greco, freestyle, weightlifting]
+    priority: 2
+  controversy:
+    label: "حواشی و گفت‌وگو"
+    keywords: [حاشیه, جنجال, اخراج, محرومیت, کنفرانس خبری, استعفا, شایعه,
+               controversy, row, spat, banned, sacked, apologises, apology, outburst, feud, dive]
+    priority: 3
+  europe_football:
+    label: "فوتبال اروپا"
+    keywords: [آرسنال, لیورپول, رئال مادرید, بارسلونا, بایرن, یوونتوس, لاجیو, اینتر, میلان,
+               premier league, la liga, serie a, bundesliga, champions league, arsenal, liverpool,
+               real madrid, barcelona, bayern, juventus, lazio, inter, milan, ballon d'or, kane]
+    priority: 4
+  world:
+    label: "جهان ورزش"
+    keywords: [formula 1, f1, grand prix, motogp, nba, nfl, tennis, cricket, atp, wta,
+               antonelli, verstappen, olympic, athletics, marathon, darts]
+    priority: 5
+  whats_next:
+    label: "برنامه بعدی"
+    keywords: [fixture, preview, next match, kick-off, schedule, matchday, vs]
+    priority: 6
+
+default_bucket: world

@@ -1,0 +1,1058 @@
+{
+  "slug": "2026-11-02-sports-longform",
+  "title": "خبرهای مهم ورزش — ۱۱ آبان ۱۴۰۵",
+  "target_duration": 300.0,
+  "duration": 302.71,
+  "segments": [
+    {
+      "id": "intro",
+      "title": "خبرهای مهم ورزش — ۱۱ آبان ۱۴۰۵",
+      "kind": "intro",
+      "bucket": "world",
+      "story": null,
+      "start": 0.0,
+      "end": 10.6,
+      "cues": [
+        {
+          "index": 1,
+          "text": "پنج دقیقه خبر ورزشی؛ از قهرمانی کشتی فرنگی ایران در جهان تا فتح آنفیلد و جوان‌ترین قهرمان تاریخ فرمول یک. با ما بمان.",
+          "kind": "title",
+          "start": 0.1,
+          "end": 9.7,
+          "audio": "build/voice/cue-001.mp3"
+        }
+      ]
+    },
+    {
+      "id": "card-iran_football",
+      "title": "فوتبال ایران",
+      "kind": "title",
+      "bucket": "iran_football",
+      "story": null,
+      "start": 10.6,
+      "end": 13.0,
+      "cues": []
+    },
+    {
+      "id": "persepolis-top",
+      "title": "پرسپولیس با برد قائمشهر، صدرنشین شد",
+      "kind": "story",
+      "bucket": "iran_football",
+      "story": {
+        "id": "persepolis-top",
+        "bucket": "iran_football",
+        "headline": "پرسپولیس با برد قائمشهر، صدرنشین شد",
+        "summary": "پرسپولیس در هفته یازدهم لیگ برتر، در خانه نساجی یک بر صفر برد و با ۲۳ امتیاز به صدر جدول برگشت.",
+        "facts": [
+          "نساجی ۰ – ۱ پرسپولیس",
+          "۲۳ امتیاز",
+          "تفاضل بهتر از سپاهان"
+        ],
+        "sources": [
+          {
+            "name": "PersianLeague — نتایج و جدول لیگ برتر",
+            "url": "https://www.persianleague.com/"
+          }
+        ],
+        "broll": null,
+        "priority": 1,
+        "verified": true,
+        "tags": [
+          "پرسپولیس",
+          "لیگ برتر"
+        ]
+      },
+      "start": 13.0,
+      "end": 27.11,
+      "cues": [
+        {
+          "index": 2,
+          "text": "اول، ایران، فوتبال: پرسپولیس در هفته یازدهم لیگ برتر، در خانه نساجی یک بر صفر برد و با ۲۳ امتیاز به صدر جدول برگشت.",
+          "kind": "narration",
+          "start": 13.1,
+          "end": 22.53,
+          "audio": "build/voice/cue-002.mp3"
+        },
+        {
+          "index": 3,
+          "text": "نساجی ۰ – ۱ پرسپولیس؛ تفاضل بهتر از سپاهان.",
+          "kind": "narration",
+          "start": 22.61,
+          "end": 26.71,
+          "audio": "build/voice/cue-003.mp3"
+        }
+      ]
+    },
+    {
+      "id": "ipl-table",
+      "title": "صدر جدول سه‌تایی شد",
+      "kind": "story",
+      "bucket": "iran_football",
+      "story": {
+        "id": "ipl-table",
+        "bucket": "iran_football",
+        "headline": "صدر جدول سه‌تایی شد",
+        "summary": "سپاهان هم ۲۳ امتیاز دارد و فولاد با ۲۲ امتیاز سوم است؛ تراکتور و استقلال هر دو ۲۰ امتیاز دارند و بازی معوق هم در دست دارند.",
+        "facts": [
+          "سپاهان ۲۳",
+          "فولاد ۲۲",
+          "تراکتور و استقلال ۲۰"
+        ],
+        "sources": [
+          {
+            "name": "PersianLeague — جدول لیگ برتر",
+            "url": "https://www.persianleague.com/"
+          }
+        ],
+        "broll": null,
+        "priority": 2,
+        "verified": true,
+        "tags": [
+          "لیگ برتر",
+          "جدول"
+        ]
+      },
+      "start": 27.11,
+      "end": 43.08,
+      "cues": [
+        {
+          "index": 4,
+          "text": "ایران، فوتبال: سپاهان هم ۲۳ امتیاز دارد و فولاد با ۲۲ امتیاز سوم است؛ تراکتور و استقلال هر دو ۲۰ امتیاز دارند و بازی معوق هم",
+          "kind": "narration",
+          "start": 27.21,
+          "end": 37.48,
+          "audio": "build/voice/cue-004.mp3"
+        },
+        {
+          "index": 5,
+          "text": "در دست دارند.",
+          "kind": "narration",
+          "start": 37.56,
+          "end": 39.43,
+          "audio": "build/voice/cue-005.mp3"
+        },
+        {
+          "index": 6,
+          "text": "سپاهان ۲۳؛ فولاد ۲۲.",
+          "kind": "narration",
+          "start": 39.51,
+          "end": 42.68,
+          "audio": "build/voice/cue-006.mp3"
+        }
+      ]
+    },
+    {
+      "id": "ipl-week12",
+      "title": "هفته دوازدهم: پرسپولیس میزبان فجر سپاسی",
+      "kind": "story",
+      "bucket": "iran_football",
+      "story": {
+        "id": "ipl-week12",
+        "bucket": "iran_football",
+        "headline": "هفته دوازدهم: پرسپولیس میزبان فجر سپاسی",
+        "summary": "لیگ برتر از پنجشنبه با هفته دوازدهم ادامه پیدا می‌کند؛ پرسپولیس جمعه میزبان فجر سپاسی است و استقلال شنبه مهمان استقلال خوزستان خواهد بود.",
+        "facts": [
+          "پرسپولیس – فجر سپاسی",
+          "استقلال خوزستان – استقلال",
+          "از ۱۵ آبان"
+        ],
+        "sources": [
+          {
+            "name": "PersianLeague — برنامه بازی‌ها",
+            "url": "https://www.persianleague.com/"
+          }
+        ],
+        "broll": null,
+        "priority": 3,
+        "verified": true,
+        "tags": [
+          "لیگ برتر",
+          "برنامه"
+        ]
+      },
+      "start": 43.08,
+      "end": 58.04,
+      "cues": [
+        {
+          "index": 7,
+          "text": "ایران، فوتبال: لیگ برتر از پنجشنبه با هفته دوازدهم ادامه پیدا می‌کند؛ پرسپولیس جمعه میزبان فجر سپاسی است و استقلال شنبه مهمان استقلال خوزستان خواهد بود.",
+          "kind": "narration",
+          "start": 43.18,
+          "end": 54.2,
+          "audio": "build/voice/cue-007.mp3"
+        },
+        {
+          "index": 8,
+          "text": "پرسپولیس – فجر سپاسی؛ از ۱۵ آبان.",
+          "kind": "narration",
+          "start": 54.28,
+          "end": 57.64,
+          "audio": "build/voice/cue-008.mp3"
+        }
+      ]
+    },
+    {
+      "id": "card-iran_other",
+      "title": "ورزش ایران",
+      "kind": "title",
+      "bucket": "iran_other",
+      "story": null,
+      "start": 58.04,
+      "end": 60.44,
+      "cues": []
+    },
+    {
+      "id": "wrestling-greco-title",
+      "title": "ایران قهرمان کشتی فرنگی جهان شد",
+      "kind": "story",
+      "bucket": "iran_other",
+      "story": {
+        "id": "wrestling-greco-title",
+        "bucket": "iran_other",
+        "headline": "ایران قهرمان کشتی فرنگی جهان شد",
+        "summary": "تیم ملی کشتی فرنگی ایران در مسابقات جهانی آستانه، با عنوان قهرمانی تیمی به کار خود پایان داد و در جدول کلی مدال‌ها هم با ۶ طلا، ۴ نقره و ۵ برنز دوم ایستاد.",
+        "facts": [
+          "قهرمان تیمی فرنگی",
+          "۶ طلا · ۴ نقره · ۵ برنز",
+          "آستانه، قزاقستان"
+        ],
+        "sources": [
+          {
+            "name": "2026 World Wrestling Championships (ویکی‌پدیا)",
+            "url": "https://en.wikipedia.org/wiki/2026_World_Wrestling_Championships"
+          },
+          {
+            "name": "فدراسیون کشتی ایران",
+            "url": "https://news.google.com/rss/search?q=%D8%A7%DB%8C%D8%B1%D8%A7%D9%86+%DA%A9%D8%B4%D8%AA%DB%8C&hl=fa"
+          }
+        ],
+        "broll": null,
+        "priority": 1,
+        "verified": true,
+        "tags": [
+          "کشتی",
+          "فرنگی",
+          "جهانی"
+        ]
+      },
+      "start": 60.44,
+      "end": 79.49,
+      "cues": [
+        {
+          "index": 9,
+          "text": "ایران، ورزش: تیم ملی کشتی فرنگی ایران در مسابقات جهانی آستانه، با عنوان قهرمانی تیمی به کار خود پایان داد و در جدول کلی مدال‌ها هم",
+          "kind": "narration",
+          "start": 60.54,
+          "end": 70.45,
+          "audio": "build/voice/cue-009.mp3"
+        },
+        {
+          "index": 10,
+          "text": "با ۶ طلا، ۴ نقره و ۵ برنز دوم ایستاد.",
+          "kind": "narration",
+          "start": 70.53,
+          "end": 74.83,
+          "audio": "build/voice/cue-010.mp3"
+        },
+        {
+          "index": 11,
+          "text": "قهرمان تیمی فرنگی؛ ۶ طلا · ۴ نقره · ۵ برنز.",
+          "kind": "narration",
+          "start": 74.91,
+          "end": 79.09,
+          "audio": "build/voice/cue-011.mp3"
+        }
+      ]
+    },
+    {
+      "id": "wrestling-medal-table",
+      "title": "آمریکا اول شد، ایران دوم",
+      "kind": "story",
+      "bucket": "iran_other",
+      "story": {
+        "id": "wrestling-medal-table",
+        "bucket": "iran_other",
+        "headline": "آمریکا اول شد، ایران دوم",
+        "summary": "آمریکا با ۷ طلا در کشتی آزاد قهرمان تیم شد و در جدول کلی هم صدرنشین ماند؛ ایران با ۱۵ مدال دوم شد و روسیه با ۱۴ مدال سوم.",
+        "facts": [
+          "آمریکا: ۷ طلا",
+          "ایران: ۱۵ مدال",
+          "روسیه: ۱۴ مدال"
+        ],
+        "sources": [
+          {
+            "name": "2026 World Wrestling Championships (ویکی‌پدیا)",
+            "url": "https://en.wikipedia.org/wiki/2026_World_Wrestling_Championships"
+          }
+        ],
+        "broll": null,
+        "priority": 1,
+        "verified": true,
+        "tags": [
+          "کشتی"
+        ]
+      },
+      "start": 79.49,
+      "end": 95.9,
+      "cues": [
+        {
+          "index": 12,
+          "text": "ایران، ورزش: آمریکا با ۷ طلا در کشتی آزاد قهرمان تیم شد و در جدول کلی هم صدرنشین ماند؛ ایران با ۱۵ مدال دوم شد و",
+          "kind": "narration",
+          "start": 79.59,
+          "end": 89.05,
+          "audio": "build/voice/cue-012.mp3"
+        },
+        {
+          "index": 13,
+          "text": "روسیه با ۱۴ مدال سوم.",
+          "kind": "narration",
+          "start": 89.13,
+          "end": 91.94,
+          "audio": "build/voice/cue-013.mp3"
+        },
+        {
+          "index": 14,
+          "text": "آمریکا: ۷ طلا؛ ایران: ۱۵ مدال.",
+          "kind": "narration",
+          "start": 92.02,
+          "end": 95.5,
+          "audio": "build/voice/cue-014.mp3"
+        }
+      ]
+    },
+    {
+      "id": "card-controversy",
+      "title": "حواشی و گفت‌وگو",
+      "kind": "title",
+      "bucket": "controversy",
+      "story": null,
+      "start": 95.9,
+      "end": 98.3,
+      "cues": []
+    },
+    {
+      "id": "var-dive-row",
+      "title": "ایرائولا: به بازیکنانم می‌گویم خودشان را بیندازند",
+      "kind": "story",
+      "bucket": "controversy",
+      "story": {
+        "id": "var-dive-row",
+        "bucket": "controversy",
+        "headline": "ایرائولا: به بازیکنانم می‌گویم خودشان را بیندازند",
+        "summary": "بعد از پنالتی نگرفته‌ی لیورپول مقابل آرسنال، سرمربی لیورپول گفت از این به بعد به شاگردانش می‌گوید برای گرفتن پنالتی روی زمین بیفتند؛ فان دایک هم گفت صحنه قطعاً پنالتی بود.",
+        "facts": [
+          "VAR پنالتی نگرفت",
+          "فان دایک: قطعاً پنالتی بود"
+        ],
+        "sources": [
+          {
+            "name": "BBC Sport — «I'll tell my players to dive in future»",
+            "url": "https://www.bbc.com/sport/football"
+          }
+        ],
+        "broll": null,
+        "priority": 2,
+        "verified": true,
+        "tags": [
+          "VAR",
+          "لیورپول",
+          "حواشی"
+        ]
+      },
+      "start": 98.3,
+      "end": 116.38,
+      "cues": [
+        {
+          "index": 15,
+          "text": "و اما حواشی: بعد از پنالتی نگرفته‌ی لیورپول مقابل آرسنال، سرمربی لیورپول گفت از این به بعد به شاگردانش می‌گوید برای گرفتن پنالتی روی زمین بیفتند؛",
+          "kind": "narration",
+          "start": 98.4,
+          "end": 108.67,
+          "audio": "build/voice/cue-015.mp3"
+        },
+        {
+          "index": 16,
+          "text": "فان دایک هم گفت صحنه قطعاً پنالتی بود.",
+          "kind": "narration",
+          "start": 108.75,
+          "end": 112.13,
+          "audio": "build/voice/cue-016.mp3"
+        },
+        {
+          "index": 17,
+          "text": "VAR پنالتی نگرفت؛ فان دایک: قطعاً پنالتی بود.",
+          "kind": "narration",
+          "start": 112.21,
+          "end": 115.98,
+          "audio": "build/voice/cue-017.mp3"
+        }
+      ]
+    },
+    {
+      "id": "mbappe-mao",
+      "title": "عذرخواهی امباپه برای کامنت جنجالی",
+      "kind": "story",
+      "bucket": "controversy",
+      "story": {
+        "id": "mbappe-mao",
+        "bucket": "controversy",
+        "headline": "عذرخواهی امباپه برای کامنت جنجالی",
+        "summary": "کیلیان امباپه برای کامنتی درباره مائو عذرخواهی کرد؛ ماجرایی که در چین واکنش تند داشت و به قطع همکاری بعضی اسپانسرها انجامید.",
+        "facts": [
+          "عذرخواهی رسمی",
+          "واکنش اسپانسرهای چینی"
+        ],
+        "sources": [
+          {
+            "name": "BBC Sport — Mbappé apologises for Mao comment",
+            "url": "https://www.bbc.com/sport/football"
+          },
+          {
+            "name": "ABC News",
+            "url": "https://www.abc.net.au/news/sport"
+          }
+        ],
+        "broll": null,
+        "priority": 3,
+        "verified": true,
+        "tags": [
+          "امباپه",
+          "حواشی"
+        ]
+      },
+      "start": 116.38,
+      "end": 130.28,
+      "cues": [
+        {
+          "index": 18,
+          "text": "و اما حواشی: کیلیان امباپه برای کامنتی درباره مائو عذرخواهی کرد؛ ماجرایی که در چین واکنش تند داشت و به قطع همکاری بعضی اسپانسرها انجامید.",
+          "kind": "narration",
+          "start": 116.48,
+          "end": 126.42,
+          "audio": "build/voice/cue-018.mp3"
+        },
+        {
+          "index": 19,
+          "text": "عذرخواهی رسمی؛ واکنش اسپانسرهای چینی.",
+          "kind": "narration",
+          "start": 126.5,
+          "end": 129.88,
+          "audio": "build/voice/cue-019.mp3"
+        }
+      ]
+    },
+    {
+      "id": "ferrari-tension",
+      "title": "همیلتون: در فراری مشکل جدی داریم",
+      "kind": "story",
+      "bucket": "controversy",
+      "story": {
+        "id": "ferrari-tension",
+        "bucket": "controversy",
+        "headline": "همیلتون: در فراری مشکل جدی داریم",
+        "summary": "بعد از درگیری همیلتون و لکلر در دور اول گراندپری مکزیک، همیلتون گفت تیم باید گفت‌وگویی جدی داشته باشد؛ او مسابقه را دوم تمام کرد و لکلر چهارم شد.",
+        "facts": [
+          "همیلتون دوم",
+          "لکلر چهارم",
+          "درخواست گفت‌وگوی جدی"
+        ],
+        "sources": [
+          {
+            "name": "BBC Sport — «We've got big problems»",
+            "url": "https://www.bbc.com/sport/formula1/articles/cv62y1e6wly6o"
+          }
+        ],
+        "broll": null,
+        "priority": 4,
+        "verified": true,
+        "tags": [
+          "فراری",
+          "فرمول یک"
+        ]
+      },
+      "start": 130.28,
+      "end": 146.23,
+      "cues": [
+        {
+          "index": 20,
+          "text": "و اما حواشی: بعد از درگیری همیلتون و لکلر در دور اول گراندپری مکزیک، همیلتون گفت تیم باید گفت‌وگویی جدی داشته باشد؛ او مسابقه را دوم",
+          "kind": "narration",
+          "start": 130.38,
+          "end": 139.88,
+          "audio": "build/voice/cue-020.mp3"
+        },
+        {
+          "index": 21,
+          "text": "تمام کرد و لکلر چهارم شد.",
+          "kind": "narration",
+          "start": 139.96,
+          "end": 142.65,
+          "audio": "build/voice/cue-021.mp3"
+        },
+        {
+          "index": 22,
+          "text": "همیلتون دوم؛ درخواست گفت‌وگوی جدی.",
+          "kind": "narration",
+          "start": 142.73,
+          "end": 145.83,
+          "audio": "build/voice/cue-022.mp3"
+        }
+      ]
+    },
+    {
+      "id": "card-europe_football",
+      "title": "فوتبال اروپا",
+      "kind": "title",
+      "bucket": "europe_football",
+      "story": null,
+      "start": 146.23,
+      "end": 148.63,
+      "cues": []
+    },
+    {
+      "id": "arsenal-anfield",
+      "title": "آرسنال بعد از ۱۴ سال آنفیلد را فتح کرد",
+      "kind": "story",
+      "bucket": "europe_football",
+      "story": {
+        "id": "arsenal-anfield",
+        "bucket": "europe_football",
+        "headline": "آرسنال بعد از ۱۴ سال آنفیلد را فتح کرد",
+        "summary": "گل کای هایورتز در دقیقه ۱۶ کافی بود تا آرسنال یک بر صفر لیورپول را در آنفیلد ببرد؛ اولین برد آرسنال در این ورزشگاه از سال ۲۰۱۲ و صدرنشینی با سه امتیاز اختلاف.",
+        "facts": [
+          "لیورپول ۰ – ۱ آرسنال",
+          "هاورتز دقیقه ۱۶",
+          "اولین برد از ۲۰۱۲"
+        ],
+        "sources": [
+          {
+            "name": "ABC News",
+            "url": "https://www.abc.net.au/news/2026-11-02/football-arsenal-ends-anfield-drought-liverpool-var-drama/107334968"
+          },
+          {
+            "name": "BBC Sport",
+            "url": "https://www.bbc.com/sport/football"
+          }
+        ],
+        "broll": null,
+        "priority": 2,
+        "verified": true,
+        "tags": [
+          "آرسنال",
+          "لیورپول",
+          "لیگ برتر"
+        ]
+      },
+      "start": 148.63,
+      "end": 166.97,
+      "cues": [
+        {
+          "index": 23,
+          "text": "اروپا: گل کای هایورتز در دقیقه ۱۶ کافی بود تا آرسنال یک بر صفر لیورپول را در آنفیلد ببرد؛ اولین برد آرسنال در این ورزشگاه از",
+          "kind": "narration",
+          "start": 148.73,
+          "end": 157.99,
+          "audio": "build/voice/cue-023.mp3"
+        },
+        {
+          "index": 24,
+          "text": "سال ۲۰۱۲ و صدرنشینی با سه امتیاز اختلاف.",
+          "kind": "narration",
+          "start": 158.07,
+          "end": 162.53,
+          "audio": "build/voice/cue-024.mp3"
+        },
+        {
+          "index": 25,
+          "text": "لیورپول ۰ – ۱ آرسنال؛ هاورتز دقیقه ۱۶.",
+          "kind": "narration",
+          "start": 162.61,
+          "end": 166.57,
+          "audio": "build/voice/cue-025.mp3"
+        }
+      ]
+    },
+    {
+      "id": "lazio-top",
+      "title": "لاجیو شکست‌ناپذیر صدرنشین سری‌آ",
+      "kind": "story",
+      "bucket": "europe_football",
+      "story": {
+        "id": "lazio-top",
+        "bucket": "europe_football",
+        "headline": "لاجیو شکست‌ناپذیر صدرنشین سری‌آ",
+        "summary": "لاجیو با ۹ برد از ۱۰ بازی و ۲۸ امتیاز صدرنشین سری‌آ است؛ رم بدون باخت سوم است و یوونتوس و ناپولی به ترتیب هفتم و هشتم‌اند.",
+        "facts": [
+          "لاجیو ۲۸ امتیاز",
+          "بدون باخت",
+          "اینتر ۲۵ · رم ۲۴"
+        ],
+        "sources": [
+          {
+            "name": "BBC Sport — Serie A table",
+            "url": "https://www.bbc.com/sport/football/italian-serie-a/table"
+          }
+        ],
+        "broll": null,
+        "priority": 2,
+        "verified": true,
+        "tags": [
+          "سری‌آ",
+          "لاجیو"
+        ]
+      },
+      "start": 166.97,
+      "end": 183.51,
+      "cues": [
+        {
+          "index": 26,
+          "text": "اروپا: لاجیو با ۹ برد از ۱۰ بازی و ۲۸ امتیاز صدرنشین سری‌آ است؛ رم بدون باخت سوم است و یوونتوس و ناپولی به ترتیب هفتم",
+          "kind": "narration",
+          "start": 167.07,
+          "end": 176.62,
+          "audio": "build/voice/cue-026.mp3"
+        },
+        {
+          "index": 27,
+          "text": "و هشتم‌اند.",
+          "kind": "narration",
+          "start": 176.7,
+          "end": 178.57,
+          "audio": "build/voice/cue-027.mp3"
+        },
+        {
+          "index": 28,
+          "text": "لاجیو ۲۸ امتیاز؛ اینتر ۲۵ · رم ۲۴.",
+          "kind": "narration",
+          "start": 178.65,
+          "end": 183.11,
+          "audio": "build/voice/cue-028.mp3"
+        }
+      ]
+    },
+    {
+      "id": "klassiker",
+      "title": "کلاسیکر مساوی شد؛ لورکوزن فروپاشید",
+      "kind": "story",
+      "bucket": "europe_football",
+      "story": {
+        "id": "klassiker",
+        "bucket": "europe_football",
+        "headline": "کلاسیکر مساوی شد؛ لورکوزن فروپاشید",
+        "summary": "بایرن و دورتموند در کلاسیکر به تساوی دو دو رسیدند و لورکوزن در خانه دو بر چهار به اشتوتگارت باخت؛ لایپزیش هم شالکه را دو بر صفر برد.",
+        "facts": [
+          "بایرن ۲ – ۲ دورتموند",
+          "لورکوزن ۲ – ۴ اشتوتگارت"
+        ],
+        "sources": [
+          {
+            "name": "Bundesliga.com — Matchday 8",
+            "url": "https://www.bundesliga.com/en/bundesliga/matchday"
+          }
+        ],
+        "broll": null,
+        "priority": 3,
+        "verified": true,
+        "tags": [
+          "بوندسلیگا",
+          "بایرن"
+        ]
+      },
+      "start": 183.51,
+      "end": 199.36,
+      "cues": [
+        {
+          "index": 29,
+          "text": "اروپا: بایرن و دورتموند در کلاسیکر به تساوی دو دو رسیدند و لورکوزن در خانه دو بر چهار به اشتوتگارت باخت؛ لایپزیش هم شالکه را دو",
+          "kind": "narration",
+          "start": 183.61,
+          "end": 192.73,
+          "audio": "build/voice/cue-029.mp3"
+        },
+        {
+          "index": 30,
+          "text": "بر صفر برد.",
+          "kind": "narration",
+          "start": 192.81,
+          "end": 194.68,
+          "audio": "build/voice/cue-030.mp3"
+        },
+        {
+          "index": 31,
+          "text": "بایرن ۲ – ۲ دورتموند؛ لورکوزن ۲ – ۴ اشتوتگارت.",
+          "kind": "narration",
+          "start": 194.76,
+          "end": 198.96,
+          "audio": "build/voice/cue-031.mp3"
+        }
+      ]
+    },
+    {
+      "id": "kane-ballon-dor",
+      "title": "هری کین توپ طلا را گرفت",
+      "kind": "story",
+      "bucket": "europe_football",
+      "story": {
+        "id": "kane-ballon-dor",
+        "bucket": "europe_football",
+        "headline": "هری کین توپ طلا را گرفت",
+        "summary": "هری کین برنده‌ی توپ طلای ۲۰۲۶ شد و در رأی‌گیری فقط ۲۸ امتیاز بیشتر از کیلیان امباپه به دست آورد.",
+        "facts": [
+          "کین برنده توپ طلا",
+          "+۲۸ امتیاز از امباپه"
+        ],
+        "sources": [
+          {
+            "name": "BBC Sport — Kane beat Mbappe by 28 points",
+            "url": "https://www.bbc.com/sport/football"
+          }
+        ],
+        "broll": null,
+        "priority": 3,
+        "verified": true,
+        "tags": [
+          "توپ طلا",
+          "کین"
+        ]
+      },
+      "start": 199.36,
+      "end": 212.92,
+      "cues": [
+        {
+          "index": 32,
+          "text": "اروپا: هری کین برنده‌ی توپ طلای ۲۰۲۶ شد و در رأی‌گیری فقط ۲۸ امتیاز بیشتر از کیلیان امباپه به دست آورد.",
+          "kind": "narration",
+          "start": 199.46,
+          "end": 208.17,
+          "audio": "build/voice/cue-032.mp3"
+        },
+        {
+          "index": 33,
+          "text": "کین برنده توپ طلا؛ +۲۸ امتیاز از امباپه.",
+          "kind": "narration",
+          "start": 208.25,
+          "end": 212.52,
+          "audio": "build/voice/cue-033.mp3"
+        }
+      ]
+    },
+    {
+      "id": "bellingham-50",
+      "title": "پنجاهمین گل بلینگام برای رئال",
+      "kind": "story",
+      "bucket": "europe_football",
+      "story": {
+        "id": "bellingham-50",
+        "bucket": "europe_football",
+        "headline": "پنجاهمین گل بلینگام برای رئال",
+        "summary": "جود بلینگام پنجاهمین گلش با پیراهن رئال مادرید را زد و امباپه هم گل زد تا رئال یک برد قاطع بگیرد؛ بارسلونا هم با درخشش یامال شش گل به آلاوس زد.",
+        "facts": [
+          "بلینگام ۵۰ گل",
+          "بارسا ۶ – ۰ آلاوس"
+        ],
+        "sources": [
+          {
+            "name": "BBC Sport — Spanish La Liga",
+            "url": "https://www.bbc.com/sport/football/spanish-la-liga"
+          }
+        ],
+        "broll": null,
+        "priority": 4,
+        "verified": true,
+        "tags": [
+          "رئال مادرید",
+          "بلینگام"
+        ]
+      },
+      "start": 212.92,
+      "end": 229.16,
+      "cues": [
+        {
+          "index": 34,
+          "text": "اروپا: جود بلینگام پنجاهمین گلش با پیراهن رئال مادرید را زد و امباپه هم گل زد تا رئال یک برد قاطع بگیرد؛ بارسلونا هم با درخشش",
+          "kind": "narration",
+          "start": 213.02,
+          "end": 222.31,
+          "audio": "build/voice/cue-034.mp3"
+        },
+        {
+          "index": 35,
+          "text": "یامال شش گل به آلاوس زد.",
+          "kind": "narration",
+          "start": 222.39,
+          "end": 224.86,
+          "audio": "build/voice/cue-035.mp3"
+        },
+        {
+          "index": 36,
+          "text": "بلینگام ۵۰ گل؛ بارسا ۶ – ۰ آلاوس.",
+          "kind": "narration",
+          "start": 224.94,
+          "end": 228.76,
+          "audio": "build/voice/cue-036.mp3"
+        }
+      ]
+    },
+    {
+      "id": "manutd-crisis",
+      "title": "بحران یونایتد: ۷ امتیاز از ۹ بازی",
+      "kind": "story",
+      "bucket": "europe_football",
+      "story": {
+        "id": "manutd-crisis",
+        "bucket": "europe_football",
+        "headline": "بحران یونایتد: ۷ امتیاز از ۹ بازی",
+        "summary": "منچستریونایتد با ۷ امتیاز از ۹ بازی در جدول لیگ برتر وضعیت خطرناکی دارد و کارشناسان درباره‌ی خطر سقوط حرف می‌زنند.",
+        "facts": [
+          "۷ امتیاز از ۹ بازی",
+          "بحث سقوط"
+        ],
+        "sources": [
+          {
+            "name": "BBC Sport — Man Utd and a relegation scrap",
+            "url": "https://www.bbc.com/sport/football"
+          }
+        ],
+        "broll": null,
+        "priority": 4,
+        "verified": true,
+        "tags": [
+          "یونایتد",
+          "لیگ برتر"
+        ]
+      },
+      "start": 229.16,
+      "end": 241.43,
+      "cues": [
+        {
+          "index": 37,
+          "text": "اروپا: منچستریونایتد با ۷ امتیاز از ۹ بازی در جدول لیگ برتر وضعیت خطرناکی دارد و کارشناسان درباره‌ی خطر سقوط حرف می‌زنند.",
+          "kind": "narration",
+          "start": 229.26,
+          "end": 239.08,
+          "audio": "build/voice/cue-037.mp3"
+        },
+        {
+          "index": 38,
+          "text": "بحث سقوط.",
+          "kind": "narration",
+          "start": 239.16,
+          "end": 241.03,
+          "audio": "build/voice/cue-038.mp3"
+        }
+      ]
+    },
+    {
+      "id": "card-world",
+      "title": "جهان ورزش",
+      "kind": "title",
+      "bucket": "world",
+      "story": null,
+      "start": 241.43,
+      "end": 243.83,
+      "cues": []
+    },
+    {
+      "id": "antonelli-champion",
+      "title": "آنتونلی، جوان‌ترین قهرمان تاریخ فرمول یک",
+      "kind": "story",
+      "bucket": "world",
+      "story": {
+        "id": "antonelli-champion",
+        "bucket": "world",
+        "headline": "آنتونلی، جوان‌ترین قهرمان تاریخ فرمول یک",
+        "summary": "کیمی آنتونلی در ۲۰ سال و ۶۸ روز با سوم‌شدن در گراندپری مکزیکوسیتی قهرمان جهان شد؛ جوان‌ترین قهرمان تاریخ فرمول یک و اولین ایتالیایی از سال ۱۹۵۳. فرشتپن برنده مسابقه شد و همیلتون دوم.",
+        "facts": [
+          "۲۰ سال و ۶۸ روز",
+          "رکورد فتل شکست",
+          "اولین ایتالیایی از ۱۹۵۳"
+        ],
+        "sources": [
+          {
+            "name": "BBC Sport — Antonelli becomes world champion",
+            "url": "https://www.bbc.com/sport/formula1/articles/cv62y1e6wly6o"
+          }
+        ],
+        "broll": null,
+        "priority": 1,
+        "verified": true,
+        "tags": [
+          "فرمول یک",
+          "آنتونلی"
+        ]
+      },
+      "start": 243.83,
+      "end": 264.78,
+      "cues": [
+        {
+          "index": 39,
+          "text": "جهان ورزش: کیمی آنتونلی در ۲۰ سال و ۶۸ روز با سوم‌شدن در گراندپری مکزیکوسیتی قهرمان جهان شد؛ جوان‌ترین قهرمان تاریخ فرمول یک و اولین ایتالیایی",
+          "kind": "narration",
+          "start": 243.93,
+          "end": 255.31,
+          "audio": "build/voice/cue-039.mp3"
+        },
+        {
+          "index": 40,
+          "text": "از سال ۱۹۵۳.",
+          "kind": "narration",
+          "start": 255.39,
+          "end": 258.51,
+          "audio": "build/voice/cue-040.mp3"
+        },
+        {
+          "index": 41,
+          "text": "فرشتپن برنده مسابقه شد و همیلتون دوم.",
+          "kind": "narration",
+          "start": 258.59,
+          "end": 262.09,
+          "audio": "build/voice/cue-041.mp3"
+        },
+        {
+          "index": 42,
+          "text": "رکورد فتل شکست.",
+          "kind": "narration",
+          "start": 262.17,
+          "end": 264.38,
+          "audio": "build/voice/cue-042.mp3"
+        }
+      ]
+    },
+    {
+      "id": "card-whats_next",
+      "title": "برنامه‌ی بعدی",
+      "kind": "title",
+      "bucket": "whats_next",
+      "story": null,
+      "start": 264.78,
+      "end": 267.18,
+      "cues": []
+    },
+    {
+      "id": "ucl-md4",
+      "title": "سه‌شنبه و چهارشنبه: دور چهارم لیگ قهرمانان",
+      "kind": "story",
+      "bucket": "whats_next",
+      "story": {
+        "id": "ucl-md4",
+        "bucket": "whats_next",
+        "headline": "سه‌شنبه و چهارشنبه: دور چهارم لیگ قهرمانان",
+        "summary": "لیگ قهرمانان سه‌شنبه و چهارشنبه ادامه پیدا می‌کند؛ آرسنال مهمان اسلاویا پراگ است و بایرن به مادرید می‌رود تا با اتلتیکو بازی کند.",
+        "facts": [
+          "اسلاویا – آرسنال",
+          "اتلتیکو – بایرن",
+          "۲۱:۰۰ به وقت اروپای مرکزی"
+        ],
+        "sources": [
+          {
+            "name": "UEFA.com — Matchday 4",
+            "url": "https://www.uefa.com/uefachampionsleague/news/02aa-21f10edb96af-f01ebdbd9935-1000--champions-league-matchday-4-key-stats-and-what-to-look-o/"
+          }
+        ],
+        "broll": null,
+        "priority": 5,
+        "verified": true,
+        "tags": [
+          "لیگ قهرمانان"
+        ]
+      },
+      "start": 267.18,
+      "end": 280.89,
+      "cues": [
+        {
+          "index": 43,
+          "text": "و در ادامه: لیگ قهرمانان سه‌شنبه و چهارشنبه ادامه پیدا می‌کند؛ آرسنال مهمان اسلاویا پراگ است و بایرن به مادرید می‌رود تا با اتلتیکو بازی کند.",
+          "kind": "narration",
+          "start": 267.28,
+          "end": 277.22,
+          "audio": "build/voice/cue-043.mp3"
+        },
+        {
+          "index": 44,
+          "text": "اسلاویا – آرسنال؛ اتلتیکو – بایرن.",
+          "kind": "narration",
+          "start": 277.3,
+          "end": 280.49,
+          "audio": "build/voice/cue-044.mp3"
+        }
+      ]
+    },
+    {
+      "id": "f1-brazil",
+      "title": "فرمول یک در برزیل، ۶ تا ۸ نوامبر",
+      "kind": "story",
+      "bucket": "whats_next",
+      "story": {
+        "id": "f1-brazil",
+        "bucket": "whats_next",
+        "headline": "فرمول یک در برزیل، ۶ تا ۸ نوامبر",
+        "summary": "بعد از جشن قهرمانی در مکزیک، فرمول یک این هفته در اینترلاگوس برزیل ادامه پیدا می‌کند و آنتونلی با عنوان قهرمان به این مسابقه می‌رود.",
+        "facts": [
+          "اینترلاگوس، برزیل",
+          "۶ تا ۸ نوامبر"
+        ],
+        "sources": [
+          {
+            "name": "BBC Sport — next race: Sao Paulo GP",
+            "url": "https://www.bbc.com/sport/formula1/articles/cv62y1e6wly6o"
+          }
+        ],
+        "broll": null,
+        "priority": 6,
+        "verified": true,
+        "tags": [
+          "فرمول یک",
+          "برزیل"
+        ]
+      },
+      "start": 280.89,
+      "end": 294.53,
+      "cues": [
+        {
+          "index": 45,
+          "text": "و در ادامه: بعد از جشن قهرمانی در مکزیک، فرمول یک این هفته در اینترلاگوس برزیل ادامه پیدا می‌کند و آنتونلی با عنوان قهرمان به این",
+          "kind": "narration",
+          "start": 280.99,
+          "end": 289.89,
+          "audio": "build/voice/cue-045.mp3"
+        },
+        {
+          "index": 46,
+          "text": "مسابقه می‌رود.",
+          "kind": "narration",
+          "start": 289.97,
+          "end": 291.84,
+          "audio": "build/voice/cue-046.mp3"
+        },
+        {
+          "index": 47,
+          "text": "۶ تا ۸ نوامبر.",
+          "kind": "narration",
+          "start": 291.92,
+          "end": 294.13,
+          "audio": "build/voice/cue-047.mp3"
+        }
+      ]
+    },
+    {
+      "id": "outro",
+      "title": "جمع‌بندی",
+      "kind": "outro",
+      "bucket": "world",
+      "story": null,
+      "start": 294.53,
+      "end": 302.71,
+      "cues": [
+        {
+          "index": 48,
+          "text": "کدام خبر مهم‌تر بود؟ نظرت را کامنت کن و برای خبرهای بعدی همراه تل‌تون اسپرت باش.",
+          "kind": "title",
+          "start": 294.63,
+          "end": 301.81,
+          "audio": "build/voice/cue-048.mp3"
+        }
+      ]
+    }
+  ]
+}
