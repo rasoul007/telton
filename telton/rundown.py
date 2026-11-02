@@ -251,6 +251,15 @@ def write_caption(project: Project, rundown: Rundown, path) -> None:
         f"{i}) {story.headline} — {story.summary.split('.')[0].strip()}."
         for i, story in enumerate(stories, start=1)
     ]
+    # one clean, de-duplicated source line (outlet names, article titles live in sources.md)
+    names = sorted(
+        {
+            source.name.split(" — ")[0].strip()
+            for story in stories
+            for source in story.sources
+            if source.name
+        }
+    )
     lines = [
         str(meta.get("caption_intro") or rundown.title),
         "",
@@ -258,7 +267,7 @@ def write_caption(project: Project, rundown: Rundown, path) -> None:
         "",
         str(meta.get("cta") or "نظرت را کامنت کن و برای خبرهای بعدی فالو کن."),
         "",
-        "📌 منابع: " + "، ".join(sorted({s.source_line for s in stories if s.source_line})),
+        "📌 منابع: " + (" · ".join(names) if names else "—"),
         "",
         str(meta.get("hashtags") or "#ورزش #فوتبال #خبر_ورزشی #پرسپولیس #آرسنال"),
         "",
