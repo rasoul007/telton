@@ -1,0 +1,25 @@
+# pipeline output
+projects/*/build/*
+!projects/*/build/script.md
+!projects/*/build/subtitles.srt
+!projects/*/build/caption.txt
+!projects/*/build/rundown.json
+projects/*/out/*
+!projects/*/out/.gitkeep
+!projects/*/out/review.html
+*.wav
+*.mp3
+__pycache__/
+*.pyc
+.pytest_cache/
+*.egg-info/
+.venv/
+# licensed footage never gets committed
+broll/*.mp4
+broll/*.mov
+broll/*.mkv
+# OAuth secrets — never commit
+.secrets/
+client_secret.json
+*youtube-token.json
+logs/

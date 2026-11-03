@@ -1,0 +1,40 @@
+# Visual + narration defaults for every render (override per project in project.yaml).
+# Default canvas is the YouTube long-form 16:9 frame; the vertical Shorts frame is
+# just a per-project override (video: {width: 1080, height: 1920}).
+video:
+  width: 1920
+  height: 1080
+  fps: 30
+  crf: 20
+  preset: veryfast
+
+colors:
+  bg: "#0B0E13"
+  bg2: "#161E2B"
+  panel: "#101826"
+  accent: "#FFD400"
+  accent2: "#E10600"
+  good: "#22C55E"
+  text: "#FFFFFF"
+  muted: "#9AA4B2"
+
+fonts:
+  black: assets/fonts/Vazirmatn-Black.ttf
+  bold: assets/fonts/Vazirmatn-Bold.ttf
+  regular: assets/fonts/Vazirmatn-Regular.ttf
+
+narration:
+  words_per_second: 2.9
+  tail_seconds: 0.9
+  min_story_seconds: 7.0
+  title_card_seconds: 2.4
+  max_words_per_cue: 26
+
+branding:
+  name: "tooop news"
+  handle: "@tooop.news"
+  watermark_alpha: 120
+
+ticker:
+  enabled: true
+  speed_px_per_second: 170
