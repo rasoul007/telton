@@ -14,6 +14,14 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT))
 
+# Windows console defaults to a legacy code page; force UTF-8 so Persian text shows up.
+if os.name == "nt":  # pragma: no cover - only on Windows
+    for stream in (sys.stdout, sys.stderr):
+        try:
+            stream.reconfigure(encoding="utf-8", errors="replace")
+        except Exception:
+            pass
+
 NEEDED = ("PIL", "arabic_reshaper", "bidi", "imageio_ffmpeg", "yaml", "feedparser")
 
 
