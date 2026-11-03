@@ -425,11 +425,11 @@ def render_video(
     return out_path
 
 
-def export_thumbnail(project: Project, rundown: Rundown, at: float = 6.0) -> Path:
+def export_thumbnail(project: Project, rundown: Rundown, at: float = 6.0, path: Path | None = None) -> Path:
     """Grab a frame for the thumbnail (YouTube/IG)."""
     painter = FramePainter(project, rundown)
     image = painter.frame(min(at, max(0.5, rundown.end - 1)))
-    path = project.out / "thumbnail.jpg"
+    path = path or (project.out / "thumbnail.jpg")
     ensure_dir(path.parent)
     image.save(path, quality=90)
     painter.close()

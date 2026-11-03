@@ -9,10 +9,20 @@ collect → broll → build → voice → render → review → publish --by "ا
  تیترها    کلیپ گل   اسکریپت  نریشن   ویدیو    بازبینی    یک دستور
 ```
 
+## شروع ساده (بدون برنامه‌نویسی)
+
+اگر با خط فرمان کار نمی‌کنی، فقط `READ-ME-FIRST.txt` را بخوان و بعد دابل‌کلیک کن:
+
+- ویندوز: **`START-WINDOWS.bat`**
+- مک: **`START-MAC.command`**
+
+یک منوی فارسی باز می‌شود: ساخت ویدیوی افقی (یوتیوب)، ساخت ویدیوی عمودی (اینستاگرام)،
+آپلود به یوتیوب، اتصال به یوتیوب، دیدن فایل‌ها.
+
 ## نصب
 
 ```bash
-pip install -r requirements.txt        # pillow, arabic-reshaper, imageio-ffmpeg, edge-tts, ...
+pip install -r requirements.txt        # pillow, arabic-reshaper, imageio-ffmpeg, edge-tts, google-api…
 python -m telton --help                # یا: pip install -e . && telton --help
 ```
 

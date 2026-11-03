@@ -70,17 +70,24 @@ def cmd_render(args: argparse.Namespace) -> int:
         return 2
     rundown = Rundown.from_dict(data)
     audio = project.build / "audio.wav"
+    if args.vertical:
+        args.width, args.height = 1080, 1920
+    width = args.width or project.style.width
+    height = args.height or project.style.height
+    suffix = "" if (width, height) == (project.style.width, project.style.height) else f"-{width}x{height}"
+    out_path = Path(args.output) if args.output else project.out / f"video{suffix}.mp4"
     video = render_video(
         project,
         rundown,
         audio if audio.exists() else None,
-        width=args.width,
-        height=args.height,
+        out_path=out_path,
+        width=width,
+        height=height,
         fps=args.fps,
         max_seconds=args.max_seconds,
     )
-    thumb = export_thumbnail(project, rundown)
-    print(f"video: {video} ({video.stat().st_size / 1e6:.1f} MB)")
+    thumb = export_thumbnail(project, rundown, path=project.out / f"thumbnail{suffix}.jpg")
+    print(f"video: {video} ({video.stat().st_size / 1e6:.1f} MB · {width}x{height})")
     print(f"thumbnail: {thumb}")
     return 0
 
@@ -326,7 +333,9 @@ def main(argv: list[str] | None = None) -> int:
     render_p = add("render", "paint frames and encode the MP4", cmd_render)
     render_p.add_argument("--width", type=int, default=None)
     render_p.add_argument("--height", type=int, default=None)
+    render_p.add_argument("--vertical", action="store_true", help="نسخه عمودی ۱۰۸۰×۱۹۲۰ (اینستاگرام/شورت)")
     render_p.add_argument("--fps", type=int, default=None)
+    render_p.add_argument("--output", help="مسیر فایل خروجی")
     render_p.add_argument("--max-seconds", type=float, default=None, help="render a shorter draft")
 
     add("review", "write out/review.html (watch + check facts)", cmd_review)
