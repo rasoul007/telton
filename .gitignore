@@ -18,3 +18,8 @@ __pycache__/
 broll/*.mp4
 broll/*.mov
 broll/*.mkv
+# OAuth secrets — never commit
+.secrets/
+client_secret.json
+*youtube-token.json
+logs/

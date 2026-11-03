@@ -217,6 +217,54 @@ def cmd_daily(args: argparse.Namespace) -> int:
     return 0
 
 
+def cmd_youtube(args: argparse.Namespace) -> int:
+    from . import youtube as yt
+    from .publish import NotApproved
+
+    if args.action == "auth":
+        yt.load_credentials(
+            args.client_secret, args.token, interactive=True, port=args.port, echo=print
+        )
+        print("✅ احراز هویت انجام شد.")
+        print(json.dumps(yt.status(args.client_secret, args.token), ensure_ascii=False, indent=2))
+        return 0
+
+    if args.action == "status":
+        print(json.dumps(yt.status(args.client_secret, args.token), ensure_ascii=False, indent=2))
+        return 0
+
+    from .models import Rundown
+
+    project = _project(args)
+    data = read_json(project.build / "rundown.json")
+    if not data:
+        print("rundown.json missing — run `telton build`", file=sys.stderr)
+        return 2
+    rundown = Rundown.from_dict(data)
+    try:
+        result = yt.upload_video(
+            project,
+            rundown,
+            privacy=args.privacy,
+            publish_at=args.publish_at,
+            dry_run=args.dry_run,
+            upload_thumbnail=not args.no_thumbnail,
+            upload_captions=not args.no_captions,
+            client_secret=args.client_secret,
+            token=args.token,
+        )
+    except NotApproved as exc:
+        print(f"✋ {exc}", file=sys.stderr)
+        return 3
+    except yt.YouTubeNotConfigured as exc:
+        print(f"⚙️  {exc}", file=sys.stderr)
+        return 4
+    print(json.dumps(result, ensure_ascii=False, indent=2))
+    if result.get("url"):
+        print(f"\n🎬 {result['url']}")
+    return 0
+
+
 def cmd_status(args: argparse.Namespace) -> int:
     from .review import approval_status
 
@@ -303,6 +351,20 @@ def main(argv: list[str] | None = None) -> int:
     broll_p.add_argument("--max-clips", type=int, default=8, help="حداکثر کلیپ دانلودی در هر اجرا")
     broll_p.add_argument("--dry-run", action="store_true", help="فقط نشان بده چه چیزی پیدا شد")
     broll_p.add_argument("--list", action="store_true", help="فهرست پیام‌های دارای ویدیو")
+
+    yt_p = add("youtube", "آپلود به یوتیوب با OAuth خودت (auth / upload / status)", cmd_youtube)
+    yt_p.add_argument("action", choices=["auth", "upload", "status"])
+    yt_p.add_argument(
+        "--privacy", default="unlisted", choices=["public", "unlisted", "private"],
+        help="وضعیت انتشار (پیش‌فرض unlisted تا خودت بررسی کنی)",
+    )
+    yt_p.add_argument("--publish-at", help="زمان‌بندی انتشار، ISO مثل 2026-11-03T18:30:00Z (privacy private می‌شود)")
+    yt_p.add_argument("--dry-run", action="store_true", help="فقط بدنه‌ی درخواست API را نشان بده")
+    yt_p.add_argument("--no-thumbnail", action="store_true")
+    yt_p.add_argument("--no-captions", action="store_true")
+    yt_p.add_argument("--client-secret", help="مسیر client_secret.json (پیش‌فرض .secrets/client_secret.json)")
+    yt_p.add_argument("--token", help="مسیر توکن (پیش‌فرض .secrets/youtube-token.json)")
+    yt_p.add_argument("--port", type=int, default=0, help="پورت لوکال برای OAuth (۰ = تصادفی)")
 
     add("status", "show pipeline progress for a project", cmd_status)
 

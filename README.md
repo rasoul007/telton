@@ -53,6 +53,19 @@ python -m telton publish -p $SLUG --by "اسم تو"
 
 اگر فقط متن/فوتیج خبری را عوض کردی (بدون تغییر نریشن): `python -m telton sync -p $SLUG` تایم‌کدها را دست نمی‌زند.
 
+## آپلود خودکار یوتیوب
+
+با OAuth خودت (یک‌بار `python -m telton youtube auth`) می‌توانی بدون ترک ترمینال منتشر کنی:
+
+```bash
+python -m telton youtube auth                                    # یک‌بار، مرورگر باز می‌شود
+python -m telton youtube upload -p $SLUG --dry-run                # پیش‌نمایش بدنه‌ی API
+python -m telton youtube upload -p $SLUG --privacy unlisted        # آپلود + تامبنیل + زیرنویس فارسی
+```
+
+راهنمای گام‌به‌گام ساخت اعتبارنامه: [`docs/youtube.md`](docs/youtube.md).
+آپلود هم از همان **دروازه‌ی تأیید** رد می‌شود (بدون تأیید = خطا، هش ویدیو چک می‌شود).
+
 ## دروازه‌ی تأیید (مهم‌ترین بخش)
 
 - `approve` هش SHA-256 فایل ویدیو را ثبت می‌کند. `publish` همان هش را دوباره حساب می‌کند؛

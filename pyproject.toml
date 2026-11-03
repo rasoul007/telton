@@ -18,6 +18,12 @@ dependencies = [
   "gTTS>=2.5",
 ]
 
+[project.optional-dependencies]
+youtube = [
+  "google-api-python-client>=2.100",
+  "google-auth-oauthlib>=1.0",
+]
+
 [project.scripts]
 telton = "telton.cli:main"
 
