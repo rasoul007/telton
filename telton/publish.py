@@ -47,8 +47,10 @@ def make_kit(project: Project, rundown: Rundown, video: Path | None = None) -> P
     status = verify(project)
     video = video or project.video_path
     kit = ensure_dir(project.out / "publish-kit")
+    width, height = project.style.width, project.style.height
+    video_name = f"video-{width}x{height}.mp4"
 
-    shutil.copy2(video, kit / "video-9x16.mp4")
+    shutil.copy2(video, kit / video_name)
     for name in ("subtitles.srt", "caption.txt"):
         source = project.build / name
         if source.exists():
@@ -80,15 +82,16 @@ def make_kit(project: Project, rundown: Rundown, video: Path | None = None) -> P
         "title": rundown.title,
         "duration": round(rundown.end, 3),
         "duration_human": seconds_to_clock(rundown.end),
+        "aspect": f"{project.style.width}:{project.style.height}",
         "files": {
-            "video": "video-9x16.mp4",
+            "video": video_name,
             "subtitles": "subtitles.srt",
             "caption": "caption.txt",
             "thumbnail": "thumbnail.jpg",
             "sources": "sources.md",
             "checklist": "checklist.md",
         },
-        "sha256": sha256_file(kit / "video-9x16.mp4"),
+        "sha256": sha256_file(kit / video_name),
         "approval": status["record"],
         "platforms": PLATFORMS,
         "stories": [
@@ -106,13 +109,14 @@ def upload(project: Project, platform: str, dry_run: bool = True) -> dict:
     if platform not in PLATFORMS:
         raise ValueError(f"unknown platform {platform!r}; use one of {sorted(PLATFORMS)}")
     kit = project.out / "publish-kit"
-    if not (kit / "video-9x16.mp4").exists():
+    video_name = f"video-{project.style.width}x{project.style.height}.mp4"
+    if not (kit / video_name).exists():
         raise FileNotFoundError("run `telton publish` first to build the kit")
     return {
         "platform": platform,
         "dry_run": dry_run,
         "status": "ready-to-upload",
-        "video": str(kit / "video-9x16.mp4"),
+        "video": str(kit / video_name),
         "caption": str(kit / "caption.txt"),
         "note": (
             "آپلود خودکار نیاز به اعتبارنامه‌ی خودت دارد: برای یوتیوب "

@@ -278,7 +278,7 @@ class FramePainter:
                 size=L.size(0.102), max_width=self.w - 2 * m, align="center", fill=(255, 255, 255, 255),
             )
             self.r.text_block(
-                draw, "نظرت را کامنت کن · فالو کن", (self.w // 2, round(self.h * 0.50)), weight="bold",
+                draw, "نظرت را کامنت کن · فالو کن", (self.w // 2, round(self.h * 0.56)), weight="bold",
                 size=L.size(0.048), max_width=self.w - 2 * m, align="center", fill=(255, 212, 0, 255),
             )
         self._overlays[segment.id] = layer

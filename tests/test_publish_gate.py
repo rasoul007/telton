@@ -43,11 +43,13 @@ def test_approve_then_publish_creates_kit(rendered):
     assert record["sha256"]
     assert approval_status(project)["approved"] is True
     kit = make_kit(project, rundown)
-    for name in ("video-9x16.mp4", "subtitles.srt", "caption.txt", "sources.md",
+    video_name = f"video-{project.style.width}x{project.style.height}.mp4"
+    for name in (video_name, "subtitles.srt", "caption.txt", "sources.md",
                  "checklist.md", "manifest.json"):
         assert (kit / name).exists(), name
     manifest = (kit / "manifest.json").read_text(encoding="utf-8")
     assert "راسول" in manifest
+    assert f"{project.style.width}:{project.style.height}" in manifest
 
 
 def test_editing_the_video_after_approval_blocks_publish(rendered):
