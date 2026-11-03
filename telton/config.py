@@ -6,9 +6,30 @@ from dataclasses import dataclass, field
 from pathlib import Path
 from typing import Any
 
-import yaml
-
 REPO_ROOT = Path(__file__).resolve().parent.parent
+
+
+def yaml_load(text: str) -> Any:
+    """Parse YAML with PyYAML if present, otherwise the pure-Python ruamel.yaml.
+
+    Windows users on a brand-new Python often cannot build PyYAML (needs a C
+    compiler), so we never require it.
+    """
+    try:
+        import yaml as _pyyaml
+
+        return _pyyaml.safe_load(text)
+    except ImportError:
+        pass
+    try:
+        from ruamel.yaml import YAML
+
+        return YAML(typ="safe").load(text) or {}
+    except ImportError as exc:  # pragma: no cover - depends on the machine
+        raise RuntimeError(
+            "برای خواندن فایل‌های تنظیمات یکی از این دو لازم است: "
+            "pip install ruamel.yaml   (یا PyYAML)"
+        ) from exc
 
 
 @dataclass
@@ -47,13 +68,13 @@ class Style:
 
 def load_style(path: Path | None = None) -> Style:
     path = path or REPO_ROOT / "config" / "style.yaml"
-    data = yaml.safe_load(path.read_text(encoding="utf-8")) or {}
+    data = yaml_load(path.read_text(encoding="utf-8")) or {}
     return Style(raw=data)
 
 
 def load_sources(path: Path | None = None) -> dict[str, Any]:
     path = path or REPO_ROOT / "config" / "sources.yaml"
-    return yaml.safe_load(path.read_text(encoding="utf-8")) or {}
+    return yaml_load(path.read_text(encoding="utf-8")) or {}
 
 
 class Project:
@@ -112,7 +133,7 @@ class Project:
     @property
     def meta(self) -> dict[str, Any]:
         if self.meta_path.exists():
-            return yaml.safe_load(self.meta_path.read_text(encoding="utf-8")) or {}
+            return yaml_load(self.meta_path.read_text(encoding="utf-8")) or {}
         return {}
 
     def ensure(self) -> "Project":
