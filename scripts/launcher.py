@@ -61,7 +61,15 @@ def open_folder(path: Path) -> None:
 
 
 def _has(module: str) -> bool:
-    return importlib.util.find_spec(module) is not None
+    """True if the module can be imported.
+
+    `find_spec("pkg.sub")` raises ModuleNotFoundError when `pkg` is missing, so a
+    plain `find_spec(...) is not None` would crash instead of returning False.
+    """
+    try:
+        return importlib.util.find_spec(module) is not None
+    except (ImportError, ModuleNotFoundError, AttributeError, ValueError):
+        return False
 
 
 def missing_packages() -> list[str]:
@@ -282,4 +290,19 @@ if __name__ == "__main__":
         raise SystemExit(main())
     except KeyboardInterrupt:
         print("\nCancelled.")
+        raise SystemExit(1)
+    except SystemExit:
+        raise
+    except Exception as exc:                     # never show a raw traceback
+        import traceback
+
+        print("\n[!] Unexpected error.")
+        print(f"    {type(exc).__name__}: {exc}")
+        print()
+        print("    Send a screenshot of this window. Technical details:")
+        traceback.print_exc()
+        try:
+            input("\nPress Enter to close...")
+        except Exception:
+            pass
         raise SystemExit(1)
