@@ -1,43 +1,44 @@
 # موزیک پس‌زمینه (بدون مشکل کپی‌رایت)
 
-برنامه هر فایل صوتی که اینجا باشد را به‌عنوان موزیک پس‌زمینه استفاده می‌کند
-(اولین فایل به ترتیب حروف الفبا). فرمت‌های `mp3`، `m4a`، `wav`، `ogg` قبول است.
+## ✅ موزیک آماده — ساخته‌ی خودمان
+فایل `tooop-sports-bed.mp3` **با کد در `scripts/make_music.py` از صفر ساخته شده** است:
+درام، بیس، آرپژ و پد، ۱۲۸ BPM، گام «د مینور قهرمانی»، با پامپ ساید‌چین مثل
+تریلرهای ورزشی.
 
-## نکتهٔ مهم
-موزیک **خودکار کم می‌شود** وقتی گوینده حرف می‌زند و در سکوت‌ها بلند می‌شود
-(داکینگ با sidechain). تنظیم‌ها در `config/style.yaml` → بخش `audio`:
+- **لایسنس:** کاملاً اورجینال و مال خودت (هیچ سمپل خارجی در آن نیست) →
+  نه Content-ID، نه ری‌استرایت، و می‌توانی monetize کنی.
+- نسخه‌ی جدید بساز:
+  ```bash
+  python scripts/make_music.py --bars 32 --out assets/music/tooop-sports-bed-v2.wav
+  ```
+  (`bars` = تعداد میزان؛ هر ۸ میزان ≈ ۱۵ ثانیه. برنامه خودش فایل را لوپ می‌کند.)
+
+## جایگزین: موزیک آماده‌ی آزاد
+| منبع | لایسنس |
+|---|---|
+| [YouTube Audio Library](https://studio.youtube.com) → Audio Library | بدون کپی‌رایت |
+| [Pixabay Music](https://pixabay.com/music/) | Pixabay License |
+| [Uppbeat](https://uppbeat.io) (پلن رایگان) | با کردیت |
+| [Free Music Archive](https://freemusicarchive.org) | CC — لایسنس هر ترک را بخوان |
+| [Incompetech](https://incompetech.com) | CC BY |
+
+⚠️ از موزیک‌های اصلی تلویزیون/برندها استفاده نکن.
+اولین فایل به ترتیب حروف الفبا در این پوشه انتخاب می‌شود.
+
+## داکینگ (خودکار)
+موزیک وقتی گوینده حرف می‌زند کم می‌شود و در سکوت‌ها بلند می‌شود.
+تنظیم‌ها در `config/style.yaml`:
 
 ```yaml
 audio:
   music: true
-  music_volume: 0.55        # صدای موزیک وقتی گوینده ساکت است
-  duck_ratio: 8             # چقدر زیر صدای گوینده کم شود
+  music_volume: 0.55        # سطح موزیک در سکوت‌ها
+  duck_ratio: 8             # شدت کم شدن زیر صدای گوینده
   duck_threshold: 0.045
 ```
 
-## از کجا موزیک آزاد بگیریم (فقط این‌ها را استفاده کن)
-| منبع | لایسنس | مناسب |
-|---|---|---|
-| [YouTube Audio Library](https://studio.youtube.com) → Audio Library | بدون کپی‌رایت | بهترین گزینه برای یوتیوب |
-| [Pixabay Music](https://pixabay.com/music/) | Pixabay License | هرچیزی، حتی تجاری |
-| [Uppbeat](https://uppbeat.io) (پلن رایگان) | با کردیت | نیاز به نوشتن کردیت |
-| [Free Music Archive](https://freemusicarchive.org) | CC | حتماً لایسنس هر ترک را بخوان |
-| [Incompetech (Kevin MacLeod)](https://incompetech.com) | CC BY | باید کردیت بدهی |
-
-⚠️ از ترک‌های معروف/کپی‌رایت‌دار (مثل موزیک‌های اصلی تلویزیون) استفاده نکن —
-هم ری‌استرایک می‌گیری، هم درآمدت بلوکه می‌شود.
-
-## چه سبکی؟
-- ورزشی و پرانرژی، بدون وکال (صدای خواننده با گوینده قاطی می‌شود)
-- ۱۲۰ تا ۱۴۰ BPM
-- طولش مهم نیست؛ برنامه خودش لوپ می‌کند
-
-## اگر فایل نگذاری چه می‌شود؟
-ویدیو بدون موزیک ساخته می‌شود (بی‌صدا زیر نریشن) و هیچ خطایی نمی‌دهد.
-
 ## موزیک مخصوص یک قسمت
-در `projects/<slug>/project.yaml` می‌توانی مسیر دلخواه بدهی:
-
 ```yaml
-music: assets/music/my-episode-track.mp3
+# projects/<slug>/project.yaml
+music: assets/music/tooop-sports-bed-v2.wav
 ```

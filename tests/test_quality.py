@@ -124,3 +124,33 @@ def test_stock_fill_reports_without_network(project, monkeypatch):
     monkeypatch.setattr(stock, "search_commons", lambda *a, **k: [])
     report = stock.fill_missing(project, limit=1, dry_run=True)
     assert report and report[0]["status"] == "no-free-result"
+
+
+def test_music_track_is_detected(project):
+    from telton.voice import music_track
+
+    track = music_track(project)
+    assert track is not None, "the bundled bed must be found"
+    assert track.suffix.lower() in {".mp3", ".wav", ".m4a", ".ogg"}
+    assert track.stat().st_size > 100_000
+
+
+def test_music_generator_makes_audio(tmp_path):
+    """scripts/make_music.py must synthesise a real, loopable bed."""
+    import importlib.util
+
+    spec = importlib.util.spec_from_file_location(
+        "make_music", Path(__file__).resolve().parent.parent / "scripts" / "make_music.py"
+    )
+    module = importlib.util.module_from_spec(spec)
+    assert spec.loader is not None
+    spec.loader.exec_module(module)
+
+    audio = module.build(bars=2)                 # short, but the same code path
+    assert audio.ndim == 1 and audio.size > 44100
+    assert float(abs(audio).max()) <= 1.0        # never clips
+    out = tmp_path / "bed.wav"
+    module.write_wav(out, audio)
+    assert out.exists() and out.stat().st_size > 10_000
+    assert 3.0 <= probe_duration(out) <= 6.0
+
