@@ -28,7 +28,21 @@ narration:
   tail_seconds: 0.9
   min_story_seconds: 7.0
   title_card_seconds: 2.4
-  max_words_per_cue: 26
+  max_words_per_cue: 22
+  # صدای گوینده — زنده‌تر و با زیر و بم
+  rate: "+9%"
+  pitch: "+3Hz"
+  volume: "+0%"
+  hook_rate: "+18%"
+  hook_pitch: "+7Hz"
+  variety_hz: 2          # هر جمله کمی بالا/پایین می‌رود تا یکنواخت نباشد
+
+audio:
+  music: true            # اگر فایلی در assets/music/ باشد استفاده می‌شود
+  music_volume: 0.55     # وقتی گوینده ساکت است
+  music_ducked_volume: 0.14
+  duck_ratio: 8
+  duck_threshold: 0.045
 
 branding:
   name: "tooop news"

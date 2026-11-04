@@ -160,8 +160,14 @@ def build_video(slug: str, vertical: bool) -> None:
 
     if not run_telton(["build", "-p", slug, "-d", "300"]):
         return
+    print("\n== Fetching match clips (Telegram) ...")
+    run_telton(["broll", "-p", slug, "--channel", "varzesh3", "--limit", "150",
+                "--max-clips", "6", "--min-score", "4"])
+    print("\n== Fetching copyright-free footage for the rest ...")
+    run_telton(["stock", "-p", slug, "--limit", "3"])
+    run_telton(["sync", "-p", slug])
     print("\n== Making the voice-over...")
-    if not run_telton(["voice", "-p", slug, "-d", "300", "--rate", "+10%"]):
+    if not run_telton(["voice", "-p", slug, "-d", "300"]):
         return
     print("\n== Rendering the video (longest step)...")
     args = ["render", "-p", slug] + (["--vertical"] if vertical else [])
@@ -172,6 +178,37 @@ def build_video(slug: str, vertical: bool) -> None:
     print("\n[ok] Video is ready!")
     print(f"     Folder: {out_dir}")
     open_folder(out_dir)
+
+
+def build_short(slug: str) -> None:
+    print("\n== Making a 50-second vertical short (YouTube Shorts / Reels)")
+    print("   It uses the 3 strongest stories of the episode.\n")
+    if run_telton(["short", "-p", slug, "-d", "50", "--count", "3"]):
+        print("\n[ok] Short is ready: out/short-1080x1920.mp4")
+        open_folder(ROOT / "projects" / slug / "out")
+
+
+def refresh_episode(slug: str) -> None:
+    """Re-check the news, re-download clips and rebuild - without touching the script."""
+    print("\n== Refresh: new headlines + new clips + rebuild")
+    run_telton(["collect", "-p", slug])
+    print("\n   Raw headlines saved. Re-downloading footage...")
+    run_telton(["broll", "-p", slug, "--channel", "varzesh3", "--limit", "150",
+                "--max-clips", "6", "--min-score", "4"])
+    run_telton(["stock", "-p", slug, "--limit", "3"])
+    run_telton(["sync", "-p", slug])
+    print("\n== Re-rendering with the new footage...")
+    build_video(slug, vertical=False)
+
+
+def update_news(slug: str) -> None:
+    """Show what is new right now (so you can add it to stories.json)."""
+    print("\n== Update: what is new in the last hours")
+    run_telton(["collect", "-p", slug])
+    project_dir = ROOT / "projects" / slug
+    digest = project_dir / "build" / "candidates.md"
+    print(f"\n   Open this file and copy the headlines you want:\n   {digest}")
+    open_folder(digest.parent)
 
 
 def upload_process(slug: str) -> None:
@@ -257,6 +294,9 @@ def main() -> int:
         print("  3) Upload to YouTube")
         print("  4) Connect to YouTube (first time)")
         print("  5) Show files and status")
+        print("  6) Make a 50s Short / Reel")
+        print("  7) Refresh (new clips + rebuild now)")
+        print("  8) Update (what is new right now)")
         print("  0) Exit")
         print()
         choice = ask("Type a number: ")
@@ -268,7 +308,7 @@ def main() -> int:
             youtube_connect()
         elif choice == "5":
             show_status()
-        elif choice in {"1", "2", "3"}:
+        elif choice in {"1", "2", "3", "6", "7", "8"}:
             slug = choose_project() or slug
             if not slug:
                 input("\nPress Enter...")
@@ -277,8 +317,14 @@ def main() -> int:
                 build_video(slug, vertical=False)
             elif choice == "2":
                 build_video(slug, vertical=True)
-            else:
+            elif choice == "3":
                 upload_process(slug)
+            elif choice == "6":
+                build_short(slug)
+            elif choice == "7":
+                refresh_episode(slug)
+            else:
+                update_news(slug)
         else:
             print("Please type one of the numbers above.")
         print()

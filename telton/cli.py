@@ -52,7 +52,7 @@ def cmd_voice(args: argparse.Namespace) -> int:
         voice=args.voice,
         offline=args.offline,
         target=args.duration,
-        rate=getattr(args, "rate", "+0%"),
+        rate=getattr(args, "rate", None),
         fit=not getattr(args, "no_fit", False),
     )
     print(f"voice-over ready: {seconds_to_clock(rundown.end)} · {audio}")
@@ -87,6 +87,12 @@ def cmd_render(args: argparse.Namespace) -> int:
         max_seconds=args.max_seconds,
     )
     thumb = export_thumbnail(project, rundown, path=project.out / f"thumbnail{suffix}.jpg")
+    try:                                    # a real hook thumbnail beats a plain frame
+        from .thumbnail import build_thumbnails
+
+        thumb = build_thumbnails(project, rundown)[0]
+    except Exception as exc:
+        print(f"  (thumbnail fallback: {exc})")
     print(f"video: {video} ({video.stat().st_size / 1e6:.1f} MB · {width}x{height})")
     print(f"thumbnail: {thumb}")
     return 0
@@ -101,6 +107,57 @@ def cmd_sync(args: argparse.Namespace) -> int:
     print(f"synced {len(rundown.segments)} segments · {len(clips)} با فوتیج")
     for clip in clips:
         print(f"  🎬 {clip}")
+    return 0
+
+
+def cmd_thumb(args: argparse.Namespace) -> int:
+    from .models import Rundown
+    from .thumbnail import build_thumbnails
+
+    project = _project(args)
+    data = read_json(project.build / "rundown.json")
+    if not data:
+        print("rundown.json missing — run `telton build`", file=sys.stderr)
+        return 2
+    rundown = Rundown.from_dict(data)
+    hooks = [args.hook] if args.hook else None
+    for path in build_thumbnails(project, rundown, hooks=hooks):
+        print(f"thumbnail: {path}")
+    return 0
+
+
+def cmd_stock(args: argparse.Namespace) -> int:
+    from .stock import fill_missing, search_commons
+
+    project = _project(args)
+    if args.query:
+        items = search_commons(args.query, kind=args.kind, limit=args.limit)
+        print(f"{len(items)} نتیجه (فقط مجوز آزاد قابل استفاده است):")
+        for item in items:
+            mark = "✅" if item.free else "⛔"
+            print(f"  {mark} [{item.license}] {item.title[:60]}")
+            print(f"      {item.url}")
+        return 0
+    for entry in fill_missing(project, kind=args.kind, limit=args.limit, dry_run=args.dry_run):
+        print(f"  {entry['status']:>15}  {entry['story']:<24} "
+              f"{entry.get('query', '')} {entry.get('license', '')}")
+    print("\nبعدی: telton sync -p %s && telton render -p %s" % (project.slug, project.slug))
+    return 0
+
+
+def cmd_short(args: argparse.Namespace) -> int:
+    from .short import make_short
+
+    project = _project(args)
+    print(f"ساخت شورت {args.duration:.0f} ثانیه‌ای (۹:۱۶)…")
+    result = make_short(
+        project,
+        target=args.duration,
+        count=args.count,
+        offline=args.offline,
+        voice=args.voice,
+    )
+    print(json.dumps(result, ensure_ascii=False, indent=2))
     return 0
 
 
@@ -325,7 +382,7 @@ def main(argv: list[str] | None = None) -> int:
 
     voice_p = add("voice", "generate Persian voice-over and mix the audio track", cmd_voice)
     voice_p.add_argument("--voice", help="edge-tts voice id (default fa-IR-FaridNeural)")
-    voice_p.add_argument("--rate", default="+0%", help="TTS speed, e.g. +8%% (پیش‌فرض +0%%)")
+    voice_p.add_argument("--rate", default=None, help="سرعت صدا مثل +12%% (پیش‌فرض از config/style.yaml)")
     voice_p.add_argument("--offline", action="store_true", help="skip TTS, use silence (fast smoke test)")
     voice_p.add_argument("--no-fit", action="store_true", help="keep every story even if it runs long")
     voice_p.add_argument("--duration", "-d", type=float, default=None)
@@ -339,6 +396,21 @@ def main(argv: list[str] | None = None) -> int:
     render_p.add_argument("--max-seconds", type=float, default=None, help="render a shorter draft")
 
     add("review", "write out/review.html (watch + check facts)", cmd_review)
+
+    thumb_p = add("thumb", "make 3 click-worthy thumbnails", cmd_thumb)
+    thumb_p.add_argument("--hook", help="متن قلاب تامبنیل (پیش‌فرض از project.yaml)")
+
+    stock_p = add("stock", "download copyright-safe footage (Wikimedia Commons)", cmd_stock)
+    stock_p.add_argument("--query", help="جست‌وجوی آزاد (برای دیدن نتایج)")
+    stock_p.add_argument("--kind", default="video", choices=["video", "image"])
+    stock_p.add_argument("--limit", type=int, default=4)
+    stock_p.add_argument("--dry-run", action="store_true")
+
+    short_p = add("short", "build a vertical short / reel (≤60s)", cmd_short)
+    short_p.add_argument("--duration", "-d", type=float, default=50.0)
+    short_p.add_argument("--count", type=int, default=3, help="چند خبر در شورت")
+    short_p.add_argument("--voice")
+    short_p.add_argument("--offline", action="store_true")
 
     add("sync", "refresh headlines/b-roll in the existing rundown (no re-recording)", cmd_sync)
 
@@ -382,7 +454,7 @@ def main(argv: list[str] | None = None) -> int:
     run_p.add_argument("--title")
     run_p.add_argument("--voice")
     run_p.add_argument("--offline", action="store_true")
-    run_p.add_argument("--rate", default="+0%")
+    run_p.add_argument("--rate", default=None)
     run_p.add_argument("--no-fit", action="store_true")
     run_p.add_argument("--width", type=int, default=None)
     run_p.add_argument("--height", type=int, default=None)
@@ -394,7 +466,7 @@ def main(argv: list[str] | None = None) -> int:
     daily_p.add_argument("--duration", "-d", type=float, default=300.0)
     daily_p.add_argument("--title")
     daily_p.add_argument("--voice")
-    daily_p.add_argument("--rate", default="+10%")
+    daily_p.add_argument("--rate", default=None)
     daily_p.add_argument("--no-fit", action="store_true")
     daily_p.add_argument("--offline", action="store_true")
     daily_p.add_argument("--width", type=int, default=None)

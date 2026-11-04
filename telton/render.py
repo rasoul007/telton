@@ -36,6 +36,56 @@ class Layout:
         return max(minimum, round(self.u * factor))
 
 
+def bell_icon(draw: ImageDraw.ImageDraw, cx: int, cy: int, size: int, fill) -> None:
+    """A small bell, drawn with polygons so we never depend on an emoji font."""
+    body = size * 0.5
+    draw.polygon(
+        [
+            (cx - body, cy + size * 0.30),
+            (cx - body * 0.86, cy - size * 0.12),
+            (cx - body * 0.7, cy - size * 0.42),
+            (cx, cy - size * 0.58),
+            (cx + body * 0.7, cy - size * 0.42),
+            (cx + body * 0.86, cy - size * 0.12),
+            (cx + body, cy + size * 0.30),
+        ],
+        fill=fill,
+    )
+    draw.rectangle([cx - body * 1.12, cy + size * 0.30, cx + body * 1.12, cy + size * 0.44], fill=fill)
+    draw.ellipse([cx - size * 0.13, cy + size * 0.50, cx + size * 0.13, cy + size * 0.74], fill=fill)
+
+
+def plus_icon(draw: ImageDraw.ImageDraw, cx: int, cy: int, size: int, fill) -> None:
+    """A 'follow' plus sign."""
+    draw.rounded_rectangle(
+        [cx - size * 0.60, cy - size * 0.14, cx + size * 0.60, cy + size * 0.14],
+        radius=int(size * 0.07), fill=fill,
+    )
+    draw.rounded_rectangle(
+        [cx - size * 0.14, cy - size * 0.60, cx + size * 0.14, cy + size * 0.60],
+        radius=int(size * 0.07), fill=fill,
+    )
+
+
+def instagram_icon(draw: ImageDraw.ImageDraw, cx: int, cy: int, size: int, fill) -> None:
+    """Instagram-style rounded square + lens + flash dot (drawn, not an emoji)."""
+    half = size * 0.62
+    stroke = max(2, int(size * 0.13))
+    draw.rounded_rectangle(
+        [cx - half, cy - half, cx + half, cy + half],
+        radius=int(size * 0.34), outline=fill, width=stroke,
+    )
+    lens = size * 0.34
+    draw.ellipse(
+        [cx - lens, cy - lens, cx + lens, cy + lens], outline=fill, width=stroke
+    )
+    dot = size * 0.10
+    draw.ellipse(
+        [cx + half - stroke - dot * 2, cy - half + stroke, cx + half - stroke, cy - half + stroke + dot * 2],
+        fill=fill,
+    )
+
+
 class Broll:
     """Decodes a licensed clip (or any video file) to raw RGB frames of the canvas size."""
 
@@ -111,6 +161,36 @@ class FramePainter:
         self._stills: dict[str, Image.Image] = {}
         self._ticker: Image.Image = self._ticker_strip()
         self._scrim = self._scrim_layer()
+        self._cta: Image.Image = self._cta_layer()
+
+    # --------------------------------------------------------------- cta
+    @property
+    def horizontal(self) -> bool:
+        return self.w >= self.h
+
+    def _cta_label(self) -> str:
+        return "SUBSCRIBE" if self.horizontal else "FOLLOW"
+
+    def _cta_layer(self, scale: float = 1.0) -> Image.Image:
+        """A pill with a bell (YouTube) or plus (Instagram) + one word."""
+        unit = self.L.size(0.032 * scale)
+        font = self.r.font("black", unit)
+        probe = ImageDraw.Draw(Image.new("RGBA", (4, 4)))
+        label = self._cta_label()
+        text_w = int(text_width(probe, label, font))
+        pad = int(unit * 0.85)
+        height = int(unit * 2.1)
+        width = text_w + int(unit * 2.5) + 2 * pad
+        layer = Image.new("RGBA", (width, height), (0, 0, 0, 0))
+        draw = ImageDraw.Draw(layer)
+        draw.rounded_rectangle([0, 0, width - 1, height - 1], radius=height // 2, fill=(225, 6, 0, 242))
+        icon_cx = width - pad - int(unit * 0.55)
+        if self.horizontal:
+            bell_icon(draw, icon_cx, height // 2, int(unit * 0.85), (255, 255, 255, 255))
+        else:
+            instagram_icon(draw, icon_cx, height // 2, int(unit * 0.60), (255, 255, 255, 255))
+        draw_text(draw, (pad, height // 2 - int(unit * 0.66)), label, font, (255, 255, 255, 255))
+        return layer
 
     # ------------------------------------------------------------- helpers
     def _scrim_layer(self) -> Image.Image:
@@ -274,12 +354,21 @@ class FramePainter:
                 )
         else:  # outro
             self.r.text_block(
-                draw, segment.title, (self.w // 2, round(self.h * 0.40)), weight="black",
+                draw, segment.title, (self.w // 2, round(self.h * 0.34)), weight="black",
                 size=L.size(0.102), max_width=self.w - 2 * m, align="center", fill=(255, 255, 255, 255),
             )
+            # big call-to-action: bell for YouTube, plus for Instagram
+            cta = self._cta_layer(scale=2.0)
+            layer.alpha_composite(cta, ((self.w - cta.width) // 2, int(self.h * 0.50)))
+            ask = (
+                "سابسکرایب کن و زنگوله را بزن"
+                if self.horizontal
+                else "فالو کن تا خبر بعدی را از دست ندهی"
+            )
             self.r.text_block(
-                draw, "نظرت را کامنت کن · فالو کن", (self.w // 2, round(self.h * 0.56)), weight="bold",
-                size=L.size(0.048), max_width=self.w - 2 * m, align="center", fill=(255, 212, 0, 255),
+                draw, ask, (self.w // 2, int(self.h * 0.50) + cta.height + int(self.h * 0.03)),
+                weight="bold", size=L.size(0.045), max_width=self.w - 2 * m, align="center",
+                fill=(255, 212, 0, 255),
             )
         self._overlays[segment.id] = layer
         return layer
@@ -352,13 +441,26 @@ class FramePainter:
             strip = self.subtitle_strip(cue)
             image.paste(strip, (0, self.L.sub_y), strip)
 
+        # mid-roll subscribe/follow reminder
+        start, end = self.rundown.end * 0.52, self.rundown.end * 0.60
+        if start <= t <= end and self.rundown.end > 60:
+            fade = min(1.0, (t - start) / 0.6, (end - t) / 0.6)
+            cta = self._cta
+            if fade < 0.99:
+                cta = cta.copy()
+                cta.putalpha(cta.getchannel("A").point(lambda a: int(a * max(0.0, fade))))
+            x = self.L.margin
+            y = self.L.pill_y + self.L.pill_h + int(self.h * 0.01)
+            image.paste(cta, (x, y), cta)
+
         if bool(self.style.get("ticker.enabled", True)):
             speed = float(self.style.get("ticker.speed_px_per_second", 170))
-            offset = int(t * speed) % self._ticker.width
+            width = self._ticker.width
+            # the news bar moves LEFT -> RIGHT (requested by the channel)
+            x0 = -width + (int(t * speed) % width)
             band = Image.new("RGB", (self.w, self._ticker.height), self.r.panel)
-            band.paste(self._ticker.crop((offset, 0, self._ticker.width, self._ticker.height)), (0, 0))
-            if offset > 0:
-                band.paste(self._ticker.crop((0, 0, offset, self._ticker.height)), (self._ticker.width - offset, 0))
+            band.paste(self._ticker, (x0, 0))
+            band.paste(self._ticker, (x0 + width, 0))
             draw = ImageDraw.Draw(band)
             draw.rectangle([0, 0, self.w, max(4, self.L.size(0.006))], fill=self.r.accent)
             image.paste(band, (0, self.L.ticker_y))
