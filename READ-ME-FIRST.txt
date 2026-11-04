@@ -37,6 +37,10 @@
   3) Upload to YouTube           → آپلود به یوتیوب
   4) Connect to YouTube          → اتصال به یوتیوب (اولین بار)
   5) Show files and status       → دیدن فایل‌ها و وضعیت
+  6) Make a 50s Short / Reel     → ساخت شورت/ریلز ۵۰ ثانیه‌ای
+  7) Refresh                     → کلیپ‌های تازه + ساخت دوباره
+  8) Update                      → چه خبر تازه‌ای آمده (فهرست)
+  9) Make today's pack           → بستهٔ روز: ویدیوی بلند + ۲ شورت
   0) Exit                        → خروج
 
 فقط شماره را تایپ کن و Enter بزن. همین.

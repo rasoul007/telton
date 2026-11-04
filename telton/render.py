@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import re
 import subprocess
 import sys
 from pathlib import Path
@@ -162,6 +163,53 @@ class FramePainter:
         self._ticker: Image.Image = self._ticker_strip()
         self._scrim = self._scrim_layer()
         self._cta: Image.Image = self._cta_layer()
+        self._stats: dict[str, Image.Image | None] = {}
+
+    # ------------------------------------------------------------- motion
+    def _stat_card(self, segment: Segment) -> Image.Image | None:
+        """Big key number (e.g. «۲۳» امتیاز) that pops at the start of a story."""
+        story = segment.story
+        if not story:
+            return None
+        if segment.id in self._stats:
+            return self._stats[segment.id]
+        number = label = ""
+        for fact in story.facts:
+            match = re.search(r"[۰-۹0-9]+(?:[.,][۰-۹0-9]+)?", fact)
+            if match:
+                number = match.group(0)
+                piece = next((p for p in re.split(r"[·•|؛]", fact) if number in p), fact)
+                label = " ".join(piece.replace(number, "").strip(" :،-").split()[:3])
+                break
+        if not number:
+            self._stats[segment.id] = None
+            return None
+        unit = self.L.size(0.20)
+        font = self.r.font("black", unit)
+        small = self.r.font("bold", self.L.size(0.038))
+        probe = ImageDraw.Draw(Image.new("RGBA", (4, 4)))
+        num_w = text_width(probe, number, font)
+        label_w = text_width(probe, label, small) if label else 0
+        width = int(max(num_w, label_w) + unit * 0.8)
+        height = int(unit * 1.65 + (self.L.size(0.045) if label else 0))
+        card = Image.new("RGBA", (width, height), (0, 0, 0, 0))
+        draw = ImageDraw.Draw(card)
+        draw.rounded_rectangle([0, 0, width - 1, height - 1], radius=int(unit * 0.18),
+                               fill=(10, 14, 20, 225), outline=(255, 212, 0, 255), width=max(3, int(unit * 0.02)))
+        draw_text(draw, ((width - num_w) / 2, unit * 0.05), number, font, (255, 212, 0, 255))
+        if label:
+            draw_text(draw, ((width - label_w) / 2, unit * 1.16), label, small, (255, 255, 255, 240))
+        self._stats[segment.id] = card
+        return card
+
+    def _blend(self, image: Image.Image, layer: Image.Image, alpha: float) -> Image.Image:
+        if alpha >= 0.99:
+            image.paste(layer, (0, 0), layer)
+            return image
+        faded = layer.copy()
+        faded.putalpha(layer.getchannel("A").point(lambda a: int(a * max(0.0, alpha))))
+        image.paste(faded, (0, 0), faded)
+        return image
 
     # --------------------------------------------------------------- cta
     @property
@@ -435,6 +483,39 @@ class FramePainter:
             image = plate.crop((0, offset, self.w, offset + self.h))
 
         image.paste(self.overlay(segment), (0, 0), self.overlay(segment))
+
+        # --- motion: the card slides in, the key number pops, the story bar fills
+        local = t - segment.start
+        if segment.kind in {"story", "intro", "outro"} and local < 0.5:
+            dx = int(self.L.margin * 0.9 * (1 - local / 0.5))
+            shift = Image.new("RGBA", (self.w, self.h), (0, 0, 0, 0))
+            shift.alpha_composite(self.overlay(segment), (dx, 0))
+            self._blend(image, shift, min(1.0, 0.35 + local * 2))
+        if segment.kind == "story":
+            progress = max(0.0, min(1.0, local / max(0.1, segment.duration)))
+            bar_y = self.L.headline_y - int(self.L.size(0.022))
+            bar_len = int((self.w - 2 * self.L.margin) * progress)
+            draw = ImageDraw.Draw(image)
+            draw.rounded_rectangle(
+                [self.w - self.L.margin - bar_len, bar_y, self.w - self.L.margin, bar_y + max(5, self.L.size(0.008))],
+                radius=4, fill=self.r.accent,
+            )
+        card = self._stat_card(segment)
+        if card is not None and 0.06 <= local <= 0.95:
+            fade_in = min(1.0, (local - 0.06) / 0.18)
+            fade_out = 1.0 if local < 0.7 else max(0.0, 1 - (local - 0.7) / 0.25)
+            scale = 1.0 + 0.12 * max(0.0, 1 - local / 0.35)
+            shown = card
+            if scale > 1.001:
+                size = (int(card.width * scale), int(card.height * scale))
+                shown = card.resize(size)
+            x = self.L.margin
+            y = int(self.h * 0.315) - shown.height // 2
+            alpha = min(fade_in, fade_out)
+            if alpha > 0.01:
+                faded = shown.copy()
+                faded.putalpha(shown.getchannel("A").point(lambda a: int(a * alpha)))
+                image.paste(faded, (x, y), faded)
 
         cue = self.cue_at(t)
         if cue is not None:

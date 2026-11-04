@@ -2,7 +2,7 @@
   "slug": "2026-11-02-sports-longform",
   "title": "خبرهای مهم ورزش — ۱۱ آبان ۱۴۰۵",
   "target_duration": 300.0,
-  "duration": 300.0,
+  "duration": 300.33,
   "segments": [
     {
       "id": "intro",
@@ -11,15 +11,15 @@
       "bucket": "world",
       "story": null,
       "start": 0.0,
-      "end": 6.0,
+      "end": 11.56,
       "cues": [
         {
           "index": 1,
           "text": "سلام! پنج دقیقه خبر ورزش؛ از قهرمانی کشتی فرنگی ایران در جهان، تا فتح آنفیلد، و جوان‌ترین قهرمان تاریخ فرمول یک. تا آخر ببین!",
           "kind": "title",
-          "start": 0.5,
-          "end": 5.2,
-          "audio": null
+          "start": 0.1,
+          "end": 10.66,
+          "audio": "build/voice/cue-001.mp3"
         }
       ]
     },
@@ -29,8 +29,8 @@
       "kind": "title",
       "bucket": "iran_football",
       "story": null,
-      "start": 6.0,
-      "end": 8.4,
+      "start": 11.56,
+      "end": 13.96,
       "cues": []
     },
     {
@@ -62,32 +62,32 @@
           "لیگ برتر"
         ]
       },
-      "start": 8.4,
-      "end": 23.988,
+      "start": 13.96,
+      "end": 29.31,
       "cues": [
         {
           "index": 2,
           "text": "اول، ایران، فوتبال: پرسپولیس در هفته یازدهم لیگ برتر، در خانه نساجی یک بر صفر برد و با ۲۳ امتیاز به صدر",
           "kind": "narration",
-          "start": 8.55,
-          "end": 16.136,
-          "audio": null
+          "start": 14.06,
+          "end": 22.7,
+          "audio": "build/voice/cue-002.mp3"
         },
         {
           "index": 3,
           "text": "جدول برگشت.",
           "kind": "narration",
-          "start": 16.136,
-          "end": 17.536,
-          "audio": null
+          "start": 22.78,
+          "end": 24.68,
+          "audio": "build/voice/cue-003.mp3"
         },
         {
           "index": 4,
           "text": "نساجی ۰ – ۱ پرسپولیس؛ تفاضل بهتر از سپاهان.",
           "kind": "narration",
-          "start": 17.536,
-          "end": 20.64,
-          "audio": null
+          "start": 24.76,
+          "end": 28.91,
+          "audio": "build/voice/cue-004.mp3"
         }
       ]
     },
@@ -120,32 +120,32 @@
           "جدول"
         ]
       },
-      "start": 23.988,
-      "end": 38.886,
+      "start": 29.31,
+      "end": 45.33,
       "cues": [
         {
           "index": 5,
           "text": "ایران، فوتبال: سپاهان هم ۲۳ امتیاز دارد و فولاد با ۲۲ امتیاز سوم است؛ تراکتور و استقلال هر دو ۲۰ امتیاز دارند",
           "kind": "narration",
-          "start": 24.138,
-          "end": 31.724,
-          "audio": null
+          "start": 29.41,
+          "end": 38.63,
+          "audio": "build/voice/cue-005.mp3"
         },
         {
           "index": 6,
           "text": "و بازی معوق هم در دست دارند.",
           "kind": "narration",
-          "start": 31.724,
-          "end": 34.138,
-          "audio": null
+          "start": 38.71,
+          "end": 41.61,
+          "audio": "build/voice/cue-006.mp3"
         },
         {
           "index": 7,
           "text": "سپاهان ۲۳؛ فولاد ۲۲.",
           "kind": "narration",
-          "start": 34.138,
-          "end": 35.538,
-          "audio": null
+          "start": 41.69,
+          "end": 44.93,
+          "audio": "build/voice/cue-007.mp3"
         }
       ]
     },
@@ -178,32 +178,32 @@
           "برنامه"
         ]
       },
-      "start": 38.886,
-      "end": 53.784,
+      "start": 45.33,
+      "end": 61.48,
       "cues": [
         {
           "index": 8,
           "text": "ایران، فوتبال: لیگ برتر از پنجشنبه با هفته دوازدهم ادامه پیدا می‌کند؛ پرسپولیس جمعه میزبان فجر سپاسی است و استقلال شنبه مهمان",
           "kind": "narration",
-          "start": 39.036,
-          "end": 46.622,
-          "audio": null
+          "start": 45.43,
+          "end": 54.89,
+          "audio": "build/voice/cue-008.mp3"
         },
         {
           "index": 9,
           "text": "استقلال خوزستان خواهد بود.",
           "kind": "narration",
-          "start": 46.622,
-          "end": 48.022,
-          "audio": null
+          "start": 54.97,
+          "end": 57.47,
+          "audio": "build/voice/cue-009.mp3"
         },
         {
           "index": 10,
           "text": "پرسپولیس – فجر سپاسی؛ از ۱۵ آبان.",
           "kind": "narration",
-          "start": 48.022,
-          "end": 50.436,
-          "audio": null
+          "start": 57.55,
+          "end": 61.08,
+          "audio": "build/voice/cue-010.mp3"
         }
       ]
     },
@@ -213,8 +213,8 @@
       "kind": "title",
       "bucket": "iran_other",
       "story": null,
-      "start": 53.784,
-      "end": 56.184,
+      "start": 61.48,
+      "end": 63.88,
       "cues": []
     },
     {
@@ -251,32 +251,32 @@
           "جهانی"
         ]
       },
-      "start": 56.184,
-      "end": 75.889,
+      "start": 63.88,
+      "end": 82.88,
       "cues": [
         {
           "index": 11,
           "text": "ایران، ورزش: تیم ملی کشتی فرنگی ایران در مسابقات جهانی آستانه، با عنوان قهرمانی تیمی به کار خود پایان داد و در",
           "kind": "narration",
-          "start": 56.334,
-          "end": 63.92,
-          "audio": null
+          "start": 63.98,
+          "end": 72.48,
+          "audio": "build/voice/cue-011.mp3"
         },
         {
           "index": 12,
           "text": "جدول کلی مدال‌ها هم با ۶ طلا، ۴ نقره و ۵ برنز دوم ایستاد.",
           "kind": "narration",
-          "start": 63.92,
-          "end": 68.748,
-          "audio": null
+          "start": 72.56,
+          "end": 78.37,
+          "audio": "build/voice/cue-012.mp3"
         },
         {
           "index": 13,
           "text": "قهرمان تیمی فرنگی؛ ۶ طلا · ۴ نقره · ۵ برنز.",
           "kind": "narration",
-          "start": 68.748,
-          "end": 72.541,
-          "audio": null
+          "start": 78.45,
+          "end": 82.48,
+          "audio": "build/voice/cue-013.mp3"
         }
       ]
     },
@@ -308,32 +308,32 @@
           "کشتی"
         ]
       },
-      "start": 75.889,
-      "end": 92.146,
+      "start": 82.88,
+      "end": 98.81,
       "cues": [
         {
           "index": 14,
           "text": "ایران، ورزش: آمریکا با ۷ طلا در کشتی آزاد قهرمان تیم شد و در جدول کلی هم صدرنشین ماند؛ ایران با ۱۵",
           "kind": "narration",
-          "start": 76.039,
-          "end": 83.625,
-          "audio": null
+          "start": 82.98,
+          "end": 91.07,
+          "audio": "build/voice/cue-014.mp3"
         },
         {
           "index": 15,
           "text": "مدال دوم شد و روسیه با ۱۴ مدال سوم.",
           "kind": "narration",
-          "start": 83.625,
-          "end": 86.729,
-          "audio": null
+          "start": 91.15,
+          "end": 94.92,
+          "audio": "build/voice/cue-015.mp3"
         },
         {
           "index": 16,
           "text": "آمریکا: ۷ طلا؛ ایران: ۱۵ مدال.",
           "kind": "narration",
-          "start": 86.729,
-          "end": 88.798,
-          "audio": null
+          "start": 95.0,
+          "end": 98.41,
+          "audio": "build/voice/cue-016.mp3"
         }
       ]
     },
@@ -343,8 +343,8 @@
       "kind": "title",
       "bucket": "controversy",
       "story": null,
-      "start": 92.146,
-      "end": 94.546,
+      "start": 98.81,
+      "end": 101.21,
       "cues": []
     },
     {
@@ -376,32 +376,32 @@
           "حواشی"
         ]
       },
-      "start": 94.546,
-      "end": 112.527,
+      "start": 101.21,
+      "end": 119.32,
       "cues": [
         {
           "index": 17,
           "text": "و اما حواشی: بعد از پنالتی نگرفته‌ی لیورپول مقابل آرسنال، سرمربی لیورپول گفت از این به بعد به شاگردانش می‌گوید برای گرفتن",
           "kind": "narration",
-          "start": 94.696,
-          "end": 102.282,
-          "audio": null
+          "start": 101.31,
+          "end": 110.14,
+          "audio": "build/voice/cue-017.mp3"
         },
         {
           "index": 18,
           "text": "پنالتی روی زمین بیفتند؛ فان دایک هم گفت صحنه قطعاً پنالتی بود.",
           "kind": "narration",
-          "start": 102.282,
-          "end": 106.42,
-          "audio": null
+          "start": 110.22,
+          "end": 115.07,
+          "audio": "build/voice/cue-018.mp3"
         },
         {
           "index": 19,
           "text": "VAR پنالتی نگرفت؛ فان دایک: قطعاً پنالتی بود.",
           "kind": "narration",
-          "start": 106.42,
-          "end": 109.179,
-          "audio": null
+          "start": 115.15,
+          "end": 118.92,
+          "audio": "build/voice/cue-019.mp3"
         }
       ]
     },
@@ -437,32 +437,32 @@
           "حواشی"
         ]
       },
-      "start": 112.527,
-      "end": 126.735,
+      "start": 119.32,
+      "end": 134.31,
       "cues": [
         {
           "index": 20,
           "text": "و اما حواشی: کیلیان امباپه برای کامنتی درباره مائو عذرخواهی کرد؛ ماجرایی که در چین واکنش تند داشت و به قطع همکاری",
           "kind": "narration",
-          "start": 112.677,
-          "end": 120.263,
-          "audio": null
+          "start": 119.42,
+          "end": 127.8,
+          "audio": "build/voice/cue-020.mp3"
         },
         {
           "index": 21,
           "text": "بعضی اسپانسرها انجامید.",
           "kind": "narration",
-          "start": 120.263,
-          "end": 121.663,
-          "audio": null
+          "start": 127.88,
+          "end": 130.42,
+          "audio": "build/voice/cue-021.mp3"
         },
         {
           "index": 22,
           "text": "عذرخواهی رسمی؛ واکنش اسپانسرهای چینی.",
           "kind": "narration",
-          "start": 121.663,
-          "end": 123.387,
-          "audio": null
+          "start": 130.5,
+          "end": 133.91,
+          "audio": "build/voice/cue-022.mp3"
         }
       ]
     },
@@ -495,32 +495,32 @@
           "فرمول یک"
         ]
       },
-      "start": 126.735,
-      "end": 142.992,
+      "start": 134.31,
+      "end": 150.76,
       "cues": [
         {
           "index": 23,
           "text": "و اما حواشی: بعد از درگیری همیلتون و لکلر در دور اول گراندپری مکزیک، همیلتون گفت تیم باید گفت‌وگویی جدی داشته باشد؛",
           "kind": "narration",
-          "start": 126.885,
-          "end": 134.472,
-          "audio": null
+          "start": 134.41,
+          "end": 143.03,
+          "audio": "build/voice/cue-023.mp3"
         },
         {
           "index": 24,
           "text": "او مسابقه را دوم تمام کرد و لکلر چهارم شد.",
           "kind": "narration",
-          "start": 134.472,
-          "end": 137.92,
-          "audio": null
+          "start": 143.11,
+          "end": 147.14,
+          "audio": "build/voice/cue-024.mp3"
         },
         {
           "index": 25,
           "text": "همیلتون دوم؛ درخواست گفت‌وگوی جدی.",
           "kind": "narration",
-          "start": 137.92,
-          "end": 139.644,
-          "audio": null
+          "start": 147.22,
+          "end": 150.36,
+          "audio": "build/voice/cue-025.mp3"
         }
       ]
     },
@@ -530,8 +530,8 @@
       "kind": "title",
       "bucket": "europe_football",
       "story": null,
-      "start": 142.992,
-      "end": 145.392,
+      "start": 150.76,
+      "end": 153.16,
       "cues": []
     },
     {
@@ -568,32 +568,32 @@
           "لیگ برتر"
         ]
       },
-      "start": 145.392,
-      "end": 163.373,
+      "start": 153.16,
+      "end": 171.58,
       "cues": [
         {
           "index": 26,
           "text": "اروپا: گل کای هایورتز در دقیقه ۱۶ کافی بود تا آرسنال یک بر صفر لیورپول را در آنفیلد ببرد؛ اولین برد آرسنال",
           "kind": "narration",
-          "start": 145.542,
-          "end": 153.128,
-          "audio": null
+          "start": 153.26,
+          "end": 161.35,
+          "audio": "build/voice/cue-026.mp3"
         },
         {
           "index": 27,
           "text": "در این ورزشگاه از سال ۲۰۱۲ و صدرنشینی با سه امتیاز اختلاف.",
           "kind": "narration",
-          "start": 153.128,
-          "end": 157.266,
-          "audio": null
+          "start": 161.43,
+          "end": 167.07,
+          "audio": "build/voice/cue-027.mp3"
         },
         {
           "index": 28,
           "text": "لیورپول ۰ – ۱ آرسنال؛ هاورتز دقیقه ۱۶.",
           "kind": "narration",
-          "start": 157.266,
-          "end": 160.025,
-          "audio": null
+          "start": 167.15,
+          "end": 171.18,
+          "audio": "build/voice/cue-028.mp3"
         }
       ]
     },
@@ -626,32 +626,32 @@
           "لاجیو"
         ]
       },
-      "start": 163.373,
-      "end": 179.285,
+      "start": 171.58,
+      "end": 188.18,
       "cues": [
         {
           "index": 29,
           "text": "اروپا: لاجیو با ۹ برد از ۱۰ بازی و ۲۸ امتیاز صدرنشین سری‌آ است؛ رم بدون باخت سوم است و یوونتوس و",
           "kind": "narration",
-          "start": 163.523,
-          "end": 171.109,
-          "audio": null
+          "start": 171.68,
+          "end": 180.25,
+          "audio": "build/voice/cue-029.mp3"
         },
         {
           "index": 30,
           "text": "ناپولی به ترتیب هفتم و هشتم‌اند.",
           "kind": "narration",
-          "start": 171.109,
-          "end": 173.178,
-          "audio": null
+          "start": 180.33,
+          "end": 183.19,
+          "audio": "build/voice/cue-030.mp3"
         },
         {
           "index": 31,
           "text": "لاجیو ۲۸ امتیاز؛ اینتر ۲۵ · رم ۲۴.",
           "kind": "narration",
-          "start": 173.178,
-          "end": 175.937,
-          "audio": null
+          "start": 183.27,
+          "end": 187.78,
+          "audio": "build/voice/cue-031.mp3"
         }
       ]
     },
@@ -683,32 +683,32 @@
           "بایرن"
         ]
       },
-      "start": 179.285,
-      "end": 196.232,
+      "start": 188.18,
+      "end": 204.31,
       "cues": [
         {
           "index": 32,
           "text": "اروپا: بایرن و دورتموند در کلاسیکر به تساوی دو دو رسیدند و لورکوزن در خانه دو بر چهار به اشتوتگارت باخت؛ لایپزیش",
           "kind": "narration",
-          "start": 179.435,
-          "end": 187.021,
-          "audio": null
+          "start": 188.28,
+          "end": 196.82,
+          "audio": "build/voice/cue-032.mp3"
         },
         {
           "index": 33,
           "text": "هم شالکه را دو بر صفر برد.",
           "kind": "narration",
-          "start": 187.021,
-          "end": 189.435,
-          "audio": null
+          "start": 196.9,
+          "end": 199.49,
+          "audio": "build/voice/cue-033.mp3"
         },
         {
           "index": 34,
           "text": "بایرن ۲ – ۲ دورتموند؛ لورکوزن ۲ – ۴ اشتوتگارت.",
           "kind": "narration",
-          "start": 189.435,
-          "end": 192.883,
-          "audio": null
+          "start": 199.57,
+          "end": 203.91,
+          "audio": "build/voice/cue-034.mp3"
         }
       ]
     },
@@ -740,24 +740,24 @@
           "کین"
         ]
       },
-      "start": 196.232,
-      "end": 209.73,
+      "start": 204.31,
+      "end": 218.88,
       "cues": [
         {
           "index": 35,
           "text": "اروپا: هری کین برنده‌ی توپ طلای ۲۰۲۶ شد و در رأی‌گیری فقط ۲۸ امتیاز بیشتر از کیلیان امباپه به دست آورد.",
           "kind": "narration",
-          "start": 196.382,
-          "end": 203.623,
-          "audio": null
+          "start": 204.41,
+          "end": 213.53,
+          "audio": "build/voice/cue-035.mp3"
         },
         {
           "index": 36,
           "text": "کین برنده توپ طلا؛ +۲۸ امتیاز از امباپه.",
           "kind": "narration",
-          "start": 203.623,
-          "end": 206.382,
-          "audio": null
+          "start": 213.61,
+          "end": 217.98,
+          "audio": "build/voice/cue-036.mp3"
         }
       ]
     },
@@ -789,32 +789,32 @@
           "بلینگام"
         ]
       },
-      "start": 209.73,
-      "end": 227.021,
+      "start": 218.88,
+      "end": 235.34,
       "cues": [
         {
           "index": 37,
           "text": "اروپا: جود بلینگام پنجاهمین گلش با پیراهن رئال مادرید را زد و امباپه هم گل زد تا رئال یک برد قاطع بگیرد؛",
           "kind": "narration",
-          "start": 209.88,
-          "end": 217.466,
-          "audio": null
+          "start": 218.98,
+          "end": 227.0,
+          "audio": "build/voice/cue-037.mp3"
         },
         {
           "index": 38,
           "text": "بارسلونا هم با درخشش یامال شش گل به آلاوس زد.",
           "kind": "narration",
-          "start": 217.466,
-          "end": 220.914,
-          "audio": null
+          "start": 227.08,
+          "end": 230.97,
+          "audio": "build/voice/cue-038.mp3"
         },
         {
           "index": 39,
           "text": "بلینگام ۵۰ گل؛ بارسا ۶ – ۰ آلاوس.",
           "kind": "narration",
-          "start": 220.914,
-          "end": 223.673,
-          "audio": null
+          "start": 231.05,
+          "end": 234.94,
+          "audio": "build/voice/cue-039.mp3"
         }
       ]
     },
@@ -846,24 +846,24 @@
           "لیگ برتر"
         ]
       },
-      "start": 227.021,
-      "end": 239.505,
+      "start": 235.34,
+      "end": 247.94,
       "cues": [
         {
           "index": 40,
           "text": "اروپا: منچستریونایتد با ۷ امتیاز از ۹ بازی در جدول لیگ برتر وضعیت خطرناکی دارد و کارشناسان درباره‌ی خطر سقوط حرف می‌زنند.",
           "kind": "narration",
-          "start": 227.171,
-          "end": 234.757,
-          "audio": null
+          "start": 235.44,
+          "end": 245.23,
+          "audio": "build/voice/cue-040.mp3"
         },
         {
           "index": 41,
           "text": "بحث سقوط.",
           "kind": "narration",
-          "start": 234.757,
-          "end": 236.157,
-          "audio": null
+          "start": 245.31,
+          "end": 247.04,
+          "audio": "build/voice/cue-041.mp3"
         }
       ]
     },
@@ -873,8 +873,8 @@
       "kind": "title",
       "bucket": "world",
       "story": null,
-      "start": 239.505,
-      "end": 241.905,
+      "start": 247.94,
+      "end": 250.34,
       "cues": []
     },
     {
@@ -906,40 +906,40 @@
           "آنتونلی"
         ]
       },
-      "start": 241.905,
-      "end": 259.217,
+      "start": 250.34,
+      "end": 271.71,
       "cues": [
         {
           "index": 42,
           "text": "جهان ورزش: کیمی آنتونلی در ۲۰ سال و ۶۸ روز با سوم‌شدن در گراندپری مکزیکوسیتی قهرمان جهان شد؛ جوان‌ترین قهرمان تاریخ فرمول",
           "kind": "narration",
-          "start": 242.055,
-          "end": 249.642,
-          "audio": null
+          "start": 250.44,
+          "end": 260.66,
+          "audio": "build/voice/cue-042.mp3"
         },
         {
           "index": 43,
           "text": "یک و اولین ایتالیایی از سال ۱۹۵۳.",
           "kind": "narration",
-          "start": 249.642,
-          "end": 252.055,
-          "audio": null
+          "start": 260.74,
+          "end": 265.32,
+          "audio": "build/voice/cue-043.mp3"
         },
         {
           "index": 44,
           "text": "فرشتپن برنده مسابقه شد و همیلتون دوم.",
           "kind": "narration",
-          "start": 252.055,
-          "end": 254.469,
-          "audio": null
+          "start": 265.4,
+          "end": 269.0,
+          "audio": "build/voice/cue-044.mp3"
         },
         {
           "index": 45,
           "text": "رکورد فتل شکست.",
           "kind": "narration",
-          "start": 254.469,
-          "end": 255.869,
-          "audio": null
+          "start": 269.08,
+          "end": 271.31,
+          "audio": "build/voice/cue-045.mp3"
         }
       ]
     },
@@ -949,8 +949,8 @@
       "kind": "title",
       "bucket": "whats_next",
       "story": null,
-      "start": 259.217,
-      "end": 261.617,
+      "start": 271.71,
+      "end": 274.11,
       "cues": []
     },
     {
@@ -981,89 +981,32 @@
           "لیگ قهرمانان"
         ]
       },
-      "start": 261.617,
-      "end": 276.171,
+      "start": 274.11,
+      "end": 289.51,
       "cues": [
         {
           "index": 46,
           "text": "و در ادامه: لیگ قهرمانان سه‌شنبه و چهارشنبه ادامه پیدا می‌کند؛ آرسنال مهمان اسلاویا پراگ است و بایرن به مادرید می‌رود تا",
           "kind": "narration",
-          "start": 261.767,
-          "end": 269.354,
-          "audio": null
+          "start": 274.21,
+          "end": 283.02,
+          "audio": "build/voice/cue-046.mp3"
         },
         {
           "index": 47,
           "text": "با اتلتیکو بازی کند.",
           "kind": "narration",
-          "start": 269.354,
-          "end": 270.754,
-          "audio": null
+          "start": 283.1,
+          "end": 285.36,
+          "audio": "build/voice/cue-047.mp3"
         },
         {
           "index": 48,
           "text": "اسلاویا – آرسنال؛ اتلتیکو – بایرن.",
           "kind": "narration",
-          "start": 270.754,
-          "end": 272.823,
-          "audio": null
-        }
-      ]
-    },
-    {
-      "id": "f1-brazil",
-      "title": "فرمول یک در برزیل، ۶ تا ۸ نوامبر",
-      "kind": "story",
-      "bucket": "whats_next",
-      "story": {
-        "id": "f1-brazil",
-        "bucket": "whats_next",
-        "headline": "فرمول یک در برزیل، ۶ تا ۸ نوامبر",
-        "summary": "بعد از جشن قهرمانی در مکزیک، فرمول یک این هفته در اینترلاگوس برزیل ادامه پیدا می‌کند و آنتونلی با عنوان قهرمان به این مسابقه می‌رود.",
-        "facts": [
-          "اینترلاگوس، برزیل",
-          "۶ تا ۸ نوامبر"
-        ],
-        "sources": [
-          {
-            "name": "BBC Sport — next race: Sao Paulo GP",
-            "url": "https://www.bbc.com/sport/formula1/articles/cv62y1e6wly6o"
-          }
-        ],
-        "broll": null,
-        "priority": 6,
-        "verified": true,
-        "tags": [
-          "فرمول یک",
-          "برزیل"
-        ]
-      },
-      "start": 276.171,
-      "end": 290.724,
-      "cues": [
-        {
-          "index": 49,
-          "text": "و در ادامه: بعد از جشن قهرمانی در مکزیک، فرمول یک این هفته در اینترلاگوس برزیل ادامه پیدا می‌کند و آنتونلی با",
-          "kind": "narration",
-          "start": 276.321,
-          "end": 283.907,
-          "audio": null
-        },
-        {
-          "index": 50,
-          "text": "عنوان قهرمان به این مسابقه می‌رود.",
-          "kind": "narration",
-          "start": 283.907,
-          "end": 285.976,
-          "audio": null
-        },
-        {
-          "index": 51,
-          "text": "۶ تا ۸ نوامبر.",
-          "kind": "narration",
-          "start": 285.976,
-          "end": 287.376,
-          "audio": null
+          "start": 285.44,
+          "end": 288.61,
+          "audio": "build/voice/cue-048.mp3"
         }
       ]
     },
@@ -1073,16 +1016,16 @@
       "kind": "outro",
       "bucket": "world",
       "story": null,
-      "start": 290.724,
-      "end": 300.0,
+      "start": 289.51,
+      "end": 300.33,
       "cues": [
         {
-          "index": 52,
+          "index": 49,
           "text": "کدوم خبر مهم‌تر بود؟ کامنت کن. و برای اینکه خبرهای بعدی رو از دست ندی، سابسکرایب کن و زنگوله رو بزن. کانال tooop news.",
           "kind": "title",
-          "start": 290.924,
-          "end": 299.2,
-          "audio": null
+          "start": 289.61,
+          "end": 299.43,
+          "audio": "build/voice/cue-052.mp3"
         }
       ]
     }

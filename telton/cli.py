@@ -161,6 +161,18 @@ def cmd_short(args: argparse.Namespace) -> int:
     return 0
 
 
+def cmd_pack(args: argparse.Namespace) -> int:
+    from .pack import make_pack
+
+    project = _project(args)
+    print("ساخت بستهٔ روزانه (بلند + دو شورت)…")
+    plan = make_pack(project, target=args.duration, fast=args.fast)
+    print("\nبرنامهٔ انتشار:")
+    for item in plan:
+        print(f"  ⏰ {item['slot']}  {item['type']:<12} {item['file']}")
+    return 0
+
+
 def cmd_review(args: argparse.Namespace) -> int:
     from .models import Rundown
     from .review import approval_status, build_review, unverified_stories
@@ -411,6 +423,10 @@ def main(argv: list[str] | None = None) -> int:
     short_p.add_argument("--count", type=int, default=3, help="چند خبر در شورت")
     short_p.add_argument("--voice")
     short_p.add_argument("--offline", action="store_true")
+
+    pack_p = add("pack", "one-click daily pack: long video + 2 shorts", cmd_pack)
+    pack_p.add_argument("--duration", "-d", type=float, default=300.0)
+    pack_p.add_argument("--fast", action="store_true", help="فقط شورت‌ها را بساز")
 
     add("sync", "refresh headlines/b-roll in the existing rundown (no re-recording)", cmd_sync)
 

@@ -297,6 +297,7 @@ def main() -> int:
         print("  6) Make a 50s Short / Reel")
         print("  7) Refresh (new clips + rebuild now)")
         print("  8) Update (what is new right now)")
+        print("  9) Make today's pack (long + 2 shorts)")
         print("  0) Exit")
         print()
         choice = ask("Type a number: ")
@@ -308,7 +309,7 @@ def main() -> int:
             youtube_connect()
         elif choice == "5":
             show_status()
-        elif choice in {"1", "2", "3", "6", "7", "8"}:
+        elif choice in {"1", "2", "3", "6", "7", "8", "9"}:
             slug = choose_project() or slug
             if not slug:
                 input("\nPress Enter...")
@@ -323,8 +324,11 @@ def main() -> int:
                 build_short(slug)
             elif choice == "7":
                 refresh_episode(slug)
-            else:
+            elif choice == "8":
                 update_news(slug)
+            else:
+                print("\n== Building today's pack: long video + 2 shorts (10-14 min)")
+                run_telton(["pack", "-p", slug, "-d", "300"])
         else:
             print("Please type one of the numbers above.")
         print()
