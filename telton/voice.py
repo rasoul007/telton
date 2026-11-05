@@ -206,7 +206,13 @@ def speak(
     wps = float(style.get("narration.words_per_second", 2.9))
     tail = float(style.get("narration.tail_seconds", 0.9))
     engine = str(style.get("narration.engine", "edge"))
-    candidates = [voice] if voice else list(FALLBACK_VOICES)
+    configured = str(style.get("narration.voice", "") or "")
+    if voice:
+        candidates = [voice]
+    elif configured:
+        candidates = [configured] + [v for v in FALLBACK_VOICES if v != configured]
+    else:
+        candidates = list(FALLBACK_VOICES)
 
     base_rate = rate or str(style.get("narration.rate", "+9%"))
     base_pitch = str(style.get("narration.pitch", "+3Hz"))
@@ -368,10 +374,16 @@ def voice_stage(
 
     rundown = Rundown.from_dict(read_json(rundown_data))
     rundown = speak(project, rundown, voice=voice, offline=offline, rate=rate)
+    measured = rundown.end
     if target:
         if fit:
             rundown = drop_to_fit(rundown, target)
         rundown = refit(rundown, target)
+        if abs(measured - rundown.end) > 1.0:
+            print(
+                f"  fit: {measured:.0f}s → {rundown.end:.0f}s "
+                f"({len([s for s in rundown.segments if s.kind == 'story'])} خبرها)"
+            )
     write_json(project.build / "rundown.json", rundown.to_dict())
     write_srt(rundown, project.build / "subtitles.srt")
     write_script(rundown, project.build / "script.md")

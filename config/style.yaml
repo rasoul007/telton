@@ -30,7 +30,8 @@ narration:
   title_card_seconds: 2.4
   max_words_per_cue: 22
   # صدای گوینده — زنده‌تر و با زیر و بم
-  engine: edge           # edge | google | openai | elevenlabs
+  engine: edge           # edge | piper | openai | elevenlabs
+  voice: "fa-IR-FaridNeural"
   rate: "+5%"
   pitch: "+2Hz"
   volume: "+0%"
