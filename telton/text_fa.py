@@ -169,6 +169,66 @@ def speechify(text: str) -> str:
     return out
 
 
+# Latin tokens and abbreviations that Persian TTS reads badly -> Persian spelling
+LATIN_SAY = {
+    "F1": "اف یک",
+    "VAR": "وی ای آر",
+    "UCL": "یو سی ال",
+    "NBA": "ان بی ای",
+    "NFL": "ان اف ال",
+    "FIFA": "فیفا",
+    "AFC": "ای اف سی",
+    "GP": "گراند پری",
+    "FC": "اف سی",
+    "TV": "تی وی",
+    "AI": "هوش مصنوعی",
+}
+
+# extra respellings for words the TTS still gets wrong (key = what we write,
+# value = what the engine should literally read)
+SAY_AS = {
+    "پرسپولیس": "پِرسِپُلیس",
+    "استقلال": "اِستِقلال",
+    "سپاهان": "سِپاهان",
+    "نساجی": "نِساجی",
+    "تراکتور": "تِراكتور",
+    "لیورپول": "لیوِرپول",
+    "آرسنال": "آرسِنال",
+    "آنفیلد": "آنفیلد",
+    "امباپه": "اُمباپِه",
+    "بلینگام": "بِلینگام",
+    "هایورتز": "هایوِرْتز",
+    "ایرائولا": "ایرائولا",
+    "کیمی": "کیمی",
+    "آنتونلی": "آنتونِلّی",
+    "فرشتپن": "فِرستَپِن",
+    "همیلتون": "هَمیلتون",
+    "لکلر": "لُکلِر",
+    "لاجیو": "لاجّیو",
+    "یوونتوس": "یووِنتوس",
+    "اینترلاگوس": "اینتِرلاگوس",
+    "قائمشهر": "قائِم‌شَهر",
+    "فرنگی": "فَرَنگی",
+}
+
+
+def latin_to_persian(text: str) -> str:
+    """Replace Latin abbreviations with how a Persian anchor would say them."""
+    out = text
+    for latin, persian in LATIN_SAY.items():
+        out = re.sub(rf"(?<![A-Za-z]){re.escape(latin)}(?![A-Za-z])", persian, out)
+    return out
+
+
+def apply_say_as(text: str) -> str:
+    """Force the engine to read tricky words the way we want."""
+    out = text
+    for written in sorted(SAY_AS, key=len, reverse=True):
+        spoken = SAY_AS[written]
+        out = re.sub(rf"(?<![\u0600-\u06FF]){re.escape(written)}(?![\u0600-\u06FF])", spoken, out)
+    return out
+
+
 def pause_after_commas(text: str) -> str:
     """Ensure breathing pauses exist so the voice is not flat."""
     out = re.sub(r"،\s*", "، ", text)
@@ -177,4 +237,4 @@ def pause_after_commas(text: str) -> str:
 
 def spoken(text: str) -> str:
     """Full pipeline for TTS input (subtitles keep the original text)."""
-    return pause_after_commas(vocalize(speechify(text)))
+    return pause_after_commas(apply_say_as(vocalize(speechify(latin_to_persian(text)))))

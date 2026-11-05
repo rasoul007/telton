@@ -24,10 +24,162 @@ def _edge(text: str, out: Path, voice: str, rate: str = "+0%", pitch: str = "+0H
     asyncio.run(go())
 
 
-def _gtts(text: str, out: Path) -> None:
+def _google(text: str, out: Path, voice: str | None = None, **_: object) -> None:
     from gtts import gTTS
 
     gTTS(text=text, lang="fa").save(str(out))
+
+
+def _openai(text: str, out: Path, voice: str | None = None, **_: object) -> None:
+    """OpenAI TTS (needs OPENAI_API_KEY). Best quality if you have a key."""
+    import json as _json
+    import os
+    import urllib.request
+
+    key = os.environ.get("OPENAI_API_KEY", "").strip()
+    if not key:
+        raise RuntimeError("OPENAI_API_KEY تنظیم نشده است")
+    payload = _json.dumps({
+        "model": os.environ.get("TELTON_OPENAI_TTS_MODEL", "gpt-4o-mini-tts"),
+        "voice": voice or os.environ.get("TELTON_OPENAI_VOICE", "alloy"),
+        "input": text,
+        "response_format": "mp3",
+    }).encode()
+    request = urllib.request.Request(
+        "https://api.openai.com/v1/audio/speech",
+        data=payload,
+        headers={"Authorization": f"Bearer {key}", "Content-Type": "application/json"},
+    )
+    with urllib.request.urlopen(request, timeout=120) as response:
+        out.write_bytes(response.read())
+
+
+def _elevenlabs(text: str, out: Path, voice: str | None = None, **_: object) -> None:
+    """ElevenLabs TTS (needs ELEVENLABS_API_KEY). Very natural Persian voices."""
+    import json as _json
+    import os
+    import urllib.request
+
+    key = os.environ.get("ELEVENLABS_API_KEY", "").strip()
+    voice_id = voice or os.environ.get("TELTON_ELEVEN_VOICE", "")
+    if not key or not voice_id:
+        raise RuntimeError("ELEVENLABS_API_KEY / TELTON_ELEVEN_VOICE تنظیم نشده است")
+    payload = _json.dumps({
+        "text": text,
+        "model_id": os.environ.get("TELTON_ELEVEN_MODEL", "eleven_multilingual_v2"),
+        "voice_settings": {"stability": 0.35, "similarity_boost": 0.8, "style": 0.35},
+    }).encode()
+    request = urllib.request.Request(
+        f"https://api.elevenlabs.io/v1/text-to-speech/{voice_id}",
+        data=payload,
+        headers={"xi-api-key": key, "Content-Type": "application/json"},
+    )
+    with urllib.request.urlopen(request, timeout=120) as response:
+        out.write_bytes(response.read())
+
+
+def _piper(text: str, out: Path, voice: str | None = None, rate: str = "+0%", **_: object) -> None:
+    """Offline Persian voice (piper). Free, no key, sometimes clearer on names."""
+    import os
+    import tempfile
+
+    from piper import PiperVoice
+
+    model = Path(voice) if voice and str(voice).endswith(".onnx") else Path(
+        os.environ.get("TELTON_PIPER_MODEL", "assets/tts/fa_IR-amir-medium.onnx")
+    )
+    if not model.exists():
+        raise RuntimeError(f"مدل piper پیدا نشد: {model}")
+    piper_voice = PiperVoice.load(str(model))
+    with tempfile.NamedTemporaryFile(suffix=".wav", delete=False) as handle:
+        raw = Path(handle.name)
+    try:
+        import wave
+
+        with wave.open(str(raw), "wb") as wav_file:
+            piper_voice.synthesize_wav(text, wav_file)
+        tempo = 1.0 + float(str(rate).replace("%", "").replace("+", "") or 0) / 100.0
+        tempo = max(0.7, min(1.4, tempo))
+        run(
+            [ffmpeg_exe(), "-y", "-loglevel", "error", "-i", str(raw),
+             "-filter:a", f"atempo={tempo:.3f}", "-codec:a", "libmp3lame", "-b:a", "160k", str(out)]
+        )
+    finally:
+        raw.unlink(missing_ok=True)
+
+
+ENGINES = {
+    "edge": _edge,
+    "google": _google,
+    "openai": _openai,
+    "elevenlabs": _elevenlabs,
+    "piper": _piper,
+}
+
+
+def available_engines() -> dict[str, str]:
+    """Which engines can run right now (and why not)."""
+    import os
+
+    status: dict[str, str] = {}
+    try:
+        import edge_tts  # noqa: F401
+
+        status["edge"] = "ok"
+    except Exception:
+        status["edge"] = "نصب نیست"
+    try:
+        import gtts
+        from gtts.lang import tts_langs
+
+        status["google"] = "ok" if "fa" in tts_langs() else "فارسی ندارد"
+    except Exception:
+        status["google"] = "نصب نیست"
+    status["openai"] = "ok" if os.environ.get("OPENAI_API_KEY") else "کلید ندارد"
+    status["elevenlabs"] = (
+        "ok"
+        if os.environ.get("ELEVENLABS_API_KEY") and os.environ.get("TELTON_ELEVEN_VOICE")
+        else "کلید ندارد"
+    )
+    try:
+        from piper import PiperVoice  # noqa: F401
+
+        model = Path(
+            os.environ.get("TELTON_PIPER_MODEL", "assets/tts/fa_IR-amir-medium.onnx")
+        )
+        status["piper"] = "ok" if model.exists() else "مدل ندارد"
+    except Exception:
+        status["piper"] = "نصب نیست"
+    return status
+
+
+def synthesize(
+    text: str,
+    out: Path,
+    engine: str = "edge",
+    voice: str | None = None,
+    rate: str = "+0%",
+    pitch: str = "+0Hz",
+    volume: str = "+0%",
+) -> str:
+    """Render one line of speech with the requested engine; returns the engine used."""
+    order = [engine] + [name for name in ("edge", "google") if name != engine]
+    last_error: Exception | None = None
+    for name in order:
+        func = ENGINES.get(name)
+        if func is None:
+            continue
+        try:
+            use_voice = voice
+            if name == "edge" and not use_voice:
+                use_voice = DEFAULT_VOICE      # edge needs an explicit voice id
+            func(text, out, voice=use_voice, rate=rate, pitch=pitch, volume=volume)
+            if out.exists() and out.stat().st_size > 800:
+                return name
+        except Exception as exc:          # try the next engine
+            last_error = exc
+            continue
+    raise RuntimeError(f"هیچ موتور صوتی کار نکرد: {last_error}")
 
 
 def _silence(out: Path, seconds: float) -> None:
@@ -53,6 +205,7 @@ def speak(
     voice_dir = ensure_dir(project.build / subdir) if subdir else ensure_dir(project.voice_dir)
     wps = float(style.get("narration.words_per_second", 2.9))
     tail = float(style.get("narration.tail_seconds", 0.9))
+    engine = str(style.get("narration.engine", "edge"))
     candidates = [voice] if voice else list(FALLBACK_VOICES)
 
     base_rate = rate or str(style.get("narration.rate", "+9%"))
@@ -79,15 +232,19 @@ def speak(
                     cue_pitch = f"{base_hz + offset:+d}Hz"
             tts_text = spoken(cue.text)
             if not offline:
+                used_engine = "edge"
                 for candidate in candidates:
                     try:
-                        _edge(tts_text, target, candidate, rate=cue_rate, pitch=cue_pitch, volume=volume)
+                        used_engine = synthesize(
+                            tts_text, target, engine=engine, voice=candidate,
+                            rate=cue_rate, pitch=cue_pitch, volume=volume,
+                        )
                         break
                     except Exception:
                         continue
                 if not target.exists():
                     try:
-                        _gtts(tts_text, target)
+                        _google(tts_text, target)          # last resort: free Google voice
                     except Exception:
                         pass
             if not target.exists():

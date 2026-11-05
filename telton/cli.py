@@ -9,7 +9,7 @@ from pathlib import Path
 
 from . import __version__
 from .config import Project
-from .util import read_json, seconds_to_clock
+from .util import ensure_dir, read_json, seconds_to_clock
 
 
 def _project(args: argparse.Namespace) -> Project:
@@ -170,6 +170,86 @@ def cmd_pack(args: argparse.Namespace) -> int:
     print("\nبرنامهٔ انتشار:")
     for item in plan:
         print(f"  ⏰ {item['slot']}  {item['type']:<12} {item['file']}")
+    return 0
+
+
+def cmd_voice_test(args: argparse.Namespace) -> int:
+    """Render the same hard sentence with every available voice so you can pick."""
+    from .text_fa import spoken
+    from .voice import available_engines, synthesize
+
+    project = _project(args)
+    out_dir = ensure_dir(project.out / "voice-test")
+    sentence = args.text or (
+        "پرسپولیس در هفته یازدهم لیگ برتر، در خانه نساجی یک بر صفر برد و "
+        "با بیست و سه امتیاز به صدر جدول برگشت. آرسنال هم در آنفیلد، "
+        "لیورپول را شکست داد؛ آنتونلی در فرمول یک رکورد فتح را شکست."
+    )
+    tts_text = spoken(sentence)
+    print("متن گوینده (با اعراب و تلفظ اصلاح‌شده):\n  " + tts_text + "\n")
+
+    engines = available_engines()
+    jobs: list[tuple[str, str, str]] = []
+    for name, state in engines.items():
+        if state != "ok":
+            print(f"  - {name}: {state}")
+            continue
+        if name == "edge":
+            jobs += [("edge-farid", "edge", "fa-IR-FaridNeural"),
+                     ("edge-dilara", "edge", "fa-IR-DilaraNeural")]
+        elif name == "google":
+            jobs.append(("google", "google", ""))
+        else:
+            jobs.append((name, name, ""))
+
+    made = []
+    for label, engine, voice in jobs:
+        target = out_dir / f"{label}.mp3"
+        try:
+            used = synthesize(tts_text, target, engine=engine, voice=voice or None,
+                              rate=args.rate, pitch=args.pitch)
+        except Exception as exc:
+            print(f"  ✗ {label}: {exc}")
+            continue
+        size = target.stat().st_size / 1024
+        print(f"  ✓ {label:<14} ({used}) {size:.0f} KB  → {target}")
+        made.append((label, target))
+
+    if not made:
+        print("\nهیچ صدایی ساخته نشد.")
+        return 2
+
+    # one file that plays every voice back-to-back, so you can compare in one go
+    compare = out_dir / "compare.mp3"
+    try:
+        from .util import ffmpeg_exe, run
+
+        clips = [path for _, path in made]
+        cmd = [ffmpeg_exe(), "-y", "-loglevel", "error"]
+        for clip in clips:
+            cmd += ["-i", str(clip)]
+        gaps = len(clips) - 1
+        for _ in range(gaps):
+            cmd += ["-f", "lavfi", "-i", "anullsrc=r=44100:cl=mono:d=0.6"]
+
+        parts = [f"[{i}:a]aresample=44100[a{i}]" for i in range(len(clips))]
+        parts += [f"[{len(clips) + i}:a]aresample=44100[s{i}]" for i in range(gaps)]
+        order: list[str] = []
+        for i in range(len(clips)):
+            order.append(f"[a{i}]")
+            if i < gaps:
+                order.append(f"[s{i}]")
+        parts.append("".join(order) + f"concat=n={len(order)}:v=0:a=1[out]")
+        cmd += ["-filter_complex", ";".join(parts), "-map", "[out]", str(compare)]
+        run(cmd)
+        print(f"\nفایل مقایسه (همه صداها پشت سر هم): {compare}")
+    except Exception as exc:
+        print(f"(فایل مقایسه ساخته نشد: {exc})")
+
+    print("\nهمه را گوش کن و بگو کدام بهتر است؛ من همان را پیش‌فرض می‌کنم.")
+    print("برای کیفیت حرفه‌ای: کلید OPENAI_API_KEY یا ELEVENLABS_API_KEY بده "
+          "(متغیر محیطی) و دوباره این دستور را بزن.")
+    open_folder(out_dir) if args.open else None
     return 0
 
 
@@ -398,6 +478,12 @@ def main(argv: list[str] | None = None) -> int:
     voice_p.add_argument("--offline", action="store_true", help="skip TTS, use silence (fast smoke test)")
     voice_p.add_argument("--no-fit", action="store_true", help="keep every story even if it runs long")
     voice_p.add_argument("--duration", "-d", type=float, default=None)
+
+    vt_p = add("voice-test", "render one sentence with every available voice", cmd_voice_test)
+    vt_p.add_argument("--text", help="جمله‌ای که می‌خواهی مقایسه شود")
+    vt_p.add_argument("--rate", default="+5%")
+    vt_p.add_argument("--pitch", default="+2Hz")
+    vt_p.add_argument("--open", action="store_true", help="پوشه را باز کن")
 
     render_p = add("render", "paint frames and encode the MP4", cmd_render)
     render_p.add_argument("--width", type=int, default=None)
