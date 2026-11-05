@@ -23,3 +23,8 @@ broll/*.mkv
 client_secret.json
 *youtube-token.json
 logs/
+
+# piper voice model (60MB) — downloaded on demand
+assets/tts/*.onnx
+assets/tts/*.onnx.json
+projects/*/out/voice-test/
